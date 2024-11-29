@@ -1,0 +1,2655 @@
+version 3
+run Wireless01-0-20241129-19:16:16-12644
+attr configname Wireless01
+attr datetime 20241129-19:16:16
+attr datetimef 20241129-191616
+attr experiment Wireless01
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network smarthome
+attr processid 12644
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../inet4.5/images
+config description "Two hosts communicating wirelessly"
+config network smarthome
+config sim-time-limit 20s
+config *.host*.ipv4.arp.typename GlobalArp
+config *.hostA.numApps 1
+config *.hostA.app[0].typename UdpBasicApp
+config *.hostA.app[0].destAddresses "\"hostB\""
+config *.hostA.app[0].destPort 5000
+config *.hostA.app[0].messageLength 1000B
+config *.hostA.app[0].sendInterval exponential(12ms)
+config *.hostA.app[0].packetName "\"UDPData\""
+config *.hostB.numApps 1
+config *.hostB.app[0].typename UdpSink
+config *.hostB.app[0].localPort 5000
+config *.host*.wlan[0].typename AckingWirelessInterface
+config *.host*.wlan[0].mac.useAck false
+config *.host*.wlan[0].mac.fullDuplex false
+config *.host*.wlan[0].radio.transmitter.communicationRange 500m
+config *.host*.wlan[0].radio.receiver.ignoreInterference true
+config *.host*.wlan[0].mac.headerLength 23B
+config *.host*.**.bitrate 1Mbps
+
+par smarthome.visualizer.sceneVisualizer typename "\"inet.visualizer.canvas.scene.SceneCanvasVisualizer\""
+par smarthome.visualizer.sceneVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.sceneVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.sceneVisualizer tags "\"\""
+par smarthome.visualizer.sceneVisualizer physicalEnvironmentModule "\"physicalEnvironment\""
+par smarthome.visualizer.sceneVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.sceneVisualizer axisLength "nan m"
+attr mutable ""
+attr unit m
+par smarthome.visualizer.sceneVisualizer animationSpeed 0
+par smarthome.visualizer.sceneVisualizer sceneMinX "nan m"
+attr unit m
+par smarthome.visualizer.sceneVisualizer sceneMinY "nan m"
+attr unit m
+par smarthome.visualizer.sceneVisualizer sceneMinZ "nan m"
+attr unit m
+par smarthome.visualizer.sceneVisualizer sceneMaxX "nan m"
+attr unit m
+par smarthome.visualizer.sceneVisualizer sceneMaxY "nan m"
+attr unit m
+par smarthome.visualizer.sceneVisualizer sceneMaxZ "nan m"
+attr unit m
+par smarthome.visualizer.sceneVisualizer zIndex 0
+par smarthome.visualizer.sceneVisualizer viewAngle "\"x right y down z out\""
+attr mutable ""
+par smarthome.visualizer.sceneVisualizer viewScale "\"1 1\""
+attr mutable ""
+par smarthome.visualizer.sceneVisualizer viewTranslation "\"0 0\""
+attr mutable ""
+par smarthome.visualizer.sceneVisualizer descriptionFigure "\"\""
+par smarthome.visualizer.physicalEnvironmentVisualizer typename "\"inet.visualizer.canvas.environment.PhysicalEnvironmentCanvasVisualizer\""
+par smarthome.visualizer.physicalEnvironmentVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.physicalEnvironmentVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.physicalEnvironmentVisualizer tags "\"\""
+par smarthome.visualizer.physicalEnvironmentVisualizer physicalEnvironmentModule "\"physicalEnvironment\""
+par smarthome.visualizer.physicalEnvironmentVisualizer displayObjects true
+par smarthome.visualizer.physicalEnvironmentVisualizer zIndex 0
+par smarthome.visualizer.networkNodeVisualizer typename "\"inet.visualizer.canvas.scene.NetworkNodeCanvasVisualizer\""
+par smarthome.visualizer.networkNodeVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.networkNodeVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.networkNodeVisualizer tags "\"\""
+par smarthome.visualizer.networkNodeVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.networkNodeVisualizer annotationSpacing 4
+par smarthome.visualizer.networkNodeVisualizer placementPenalty 10
+par smarthome.visualizer.networkNodeVisualizer zIndex 0
+par smarthome.visualizer.networkConnectionVisualizer typename "\"inet.visualizer.canvas.scene.NetworkConnectionCanvasVisualizer\""
+par smarthome.visualizer.networkConnectionVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.networkConnectionVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.networkConnectionVisualizer tags "\"\""
+par smarthome.visualizer.networkConnectionVisualizer displayNetworkConnections true
+par smarthome.visualizer.networkConnectionVisualizer nodeFilter "\"\""
+attr mutable ""
+par smarthome.visualizer.networkConnectionVisualizer lineColor "\"black\""
+par smarthome.visualizer.networkConnectionVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.networkConnectionVisualizer lineWidth 1
+par smarthome.visualizer.networkConnectionVisualizer zIndex 0
+par smarthome.visualizer.mobilityVisualizer typename "\"inet.visualizer.canvas.mobility.MobilityCanvasVisualizer\""
+par smarthome.visualizer.mobilityVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.mobilityVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.mobilityVisualizer tags "\"\""
+par smarthome.visualizer.mobilityVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.mobilityVisualizer displayMobility true
+par smarthome.visualizer.mobilityVisualizer animationSpeed 0
+par smarthome.visualizer.mobilityVisualizer moduleFilter "\"**.mobility\""
+attr mutable ""
+par smarthome.visualizer.mobilityVisualizer displayPositions false
+par smarthome.visualizer.mobilityVisualizer positionCircleRadius 4
+par smarthome.visualizer.mobilityVisualizer positionCircleLineWidth 1
+par smarthome.visualizer.mobilityVisualizer positionCircleLineColor "\"dark\""
+par smarthome.visualizer.mobilityVisualizer positionCircleFillColor "\"dark\""
+par smarthome.visualizer.mobilityVisualizer displayOrientations false
+par smarthome.visualizer.mobilityVisualizer orientationPieRadius 32
+par smarthome.visualizer.mobilityVisualizer orientationPieSize 0.2
+par smarthome.visualizer.mobilityVisualizer orientationPieOpacity 0.25
+par smarthome.visualizer.mobilityVisualizer orientationLineColor "\"black\""
+par smarthome.visualizer.mobilityVisualizer orientationLineStyle "\"solid\""
+par smarthome.visualizer.mobilityVisualizer orientationLineWidth 1
+par smarthome.visualizer.mobilityVisualizer orientationFillColor "\"blue\""
+par smarthome.visualizer.mobilityVisualizer displayVelocities false
+par smarthome.visualizer.mobilityVisualizer velocityArrowScale 1
+par smarthome.visualizer.mobilityVisualizer velocityLineColor "\"black\""
+par smarthome.visualizer.mobilityVisualizer velocityLineStyle "\"solid\""
+par smarthome.visualizer.mobilityVisualizer velocityLineWidth 1
+par smarthome.visualizer.mobilityVisualizer displayMovementTrails false
+par smarthome.visualizer.mobilityVisualizer movementTrailLineColor "\"dark\""
+par smarthome.visualizer.mobilityVisualizer movementTrailLineStyle "\"solid\""
+par smarthome.visualizer.mobilityVisualizer movementTrailLineWidth 1
+par smarthome.visualizer.mobilityVisualizer trailLength 100
+par smarthome.visualizer.mobilityVisualizer zIndex 0
+par smarthome.visualizer.statisticVisualizer typename "\"inet.visualizer.canvas.common.StatisticCanvasVisualizer\""
+par smarthome.visualizer.statisticVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.statisticVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.statisticVisualizer tags "\"\""
+par smarthome.visualizer.statisticVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.statisticVisualizer displayStatistics true
+par smarthome.visualizer.statisticVisualizer signalName "\"\""
+par smarthome.visualizer.statisticVisualizer statisticName "\"\""
+par smarthome.visualizer.statisticVisualizer statisticUnit "\"\""
+par smarthome.visualizer.statisticVisualizer statisticExpression "\"\""
+par smarthome.visualizer.statisticVisualizer sourceFilter "\"**\""
+attr mutable ""
+par smarthome.visualizer.statisticVisualizer format "\"%n: %v %u\""
+attr mutable ""
+par smarthome.visualizer.statisticVisualizer unit "\"\""
+par smarthome.visualizer.statisticVisualizer font "\"<default>\""
+par smarthome.visualizer.statisticVisualizer textColor "\"black\""
+par smarthome.visualizer.statisticVisualizer backgroundColor "\"white\""
+par smarthome.visualizer.statisticVisualizer opacity 1
+par smarthome.visualizer.statisticVisualizer placementHint "\"top\""
+par smarthome.visualizer.statisticVisualizer placementPriority 0
+par smarthome.visualizer.statisticVisualizer zIndex 10
+par smarthome.visualizer.statisticVisualizer propertyName "\"\""
+par smarthome.visualizer.statisticVisualizer propertyIndex "\"\""
+par smarthome.visualizer.infoVisualizer typename "\"inet.visualizer.canvas.common.InfoCanvasVisualizer\""
+par smarthome.visualizer.infoVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.infoVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.infoVisualizer tags "\"\""
+par smarthome.visualizer.infoVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.infoVisualizer displayInfos true
+par smarthome.visualizer.infoVisualizer modules "\"\""
+attr mutable ""
+par smarthome.visualizer.infoVisualizer format "\"%t\""
+attr mutable ""
+par smarthome.visualizer.infoVisualizer font "\"<default>\""
+par smarthome.visualizer.infoVisualizer textColor "\"black\""
+par smarthome.visualizer.infoVisualizer backgroundColor "\"white\""
+par smarthome.visualizer.infoVisualizer opacity 1
+par smarthome.visualizer.infoVisualizer placementHint "\"top\""
+par smarthome.visualizer.infoVisualizer placementPriority 0
+par smarthome.visualizer.infoVisualizer zIndex 10
+par smarthome.visualizer.energyStorageVisualizer typename "\"inet.visualizer.canvas.power.EnergyStorageCanvasVisualizer\""
+par smarthome.visualizer.energyStorageVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.energyStorageVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.energyStorageVisualizer tags "\"\""
+par smarthome.visualizer.energyStorageVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.energyStorageVisualizer displayEnergyStorages false
+par smarthome.visualizer.energyStorageVisualizer energyStorageFilter "\"**\""
+par smarthome.visualizer.energyStorageVisualizer color "\"green\""
+par smarthome.visualizer.energyStorageVisualizer width 8
+par smarthome.visualizer.energyStorageVisualizer height 24
+par smarthome.visualizer.energyStorageVisualizer spacing 2
+par smarthome.visualizer.energyStorageVisualizer placementHint "\"right\""
+par smarthome.visualizer.energyStorageVisualizer placementPriority 0
+par smarthome.visualizer.energyStorageVisualizer zIndex 10
+par smarthome.visualizer.mediumVisualizer typename "\"inet.visualizer.canvas.physicallayer.MediumCanvasVisualizer\""
+par smarthome.visualizer.mediumVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.mediumVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.mediumVisualizer tags "\"\""
+par smarthome.visualizer.mediumVisualizer mediumModule "\"radioMedium\""
+par smarthome.visualizer.mediumVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.mediumVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.mediumVisualizer interfaceFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.mediumVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.mediumVisualizer displaySignals false
+par smarthome.visualizer.mediumVisualizer signalColor "\"dark\""
+par smarthome.visualizer.mediumVisualizer signalPropagationAnimationSpeed "nan "
+attr mutable ""
+par smarthome.visualizer.mediumVisualizer signalPropagationAnimationTime 1s
+attr unit s
+par smarthome.visualizer.mediumVisualizer signalPropagationAdditionalTime 0s
+attr unit s
+par smarthome.visualizer.mediumVisualizer signalTransmissionAnimationSpeed "nan "
+attr mutable ""
+par smarthome.visualizer.mediumVisualizer signalTransmissionAnimationTime 1s
+attr unit s
+par smarthome.visualizer.mediumVisualizer signalAnimationSpeedChangeTimeMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.mediumVisualizer signalAnimationSpeedChangeTime 1s
+attr unit s
+par smarthome.visualizer.mediumVisualizer displaySignalDepartures false
+par smarthome.visualizer.mediumVisualizer signalDepartureImage "\"misc/signal_departure.png\""
+par smarthome.visualizer.mediumVisualizer signalDeparturePlacementHint "\"topCenter\""
+par smarthome.visualizer.mediumVisualizer signalDeparturePlacementPriority 1
+par smarthome.visualizer.mediumVisualizer displaySignalArrivals false
+par smarthome.visualizer.mediumVisualizer signalArrivalImage "\"misc/signal_arrival.png\""
+par smarthome.visualizer.mediumVisualizer signalArrivalPlacementHint "\"topCenter\""
+par smarthome.visualizer.mediumVisualizer signalArrivalPlacementPriority -1
+par smarthome.visualizer.mediumVisualizer displayCommunicationRanges false
+par smarthome.visualizer.mediumVisualizer communicationRangeLineColor "\"blue\""
+par smarthome.visualizer.mediumVisualizer communicationRangeLineStyle "\"solid\""
+par smarthome.visualizer.mediumVisualizer communicationRangeLineWidth 1
+par smarthome.visualizer.mediumVisualizer displayInterferenceRanges false
+par smarthome.visualizer.mediumVisualizer interferenceRangeLineColor "\"gray\""
+par smarthome.visualizer.mediumVisualizer interferenceRangeLineStyle "\"solid\""
+par smarthome.visualizer.mediumVisualizer interferenceRangeLineWidth 1
+par smarthome.visualizer.mediumVisualizer autoPowerAxis true
+par smarthome.visualizer.mediumVisualizer signalMinPower "inf dBmW"
+attr unit dBmW
+par smarthome.visualizer.mediumVisualizer signalMaxPower 0dBmW
+attr unit dBmW
+par smarthome.visualizer.mediumVisualizer signalMinPowerDensity "inf dBmWpMHz"
+attr unit dBmWpMHz
+par smarthome.visualizer.mediumVisualizer signalMaxPowerDensity "-inf dBmWpMHz"
+attr unit dBmWpMHz
+par smarthome.visualizer.mediumVisualizer autoTimeAxis true
+par smarthome.visualizer.mediumVisualizer signalMinTime 0s
+attr unit s
+par smarthome.visualizer.mediumVisualizer signalMaxTime 0s
+attr unit s
+par smarthome.visualizer.mediumVisualizer autoFrequencyAxis true
+par smarthome.visualizer.mediumVisualizer signalMinFrequency "inf Hz"
+attr unit Hz
+par smarthome.visualizer.mediumVisualizer signalMaxFrequency "-inf Hz"
+attr unit Hz
+par smarthome.visualizer.mediumVisualizer displayMainPowerDensityMap false
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapPixmapDensity 1
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapMinX 0
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapMaxX "nan "
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapMinY 0
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapMaxY "nan "
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapZ 0
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapFigureXTickCount 3
+par smarthome.visualizer.mediumVisualizer mainPowerDensityMapFigureYTickCount 3
+par smarthome.visualizer.mediumVisualizer displayPowerDensityMaps false
+par smarthome.visualizer.mediumVisualizer powerDensityMapMode "\"auto\""
+attr enum total,signal,auto
+par smarthome.visualizer.mediumVisualizer powerDensityMapPixelMode "\"mean\""
+attr enum sample,partition,mean
+par smarthome.visualizer.mediumVisualizer powerDensityMapApproximationSize 10
+par smarthome.visualizer.mediumVisualizer powerDensityMapCenterFrequency "nan Hz"
+attr mutable ""
+attr unit Hz
+par smarthome.visualizer.mediumVisualizer powerDensityMapBandwidth 0Hz
+attr mutable ""
+attr unit Hz
+par smarthome.visualizer.mediumVisualizer powerDensityMapFigureWidth 200
+par smarthome.visualizer.mediumVisualizer powerDensityMapFigureHeight 120
+par smarthome.visualizer.mediumVisualizer powerDensityMapPixmapWidth 200
+par smarthome.visualizer.mediumVisualizer powerDensityMapPixmapHeight 120
+par smarthome.visualizer.mediumVisualizer powerDensityMapZ 0
+par smarthome.visualizer.mediumVisualizer powerDensityMapFigureXTickCount 3
+par smarthome.visualizer.mediumVisualizer powerDensityMapFigureYTickCount 3
+par smarthome.visualizer.mediumVisualizer displaySpectrums false
+par smarthome.visualizer.mediumVisualizer spectrumMode "\"auto\""
+attr enum total,signal,auto
+par smarthome.visualizer.mediumVisualizer spectrumFigureWidth 200
+par smarthome.visualizer.mediumVisualizer spectrumFigureHeight 120
+par smarthome.visualizer.mediumVisualizer spectrumFigureXTickCount 3
+par smarthome.visualizer.mediumVisualizer spectrumFigureYTickCount 5
+par smarthome.visualizer.mediumVisualizer spectrumFigureInterpolationSize 5
+par smarthome.visualizer.mediumVisualizer spectrumPlacementHint "\"bottomCenter\""
+par smarthome.visualizer.mediumVisualizer spectrumPlacementPriority -1
+par smarthome.visualizer.mediumVisualizer displaySpectrograms false
+par smarthome.visualizer.mediumVisualizer spectrogramMode "\"auto\""
+attr enum total,signal,auto
+par smarthome.visualizer.mediumVisualizer spectrogramPixelMode "\"mean\""
+attr enum sample,partition,mean
+par smarthome.visualizer.mediumVisualizer spectrogramFigureWidth 200
+par smarthome.visualizer.mediumVisualizer spectrogramFigureHeight 120
+par smarthome.visualizer.mediumVisualizer spectrogramPixmapWidth 200
+par smarthome.visualizer.mediumVisualizer spectrogramPixmapHeight 120
+par smarthome.visualizer.mediumVisualizer spectrogramFigureXTickCount 3
+par smarthome.visualizer.mediumVisualizer spectrogramFigureYTickCount 5
+par smarthome.visualizer.mediumVisualizer spectrogramPlacementHint "\"bottomCenter\""
+par smarthome.visualizer.mediumVisualizer spectrogramPlacementPriority -1
+par smarthome.visualizer.mediumVisualizer zIndex 0
+par smarthome.visualizer.mediumVisualizer signalShape "\"ring\""
+attr enum ring,sphere
+par smarthome.visualizer.mediumVisualizer signalOpacity 0.5
+par smarthome.visualizer.mediumVisualizer signalRingCount 20
+par smarthome.visualizer.mediumVisualizer signalRingSize 50m
+attr unit m
+par smarthome.visualizer.mediumVisualizer signalFadingDistance 50m
+attr unit m
+par smarthome.visualizer.mediumVisualizer signalFadingFactor 1.2
+par smarthome.visualizer.mediumVisualizer signalWaveCount 20
+par smarthome.visualizer.mediumVisualizer signalWaveLength 50m
+attr unit m
+par smarthome.visualizer.mediumVisualizer signalWaveWidth 10m
+attr unit m
+par smarthome.visualizer.mediumVisualizer signalWaveFadingAnimationSpeedFactor 1
+par smarthome.visualizer.mediumVisualizer displayCommunicationHeat false
+par smarthome.visualizer.obstacleLossVisualizer typename "\"inet.visualizer.canvas.physicallayer.TracingObstacleLossCanvasVisualizer\""
+par smarthome.visualizer.obstacleLossVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.obstacleLossVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.obstacleLossVisualizer tags "\"\""
+par smarthome.visualizer.obstacleLossVisualizer displayIntersections false
+par smarthome.visualizer.obstacleLossVisualizer intersectionLineColor "\"red\""
+par smarthome.visualizer.obstacleLossVisualizer intersectionLineStyle "\"solid\""
+par smarthome.visualizer.obstacleLossVisualizer intersectionLineWidth 1
+par smarthome.visualizer.obstacleLossVisualizer displayFaceNormalVectors false
+par smarthome.visualizer.obstacleLossVisualizer faceNormalLineColor "\"grey\""
+par smarthome.visualizer.obstacleLossVisualizer faceNormalLineStyle "\"solid\""
+par smarthome.visualizer.obstacleLossVisualizer faceNormalLineWidth 1
+par smarthome.visualizer.obstacleLossVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.obstacleLossVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.obstacleLossVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.obstacleLossVisualizer zIndex 0
+par smarthome.visualizer.packetDropVisualizer typename "\"inet.visualizer.canvas.common.PacketDropCanvasVisualizer\""
+par smarthome.visualizer.packetDropVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.packetDropVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.packetDropVisualizer tags "\"\""
+par smarthome.visualizer.packetDropVisualizer displayPacketDrops false
+par smarthome.visualizer.packetDropVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.packetDropVisualizer interfaceFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.packetDropVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.packetDropVisualizer detailsFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.packetDropVisualizer icon "\"msg/packet_s\""
+par smarthome.visualizer.packetDropVisualizer iconTintAmount 1
+par smarthome.visualizer.packetDropVisualizer iconTintColor "\"dark\""
+par smarthome.visualizer.packetDropVisualizer labelFormat "\"%n\""
+attr mutable ""
+par smarthome.visualizer.packetDropVisualizer labelFont "\"<default>\""
+par smarthome.visualizer.packetDropVisualizer labelColor "\"black\""
+par smarthome.visualizer.packetDropVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.packetDropVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.packetDropVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.packetDropVisualizer zIndex 10
+par smarthome.visualizer.packetDropVisualizer dx 32
+par smarthome.visualizer.packetDropVisualizer dy 64
+par smarthome.visualizer.packetFlowVisualizer typename "\"inet.visualizer.canvas.flow.PacketFlowCanvasVisualizer\""
+par smarthome.visualizer.packetFlowVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.packetFlowVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.packetFlowVisualizer tags "\"\""
+par smarthome.visualizer.packetFlowVisualizer displayRoutes false
+par smarthome.visualizer.packetFlowVisualizer startPathSignal "\"packetFlowStarted\""
+par smarthome.visualizer.packetFlowVisualizer extendPathSignal "\"packetReceivedFromLower\""
+par smarthome.visualizer.packetFlowVisualizer endPathSignal "\"packetFlowEnded\""
+par smarthome.visualizer.packetFlowVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.packetFlowVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.packetFlowVisualizer lineColor "\"dark\""
+par smarthome.visualizer.packetFlowVisualizer lineStyle "\"dashed\""
+par smarthome.visualizer.packetFlowVisualizer lineWidth 3
+par smarthome.visualizer.packetFlowVisualizer lineSmooth false
+par smarthome.visualizer.packetFlowVisualizer lineShift 16
+par smarthome.visualizer.packetFlowVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.packetFlowVisualizer lineContactSpacing 3
+par smarthome.visualizer.packetFlowVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.packetFlowVisualizer labelFormat "\"%L %p pk (%l)\""
+par smarthome.visualizer.packetFlowVisualizer labelFont "\"<default>, 8px\""
+par smarthome.visualizer.packetFlowVisualizer labelColor "\"\""
+par smarthome.visualizer.packetFlowVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.packetFlowVisualizer fadeOutTime 0s
+attr unit s
+par smarthome.visualizer.packetFlowVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.packetFlowVisualizer zIndex 4
+par smarthome.visualizer.queueVisualizer typename "\"inet.visualizer.canvas.common.QueueCanvasVisualizer\""
+par smarthome.visualizer.queueVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.queueVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.queueVisualizer tags "\"\""
+par smarthome.visualizer.queueVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.queueVisualizer displayQueues false
+par smarthome.visualizer.queueVisualizer queueFilter "\"**\""
+par smarthome.visualizer.queueVisualizer color "\"blue\""
+par smarthome.visualizer.queueVisualizer width 8
+par smarthome.visualizer.queueVisualizer height 24
+par smarthome.visualizer.queueVisualizer spacing 2
+par smarthome.visualizer.queueVisualizer placementHint "\"right\""
+par smarthome.visualizer.queueVisualizer placementPriority 0
+par smarthome.visualizer.queueVisualizer zIndex 10
+par smarthome.visualizer.gateScheduleVisualizer typename "\"inet.visualizer.canvas.common.GateScheduleCanvasVisualizer\""
+par smarthome.visualizer.gateScheduleVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.gateScheduleVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.gateScheduleVisualizer tags "\"\""
+par smarthome.visualizer.gateScheduleVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.gateScheduleVisualizer displayGateSchedules false
+par smarthome.visualizer.gateScheduleVisualizer labelFormat "\"%i %D\""
+par smarthome.visualizer.gateScheduleVisualizer gateFilter "\"**\""
+par smarthome.visualizer.gateScheduleVisualizer width 100
+par smarthome.visualizer.gateScheduleVisualizer height 8
+par smarthome.visualizer.gateScheduleVisualizer spacing 2
+par smarthome.visualizer.gateScheduleVisualizer placementHint "\"right\""
+par smarthome.visualizer.gateScheduleVisualizer placementPriority 0
+par smarthome.visualizer.gateScheduleVisualizer displayDuration 0s
+attr mutable ""
+attr unit s
+par smarthome.visualizer.gateScheduleVisualizer currentTimePosition 50
+par smarthome.visualizer.gateScheduleVisualizer zIndex 10
+par smarthome.visualizer.radioVisualizer typename "\"inet.visualizer.canvas.physicallayer.RadioCanvasVisualizer\""
+par smarthome.visualizer.radioVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.radioVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.radioVisualizer tags "\"\""
+par smarthome.visualizer.radioVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.radioVisualizer displayRadios false
+par smarthome.visualizer.radioVisualizer displayRadioMode true
+par smarthome.visualizer.radioVisualizer displayReceptionState true
+par smarthome.visualizer.radioVisualizer displayTransmissionState true
+par smarthome.visualizer.radioVisualizer displayAntennaLobes false
+par smarthome.visualizer.radioVisualizer radioFilter "\"**\""
+attr mutable ""
+par smarthome.visualizer.radioVisualizer radioModeImages "\"block/process_vs block/timer_vs block/wrx_vs block/wtx_vs block/wrxtx_vs block/cogwheel_vs\""
+par smarthome.visualizer.radioVisualizer receptionStateImages "\"- - misc/receiving misc/receiving\""
+par smarthome.visualizer.radioVisualizer transmissionStateImages "\"- - misc/transmitting\""
+par smarthome.visualizer.radioVisualizer width 16
+par smarthome.visualizer.radioVisualizer height 16
+par smarthome.visualizer.radioVisualizer placementHint "\"bottomRight\""
+par smarthome.visualizer.radioVisualizer placementPriority 0
+par smarthome.visualizer.radioVisualizer antennaLobeNormalize false
+par smarthome.visualizer.radioVisualizer antennaLobeRelativeLabels false
+par smarthome.visualizer.radioVisualizer antennaLobePlaneGlobal true
+par smarthome.visualizer.radioVisualizer antennaLobePlane "\"view\""
+attr enum view,xy,xz,yz
+par smarthome.visualizer.radioVisualizer antennaLobeMode "\"logarithmic\""
+attr enum logarithmic,linear
+par smarthome.visualizer.radioVisualizer antennaLobeLogarithmicBase 10
+par smarthome.visualizer.radioVisualizer antennaLobeLogarithmicScale 100
+par smarthome.visualizer.radioVisualizer antennaLobeRadius 100
+par smarthome.visualizer.radioVisualizer antennaLobeStep 10deg
+attr unit deg
+par smarthome.visualizer.radioVisualizer antennaLobeOpacity 0.25
+par smarthome.visualizer.radioVisualizer antennaLobeLineSmooth true
+par smarthome.visualizer.radioVisualizer antennaLobeLineColor "\"black\""
+par smarthome.visualizer.radioVisualizer antennaLobeLineStyle "\"solid\""
+par smarthome.visualizer.radioVisualizer antennaLobeLineWidth 1
+par smarthome.visualizer.radioVisualizer antennaLobeFillColor "\"white\""
+par smarthome.visualizer.radioVisualizer zIndex 10
+par smarthome.visualizer.physicalLinkVisualizer typename "\"inet.visualizer.canvas.physicallayer.PhysicalLinkCanvasVisualizer\""
+par smarthome.visualizer.physicalLinkVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.physicalLinkVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.physicalLinkVisualizer tags "\"\""
+par smarthome.visualizer.physicalLinkVisualizer displayLinks false
+par smarthome.visualizer.physicalLinkVisualizer activityLevel "\"service\""
+attr enum service,peer,protocol
+par smarthome.visualizer.physicalLinkVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.physicalLinkVisualizer interfaceFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.physicalLinkVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.physicalLinkVisualizer lineColor "\"olive\""
+par smarthome.visualizer.physicalLinkVisualizer lineStyle "\"dotted\""
+par smarthome.visualizer.physicalLinkVisualizer lineWidth 3
+par smarthome.visualizer.physicalLinkVisualizer lineShift 16
+par smarthome.visualizer.physicalLinkVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.physicalLinkVisualizer lineContactSpacing 3
+par smarthome.visualizer.physicalLinkVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.physicalLinkVisualizer labelFormat "\"%n\""
+par smarthome.visualizer.physicalLinkVisualizer labelFont "\"<default>, 8px\""
+par smarthome.visualizer.physicalLinkVisualizer labelColor "\"olive\""
+par smarthome.visualizer.physicalLinkVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.physicalLinkVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.physicalLinkVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.physicalLinkVisualizer holdAnimationTime 0s
+attr unit s
+par smarthome.visualizer.physicalLinkVisualizer zIndex 1
+par smarthome.visualizer.interfaceTableVisualizer typename "\"inet.visualizer.canvas.linklayer.InterfaceTableCanvasVisualizer\""
+par smarthome.visualizer.interfaceTableVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.interfaceTableVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.interfaceTableVisualizer tags "\"\""
+par smarthome.visualizer.interfaceTableVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.interfaceTableVisualizer displayInterfaceTables false
+par smarthome.visualizer.interfaceTableVisualizer displayWiredInterfacesAtConnections true
+par smarthome.visualizer.interfaceTableVisualizer displayBackground false
+par smarthome.visualizer.interfaceTableVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.interfaceTableVisualizer interfaceFilter "\"not(lo*)\""
+attr mutable ""
+par smarthome.visualizer.interfaceTableVisualizer format "\"%N %\\\\%a%/%l\""
+attr mutable ""
+par smarthome.visualizer.interfaceTableVisualizer placementHint "\"top\""
+par smarthome.visualizer.interfaceTableVisualizer placementPriority 0
+par smarthome.visualizer.interfaceTableVisualizer font "\"<default>\""
+par smarthome.visualizer.interfaceTableVisualizer textColor "\"#005030\""
+par smarthome.visualizer.interfaceTableVisualizer backgroundColor "\"white\""
+par smarthome.visualizer.interfaceTableVisualizer opacity 1
+par smarthome.visualizer.interfaceTableVisualizer zIndex 10
+par smarthome.visualizer.dataLinkVisualizer typename "\"inet.visualizer.canvas.linklayer.DataLinkCanvasVisualizer\""
+par smarthome.visualizer.dataLinkVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.dataLinkVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.dataLinkVisualizer tags "\"\""
+par smarthome.visualizer.dataLinkVisualizer displayLinks false
+par smarthome.visualizer.dataLinkVisualizer activityLevel "\"service\""
+attr enum service,peer,protocol
+par smarthome.visualizer.dataLinkVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.dataLinkVisualizer interfaceFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.dataLinkVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.dataLinkVisualizer lineColor "\"darkcyan\""
+par smarthome.visualizer.dataLinkVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.dataLinkVisualizer lineWidth 3
+par smarthome.visualizer.dataLinkVisualizer lineShift 16
+par smarthome.visualizer.dataLinkVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.dataLinkVisualizer lineContactSpacing 3
+par smarthome.visualizer.dataLinkVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.dataLinkVisualizer labelFormat "\"%n\""
+par smarthome.visualizer.dataLinkVisualizer labelFont "\"<default>, 8px\""
+par smarthome.visualizer.dataLinkVisualizer labelColor "\"darkcyan\""
+par smarthome.visualizer.dataLinkVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.dataLinkVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.dataLinkVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.dataLinkVisualizer holdAnimationTime 0s
+attr unit s
+par smarthome.visualizer.dataLinkVisualizer zIndex 2
+par smarthome.visualizer.linkBreakVisualizer typename "\"inet.visualizer.canvas.linklayer.LinkBreakCanvasVisualizer\""
+par smarthome.visualizer.linkBreakVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.linkBreakVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.linkBreakVisualizer tags "\"\""
+par smarthome.visualizer.linkBreakVisualizer displayLinkBreaks false
+par smarthome.visualizer.linkBreakVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.linkBreakVisualizer interfaceFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.linkBreakVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.linkBreakVisualizer icon "\"status/stop\""
+par smarthome.visualizer.linkBreakVisualizer iconTintAmount 0
+par smarthome.visualizer.linkBreakVisualizer iconTintColor "\"\""
+par smarthome.visualizer.linkBreakVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.linkBreakVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.linkBreakVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.linkBreakVisualizer zIndex 2
+par smarthome.visualizer.ieee80211Visualizer typename "\"inet.visualizer.canvas.linklayer.Ieee80211CanvasVisualizer\""
+par smarthome.visualizer.ieee80211Visualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.ieee80211Visualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.ieee80211Visualizer tags "\"\""
+par smarthome.visualizer.ieee80211Visualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.ieee80211Visualizer displayAssociations false
+par smarthome.visualizer.ieee80211Visualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.ieee80211Visualizer interfaceFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.ieee80211Visualizer minPower -85dBm
+attr unit dBm
+par smarthome.visualizer.ieee80211Visualizer maxPower -50dBm
+attr unit dBm
+par smarthome.visualizer.ieee80211Visualizer icons "\"misc/signal_power_0 misc/signal_power_1 misc/signal_power_2 misc/signal_power_3\""
+par smarthome.visualizer.ieee80211Visualizer iconColor "\"dark\""
+par smarthome.visualizer.ieee80211Visualizer labelFont "\"<default>\""
+par smarthome.visualizer.ieee80211Visualizer labelColor "\"black\""
+par smarthome.visualizer.ieee80211Visualizer placementHint "\"top\""
+par smarthome.visualizer.ieee80211Visualizer placementPriority 0
+par smarthome.visualizer.ieee80211Visualizer zIndex 2
+par smarthome.visualizer.networkRouteVisualizer typename "\"inet.visualizer.canvas.networklayer.NetworkRouteCanvasVisualizer\""
+par smarthome.visualizer.networkRouteVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.networkRouteVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.networkRouteVisualizer tags "\"\""
+par smarthome.visualizer.networkRouteVisualizer displayRoutes false
+par smarthome.visualizer.networkRouteVisualizer startPathSignal "\"packetReceivedFromUpper\""
+par smarthome.visualizer.networkRouteVisualizer extendPathSignal "\"packetReceivedFromLower\""
+par smarthome.visualizer.networkRouteVisualizer endPathSignal "\"packetSentToUpper\""
+par smarthome.visualizer.networkRouteVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.networkRouteVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.networkRouteVisualizer lineColor "\"dark\""
+par smarthome.visualizer.networkRouteVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.networkRouteVisualizer lineWidth 3
+par smarthome.visualizer.networkRouteVisualizer lineSmooth false
+par smarthome.visualizer.networkRouteVisualizer lineShift 16
+par smarthome.visualizer.networkRouteVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.networkRouteVisualizer lineContactSpacing 3
+par smarthome.visualizer.networkRouteVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.networkRouteVisualizer labelFormat "\"%n\""
+par smarthome.visualizer.networkRouteVisualizer labelFont "\"<default>, 8px\""
+par smarthome.visualizer.networkRouteVisualizer labelColor "\"\""
+par smarthome.visualizer.networkRouteVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.networkRouteVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.networkRouteVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.networkRouteVisualizer zIndex 3
+par smarthome.visualizer.routingTableVisualizer typename "\"inet.visualizer.canvas.networklayer.RoutingTableCanvasVisualizer\""
+par smarthome.visualizer.routingTableVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.routingTableVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.routingTableVisualizer tags "\"\""
+par smarthome.visualizer.routingTableVisualizer displayRoutingTables false
+par smarthome.visualizer.routingTableVisualizer displayRoutesIndividually true
+par smarthome.visualizer.routingTableVisualizer displayLabels true
+par smarthome.visualizer.routingTableVisualizer destinationFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.routingTableVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.routingTableVisualizer lineColor "\"black\""
+par smarthome.visualizer.routingTableVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.routingTableVisualizer lineWidth 2
+par smarthome.visualizer.routingTableVisualizer lineShift 16
+par smarthome.visualizer.routingTableVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.routingTableVisualizer lineContactSpacing 3
+par smarthome.visualizer.routingTableVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.routingTableVisualizer labelFormat "\"%d/%m -> %g (%n)\""
+attr mutable ""
+par smarthome.visualizer.routingTableVisualizer labelFont "\"<default>, 8px\""
+par smarthome.visualizer.routingTableVisualizer labelColor "\"black\""
+par smarthome.visualizer.routingTableVisualizer zIndex 0
+par smarthome.visualizer.transportRouteVisualizer typename "\"inet.visualizer.canvas.transportlayer.TransportRouteCanvasVisualizer\""
+par smarthome.visualizer.transportRouteVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.transportRouteVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.transportRouteVisualizer tags "\"\""
+par smarthome.visualizer.transportRouteVisualizer displayRoutes false
+par smarthome.visualizer.transportRouteVisualizer startPathSignal "\"packetReceivedFromUpper\""
+par smarthome.visualizer.transportRouteVisualizer extendPathSignal "\"packetReceivedFromLower\""
+par smarthome.visualizer.transportRouteVisualizer endPathSignal "\"packetSentToUpper\""
+par smarthome.visualizer.transportRouteVisualizer nodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.transportRouteVisualizer packetFilter "(omnetpp::cValueHolder)holder: \"*\""
+attr mutable ""
+par smarthome.visualizer.transportRouteVisualizer lineColor "\"dark\""
+par smarthome.visualizer.transportRouteVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.transportRouteVisualizer lineWidth 3
+par smarthome.visualizer.transportRouteVisualizer lineSmooth false
+par smarthome.visualizer.transportRouteVisualizer lineShift 16
+par smarthome.visualizer.transportRouteVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.transportRouteVisualizer lineContactSpacing 3
+par smarthome.visualizer.transportRouteVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.transportRouteVisualizer labelFormat "\"%n\""
+par smarthome.visualizer.transportRouteVisualizer labelFont "\"<default>, 8px\""
+par smarthome.visualizer.transportRouteVisualizer labelColor "\"\""
+par smarthome.visualizer.transportRouteVisualizer fadeOutMode "\"realTime\""
+attr enum realTime,animationTime,simulationTime
+par smarthome.visualizer.transportRouteVisualizer fadeOutTime 1s
+attr unit s
+par smarthome.visualizer.transportRouteVisualizer fadeOutAnimationSpeed 0
+par smarthome.visualizer.transportRouteVisualizer zIndex 4
+par smarthome.visualizer.transportConnectionVisualizer typename "\"inet.visualizer.canvas.transportlayer.TransportConnectionCanvasVisualizer\""
+par smarthome.visualizer.transportConnectionVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.transportConnectionVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.transportConnectionVisualizer tags "\"\""
+par smarthome.visualizer.transportConnectionVisualizer networkNodeVisualizerModule "\"^.networkNodeVisualizer\""
+par smarthome.visualizer.transportConnectionVisualizer displayTransportConnections false
+par smarthome.visualizer.transportConnectionVisualizer sourceNodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.transportConnectionVisualizer sourcePortFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.transportConnectionVisualizer destinationNodeFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.transportConnectionVisualizer destinationPortFilter "\"*\""
+attr mutable ""
+par smarthome.visualizer.transportConnectionVisualizer icon "\"misc/marker_s\""
+par smarthome.visualizer.transportConnectionVisualizer iconColor "\"dark\""
+par smarthome.visualizer.transportConnectionVisualizer labelFont "\"<default>\""
+par smarthome.visualizer.transportConnectionVisualizer labelColor "\"black\""
+par smarthome.visualizer.transportConnectionVisualizer placementHint "\"top\""
+par smarthome.visualizer.transportConnectionVisualizer placementPriority 0
+par smarthome.visualizer.transportConnectionVisualizer zIndex 4
+par smarthome.visualizer.failureProtectionConfigurationVisualizer typename "\"inet.visualizer.canvas.configurator.FailureProtectionConfigurationCanvasVisualizer\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer tags "\"\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer displayTrees false
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineColor "\"dark\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineWidth 3
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineSmooth false
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineShift 16
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineContactSpacing 3
+par smarthome.visualizer.failureProtectionConfigurationVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.failureProtectionConfigurationVisualizer failureProtectionConfiguratorModule "\"failureProtectionConfigurator\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer streamFilter "\"*\""
+par smarthome.visualizer.failureProtectionConfigurationVisualizer zIndex 3
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer typename "\"inet.visualizer.canvas.configurator.StreamRedundancyConfigurationCanvasVisualizer\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer visualizationTargetModule "\"^.^\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer visualizationSubjectModule "\"^.^\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer tags "\"\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer displayTrees false
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineColor "\"dark\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineStyle "\"solid\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineWidth 3
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineSmooth false
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineShift 16
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineShiftMode "\"normal\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineContactSpacing 3
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer lineContactMode "\"rectangular\""
+attr enum circular,rectangular
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer streamRedundancyConfiguratorModule "\"streamRedundancyConfigurator\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer streamFilter "\"*\""
+par smarthome.visualizer.streamRedundancyConfigurationVisualizer zIndex 3
+par smarthome.visualizer typename "\"inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer\""
+par smarthome.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator\""
+par smarthome.configurator minLinkWeight 0.001
+par smarthome.configurator configureIsolatedNetworksSeparatly false
+par smarthome.configurator config "<config>...</config> at content:1"
+par smarthome.configurator assignAddresses true
+par smarthome.configurator assignUniqueAddresses true
+par smarthome.configurator assignDisjunctSubnetAddresses true
+par smarthome.configurator addStaticRoutes true
+par smarthome.configurator addDefaultRoutes true
+par smarthome.configurator addSubnetRoutes true
+par smarthome.configurator addDirectRoutes true
+par smarthome.configurator optimizeRoutes true
+par smarthome.configurator dumpTopology false
+par smarthome.configurator dumpLinks false
+par smarthome.configurator dumpAddresses false
+par smarthome.configurator dumpRoutes false
+par smarthome.configurator dumpConfig "\"\""
+par smarthome.radioMedium.propagation typename "\"inet.physicallayer.wireless.common.propagation.ConstantSpeedPropagation\""
+par smarthome.radioMedium.propagation propagationSpeed 2.99792e+08mps
+attr unit mps
+par smarthome.radioMedium.propagation ignoreMovementDuringTransmission true
+par smarthome.radioMedium.propagation ignoreMovementDuringPropagation true
+par smarthome.radioMedium.propagation ignoreMovementDuringReception true
+scalar smarthome.radioMedium.propagation "Arrival computation count" 7
+par smarthome.radioMedium.analogModel typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskAnalogModel\""
+par smarthome.radioMedium.pathLoss typename "\"inet.physicallayer.wireless.common.pathloss.FreeSpacePathLoss\""
+par smarthome.radioMedium.pathLoss alpha 2
+par smarthome.radioMedium.pathLoss systemLoss 0dB
+attr unit dB
+par smarthome.radioMedium.mediumLimitCache typename "\"inet.physicallayer.wireless.common.medium.MediumLimitCache\""
+par smarthome.radioMedium.mediumLimitCache centerFrequency "nan Hz"
+attr unit Hz
+par smarthome.radioMedium.mediumLimitCache maxSpeed "nan mps"
+attr unit mps
+par smarthome.radioMedium.mediumLimitCache maxTransmissionPower "nan W"
+attr unit W
+par smarthome.radioMedium.mediumLimitCache minInterferencePower "nan dBm"
+attr unit dBm
+par smarthome.radioMedium.mediumLimitCache minReceptionPower "nan dBm"
+attr unit dBm
+par smarthome.radioMedium.mediumLimitCache maxAntennaGain 0dB
+attr unit dB
+par smarthome.radioMedium.mediumLimitCache minInterferenceTime 1e-12s
+attr unit s
+par smarthome.radioMedium.mediumLimitCache maxTransmissionDuration 0.01s
+attr unit s
+par smarthome.radioMedium.mediumLimitCache maxCommunicationRange "nan m"
+attr unit m
+par smarthome.radioMedium.mediumLimitCache maxInterferenceRange "nan m"
+attr unit m
+par smarthome.radioMedium.communicationCache typename "\"inet.physicallayer.wireless.common.communicationcache.VectorCommunicationCache\""
+par smarthome.radioMedium typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskRadioMedium\""
+par smarthome.radioMedium physicalEnvironmentModule "\"physicalEnvironment\""
+par smarthome.radioMedium signalAnalogRepresentation "\"unitDisk\""
+attr enum unitDisk,scalar,dimensional
+par smarthome.radioMedium rangeFilter "\"\""
+par smarthome.radioMedium radioModeFilter false
+par smarthome.radioMedium listeningFilter false
+par smarthome.radioMedium macAddressFilter false
+par smarthome.radioMedium recordTransmissionLog false
+par smarthome.radioMedium recordReceptionLog false
+scalar smarthome.radioMedium "transmission count" 7
+scalar smarthome.radioMedium "signal send count" 7
+scalar smarthome.radioMedium "reception computation count" 7
+scalar smarthome.radioMedium "interference computation count" 32
+scalar smarthome.radioMedium "reception decision computation count" 7
+scalar smarthome.radioMedium "listening decision computation count" 18
+scalar smarthome.radioMedium "reception cache hit" 86.538461538462
+attr unit %
+scalar smarthome.radioMedium "interference cache hit" 66.666666666667
+attr unit %
+scalar smarthome.radioMedium "noise cache hit" 0
+attr unit %
+scalar smarthome.radioMedium "snir cache hit" 50
+attr unit %
+scalar smarthome.radioMedium "reception decision cache hit" 50
+attr unit %
+scalar smarthome.radioMedium "reception result cache hit" 0
+attr unit %
+par smarthome.hostA.radioIn[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.mobility typename "\"inet.mobility.static.StationaryMobility\""
+par smarthome.hostA.mobility subjectModule "\"^\""
+par smarthome.hostA.mobility coordinateSystemModule "\"\""
+par smarthome.hostA.mobility displayStringTextFormat "\"p: %p\\nv: %v\""
+attr mutable ""
+par smarthome.hostA.mobility updateDisplayString true
+par smarthome.hostA.mobility constraintAreaMinX "-inf m"
+attr unit m
+par smarthome.hostA.mobility constraintAreaMinY "-inf m"
+attr unit m
+par smarthome.hostA.mobility constraintAreaMinZ "-inf m"
+attr unit m
+par smarthome.hostA.mobility constraintAreaMaxX "inf m"
+attr unit m
+par smarthome.hostA.mobility constraintAreaMaxY "inf m"
+attr unit m
+par smarthome.hostA.mobility constraintAreaMaxZ "inf m"
+attr unit m
+par smarthome.hostA.mobility initialX "nan m"
+attr unit m
+par smarthome.hostA.mobility initialY "nan m"
+attr unit m
+par smarthome.hostA.mobility initialZ 0m
+attr unit m
+par smarthome.hostA.mobility initialLatitude "nan deg"
+attr unit deg
+par smarthome.hostA.mobility initialLongitude "nan deg"
+attr unit deg
+par smarthome.hostA.mobility initialAltitude 0m
+attr unit m
+par smarthome.hostA.mobility initialHeading 0deg
+attr unit deg
+par smarthome.hostA.mobility initialElevation 0deg
+attr unit deg
+par smarthome.hostA.mobility initialBank 0deg
+attr unit deg
+par smarthome.hostA.mobility initFromDisplayString true
+par smarthome.hostA.mobility updateFromDisplayString true
+par smarthome.hostA.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par smarthome.hostA.interfaceTable displayAddresses false
+par smarthome.hostA.cb typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.cb forwardServiceRegistration true
+par smarthome.hostA.cb forwardProtocolRegistration true
+par smarthome.hostA.bl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.bl forwardServiceRegistration true
+par smarthome.hostA.bl forwardProtocolRegistration true
+par smarthome.hostA.li typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.li displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.li forwardServiceRegistration true
+par smarthome.hostA.li forwardProtocolRegistration true
+par smarthome.hostA.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par smarthome.hostA.lo[0].lo interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.lo[0].lo mtu 4470B
+attr unit B
+scalar smarthome.hostA.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostA.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostA.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostA.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par smarthome.hostA.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par smarthome.hostA.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostA.lo[0] recordPcap false
+par smarthome.hostA.lo[0] numPcapRecorders 0
+par smarthome.hostA.lo[0] interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+scalar smarthome.hostA.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostA.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostA.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostA.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostA.wlan[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.wlan[0].radioIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.wlan[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.wlan[0].queue typename "\"inet.queueing.queue.DropTailQueue\""
+par smarthome.hostA.wlan[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par smarthome.hostA.wlan[0].queue packetCapacity 100
+par smarthome.hostA.wlan[0].queue dataCapacity -1b
+attr unit b
+par smarthome.hostA.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par smarthome.hostA.wlan[0].queue comparatorClass "\"\""
+par smarthome.hostA.wlan[0].queue bufferModule "\"\""
+scalar smarthome.hostA.wlan[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar smarthome.hostA.wlan[0].queue queueLength:max 1
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar smarthome.hostA.wlan[0].queue queueLength:timeavg 0.046978163243911
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar smarthome.hostA.wlan[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar smarthome.hostA.wlan[0].queue queueBitLength:max 8224
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar smarthome.hostA.wlan[0].queue queueBitLength:timeavg 386.34841451792
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic smarthome.hostA.wlan[0].queue queueingTime:histogram
+field count 7
+field mean 0.00088428036257143
+field stddev 0.0011511481480906
+field min 0
+field max 0.002700774741
+field sum 0.006189962538
+field sqrsum 1.3424514670521e-05
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	4
+bin	5e-05	0
+bin	0.0001	0
+bin	0.00015	0
+bin	0.0002	0
+bin	0.00025	0
+bin	0.0003	0
+bin	0.00035	0
+bin	0.0004	0
+bin	0.00045	0
+bin	0.0005	0
+bin	0.00055	0
+bin	0.0006	0
+bin	0.00065	0
+bin	0.0007	0
+bin	0.00075	0
+bin	0.0008	0
+bin	0.00085	0
+bin	0.0009	0
+bin	0.00095	0
+bin	0.001	0
+bin	0.00105	0
+bin	0.0011	0
+bin	0.00115	0
+bin	0.0012	0
+bin	0.00125	0
+bin	0.0013	0
+bin	0.00135	0
+bin	0.0014	0
+bin	0.00145	0
+bin	0.0015	0
+bin	0.00155	1
+bin	0.0016	0
+bin	0.00165	0
+bin	0.0017	0
+bin	0.00175	0
+bin	0.0018	0
+bin	0.00185	1
+bin	0.0019	0
+bin	0.00195	0
+bin	0.002	0
+bin	0.00205	0
+bin	0.0021	0
+bin	0.00215	0
+bin	0.0022	0
+bin	0.00225	0
+bin	0.0023	0
+bin	0.00235	0
+bin	0.0024	0
+bin	0.00245	0
+bin	0.0025	0
+bin	0.00255	0
+bin	0.0026	0
+bin	0.00265	0
+bin	0.0027	1
+bin	0.00275	0
+bin	0.0028	0
+bin	0.00285	0
+bin	0.0029	0
+bin	0.00295	0
+bin	0.003	0
+bin	0.00305	0
+bin	0.0031	0
+bin	0.00315	0
+bin	0.0032	0
+bin	0.00325	0
+bin	0.0033	0
+bin	0.00335	0
+bin	0.0034	0
+scalar smarthome.hostA.wlan[0].queue outgoingPackets:count 7
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar smarthome.hostA.wlan[0].queue outgoingPacketLengths:sum 57568
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic smarthome.hostA.wlan[0].queue outgoingPacketLengths:histogram
+field count 7
+field mean 8224
+field stddev 0
+field min 8224
+field max 8224
+field sum 57568
+field sqrsum 473439232
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	8223	0
+bin	8224	7
+bin	8225	0
+statistic smarthome.hostA.wlan[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostA.wlan[0].queue incomingPackets:count 7
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar smarthome.hostA.wlan[0].queue incomingPacketLengths:sum 57568
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic smarthome.hostA.wlan[0].queue incomingPacketLengths:histogram
+field count 7
+field mean 8224
+field stddev 0
+field min 8224
+field max 8224
+field sum 57568
+field sqrsum 473439232
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	8223	0
+bin	8224	7
+bin	8225	0
+scalar smarthome.hostA.wlan[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar smarthome.hostA.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par smarthome.hostA.wlan[0].mac typename "\"inet.linklayer.acking.AckingMac\""
+par smarthome.hostA.wlan[0].mac interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.wlan[0].mac address "\"auto\""
+attr mutable ""
+par smarthome.hostA.wlan[0].mac bitrate 1e+06bps
+attr unit bps
+par smarthome.hostA.wlan[0].mac mtu 4470B
+attr unit B
+par smarthome.hostA.wlan[0].mac headerLength 23B
+attr unit B
+par smarthome.hostA.wlan[0].mac promiscuous false
+par smarthome.hostA.wlan[0].mac fullDuplex false
+par smarthome.hostA.wlan[0].mac useAck false
+par smarthome.hostA.wlan[0].mac ackTimeout 0.1s
+attr unit s
+scalar smarthome.hostA.wlan[0].mac rcvdPkFromLl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, count"
+scalar smarthome.hostA.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac sentDownPk:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets sent to lower layer, count"
+scalar smarthome.hostA.wlan[0].mac sentDownPk:sum(packetBytes) 7357
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets sent to lower layer, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac rcvdPkFromHl:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostA.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 7196
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostA.wlan[0].mac passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar smarthome.hostA.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar smarthome.hostA.wlan[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac packetDropNotAddressedToUs:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar smarthome.hostA.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0].mac linkBroken:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source linkBroken
+attr title "link break, count"
+par smarthome.hostA.wlan[0].radio.antenna typename "\"inet.physicallayer.wireless.common.antenna.IsotropicAntenna\""
+par smarthome.hostA.wlan[0].radio.antenna mobilityModule "\"^.^.^.mobility\""
+par smarthome.hostA.wlan[0].radio.antenna numAntennas 1
+par smarthome.hostA.wlan[0].radio.transmitter typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskTransmitter\""
+par smarthome.hostA.wlan[0].radio.transmitter preambleDuration 0s
+attr unit s
+par smarthome.hostA.wlan[0].radio.transmitter headerLength 96b
+attr unit b
+par smarthome.hostA.wlan[0].radio.transmitter bitrate 1e+06bps
+attr unit bps
+par smarthome.hostA.wlan[0].radio.transmitter communicationRange 500m
+attr unit m
+par smarthome.hostA.wlan[0].radio.transmitter interferenceRange 500m
+attr unit m
+par smarthome.hostA.wlan[0].radio.transmitter detectionRange 500m
+attr unit m
+par smarthome.hostA.wlan[0].radio.receiver typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskReceiver\""
+par smarthome.hostA.wlan[0].radio.receiver ignoreInterference true
+par smarthome.hostA.wlan[0].radio typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskRadio\""
+par smarthome.hostA.wlan[0].radio radioMediumModule "\"radioMedium\""
+par smarthome.hostA.wlan[0].radio energySourceModule "\"\""
+par smarthome.hostA.wlan[0].radio initialRadioMode "\"off\""
+attr enum off,sleep,receiver,transmitter,transceiver
+par smarthome.hostA.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
+par smarthome.hostA.wlan[0].radio sendRawBytes false
+par smarthome.hostA.wlan[0].radio separateTransmissionParts false
+par smarthome.hostA.wlan[0].radio separateReceptionParts false
+par smarthome.hostA.wlan[0].radio displayCommunicationRange false
+par smarthome.hostA.wlan[0].radio displayInterferenceRange false
+statistic smarthome.hostA.wlan[0].radio minSnir:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source minimumSnir(packetSentToUpper)
+attr title "Min SNIR"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostA.wlan[0].radio packetErrorRate:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source packetErrorRate(packetSentToUpper)
+attr title "Packet error rate"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostA.wlan[0].radio bitErrorRate:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source bitErrorRate(packetSentToUpper)
+attr title "Bit error rate"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostA.wlan[0].radio symbolErrorRate:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source symbolErrorRate(packetSentToUpper)
+attr title "Symbol error rate"
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostA.wlan[0].radio transmissionState:count 28
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source transmissionStateChanged
+attr title "Radio transmission state, count"
+scalar smarthome.hostA.wlan[0].radio receptionState:count 15
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source receptionStateChanged
+attr title "Radio reception state, count"
+scalar smarthome.hostA.wlan[0].radio radioMode:count 17
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source radioModeChanged
+attr title "Radio mode, count"
+par smarthome.hostA.wlan[0] typename "\"inet.linklayer.acking.AckingWirelessInterface\""
+par smarthome.hostA.wlan[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostA.wlan[0] recordPcap false
+par smarthome.hostA.wlan[0] numPcapRecorders 0
+par smarthome.hostA.wlan[0] interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.wlan[0] energySourceModule "\"\""
+par smarthome.hostA.wlan[0] bitrate 1e+06bps
+attr unit bps
+scalar smarthome.hostA.wlan[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostA.wlan[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostA.wlan[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostA.wlan[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostA.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostA.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par smarthome.hostA.ipv4.configurator interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4.configurator routingTableModule "\"smarthome.hostA.ipv4.routingTable\""
+par smarthome.hostA.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par smarthome.hostA.ipv4.configurator configureRoutingTable true
+par smarthome.hostA.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par smarthome.hostA.ipv4.routingTable interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4.routingTable routerId "\"auto\""
+par smarthome.hostA.ipv4.routingTable netmaskRoutes "\"*\""
+par smarthome.hostA.ipv4.routingTable forwarding false
+par smarthome.hostA.ipv4.routingTable multicastForwarding false
+par smarthome.hostA.ipv4.routingTable useAdminDist false
+par smarthome.hostA.ipv4.routingTable routingFile "\"\""
+par smarthome.hostA.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par smarthome.hostA.ipv4.natTable networkProtocolModule "\"^.ip\""
+par smarthome.hostA.ipv4.natTable config "<config/> at content:1"
+par smarthome.hostA.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.ipv4.up forwardServiceRegistration true
+par smarthome.hostA.ipv4.up forwardProtocolRegistration true
+par smarthome.hostA.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par smarthome.hostA.ipv4.igmp interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4.igmp routingTableModule "\"smarthome.hostA.ipv4.routingTable\""
+par smarthome.hostA.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostA.ipv4.igmp enabled true
+par smarthome.hostA.ipv4.igmp robustnessVariable 2
+par smarthome.hostA.ipv4.igmp queryInterval 125s
+attr unit s
+par smarthome.hostA.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par smarthome.hostA.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par smarthome.hostA.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par smarthome.hostA.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par smarthome.hostA.ipv4.igmp startupQueryCount 2
+par smarthome.hostA.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par smarthome.hostA.ipv4.igmp lastMemberQueryCount 2
+par smarthome.hostA.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par smarthome.hostA.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par smarthome.hostA.ipv4.icmp interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4.icmp routingTableModule "\"smarthome.hostA.ipv4.routingTable\""
+par smarthome.hostA.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par smarthome.hostA.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par smarthome.hostA.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.ipv4.mp forwardServiceRegistration true
+par smarthome.hostA.ipv4.mp forwardProtocolRegistration true
+par smarthome.hostA.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par smarthome.hostA.ipv4.ip interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4.ip routingTableModule "\"smarthome.hostA.ipv4.routingTable\""
+par smarthome.hostA.ipv4.ip arpModule "\"smarthome.hostA.ipv4.arp\""
+par smarthome.hostA.ipv4.ip icmpModule "\"smarthome.hostA.ipv4.icmp\""
+par smarthome.hostA.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostA.ipv4.ip timeToLive 32
+par smarthome.hostA.ipv4.ip multicastTimeToLive 32
+par smarthome.hostA.ipv4.ip fragmentTimeout 60s
+attr unit s
+par smarthome.hostA.ipv4.ip limitedBroadcast false
+par smarthome.hostA.ipv4.ip directBroadcastInterfaces "\"\""
+scalar smarthome.hostA.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar smarthome.hostA.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar smarthome.hostA.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar smarthome.hostA.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar smarthome.hostA.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar smarthome.hostA.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar smarthome.hostA.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar smarthome.hostA.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar smarthome.hostA.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar smarthome.hostA.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar smarthome.hostA.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar smarthome.hostA.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par smarthome.hostA.ipv4.arp typename "\"inet.networklayer.arp.ipv4.GlobalArp\""
+par smarthome.hostA.ipv4.arp interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4.arp addressType "\"ipv4\""
+attr enum ipv4,ipv6,mac,moduleid,modulepath
+par smarthome.hostA.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.ipv4.lp forwardServiceRegistration true
+par smarthome.hostA.ipv4.lp forwardProtocolRegistration true
+par smarthome.hostA.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par smarthome.hostA.ipv4 forwarding false
+par smarthome.hostA.ipv4 multicastForwarding false
+par smarthome.hostA.ipv4 interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.ipv4 displayStringTextFormat "\"%i\""
+par smarthome.hostA.nl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.nl forwardServiceRegistration true
+par smarthome.hostA.nl forwardProtocolRegistration true
+par smarthome.hostA.udp typename "\"inet.transportlayer.udp.Udp\""
+par smarthome.hostA.udp interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.udp icmpModule "\"^.ipv4.icmp\""
+par smarthome.hostA.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par smarthome.hostA.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par smarthome.hostA.udp defaultMulticastLoop true
+scalar smarthome.hostA.udp packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostA.udp packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar smarthome.hostA.udp packetSent:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar smarthome.hostA.udp packetSent:sum(packetBytes) 7056
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar smarthome.hostA.udp passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar smarthome.hostA.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar smarthome.hostA.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par smarthome.hostA.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par smarthome.hostA.tcp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostA.tcp advertisedWindow 7504
+par smarthome.hostA.tcp delayedAcksEnabled false
+par smarthome.hostA.tcp nagleEnabled true
+par smarthome.hostA.tcp limitedTransmitEnabled false
+par smarthome.hostA.tcp increasedIWEnabled false
+par smarthome.hostA.tcp sackSupport false
+par smarthome.hostA.tcp windowScalingSupport false
+par smarthome.hostA.tcp windowScalingFactor -1
+par smarthome.hostA.tcp timestampSupport false
+par smarthome.hostA.tcp mss 536
+par smarthome.hostA.tcp msl 120s
+attr unit s
+par smarthome.hostA.tcp tcpAlgorithmClass "\"TcpReno\""
+par smarthome.hostA.tcp useDataNotification false
+par smarthome.hostA.tcp dupthresh 3
+par smarthome.hostA.tcp initialSsthresh 4294967295
+par smarthome.hostA.tcp stopOperationExtraTime 0s
+attr unit s
+par smarthome.hostA.tcp stopOperationTimeout 2s
+attr unit s
+par smarthome.hostA.tcp ecnWillingness false
+par smarthome.hostA.tcp dctcpGamma 0.0625
+par smarthome.hostA.tn typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.tn forwardServiceRegistration true
+par smarthome.hostA.tn forwardProtocolRegistration true
+par smarthome.hostA.app[0] typename "\"inet.applications.udpapp.UdpBasicApp\""
+par smarthome.hostA.app[0] interfaceTableModule "\"smarthome.hostA.interfaceTable\""
+par smarthome.hostA.app[0] clockModule "\"\""
+par smarthome.hostA.app[0] localPort -1
+par smarthome.hostA.app[0] destAddresses "\"hostB\""
+par smarthome.hostA.app[0] localAddress "\"\""
+par smarthome.hostA.app[0] packetName "\"UDPData\""
+par smarthome.hostA.app[0] destPort 5000
+par smarthome.hostA.app[0] messageLength 1000B
+attr unit B
+par smarthome.hostA.app[0] startTime 0.0223153s
+attr unit s
+par smarthome.hostA.app[0] stopTime -1s
+attr unit s
+par smarthome.hostA.app[0] sendInterval exponential(12ms)
+attr unit s
+par smarthome.hostA.app[0] timeToLive -1
+par smarthome.hostA.app[0] dontFragment false
+par smarthome.hostA.app[0] dscp -1
+par smarthome.hostA.app[0] tos -1
+par smarthome.hostA.app[0] multicastInterface "\"\""
+par smarthome.hostA.app[0] receiveBroadcast false
+par smarthome.hostA.app[0] joinLocalMulticastGroups false
+par smarthome.hostA.app[0] stopOperationExtraTime -1s
+attr unit s
+par smarthome.hostA.app[0] stopOperationTimeout 2s
+attr unit s
+scalar smarthome.hostA.app[0] "packets sent" 7
+scalar smarthome.hostA.app[0] "packets received" 0
+scalar smarthome.hostA.app[0] packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostA.app[0] packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+statistic smarthome.hostA.app[0] rcvdPkLifetime:stats
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode stats
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+scalar smarthome.hostA.app[0] packetSent:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar smarthome.hostA.app[0] packetSent:sum(packetBytes) 7000
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+par smarthome.hostA.at typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostA.at displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostA.at forwardServiceRegistration true
+par smarthome.hostA.at forwardProtocolRegistration true
+par smarthome.hostA typename "\"inet.node.inet.WirelessHost\""
+par smarthome.hostA hasStatus false
+par smarthome.hostA osgModel "\"\""
+par smarthome.hostA osgModelColor "\"\""
+par smarthome.hostA canvasImage "\"\""
+par smarthome.hostA canvasImageColor "\"\""
+par smarthome.hostA recordPcap false
+par smarthome.hostA numPcapRecorders 0
+par smarthome.hostA numLoInterfaces 1
+par smarthome.hostA numWlanInterfaces 1
+par smarthome.hostA numEthInterfaces 0
+par smarthome.hostA numPppInterfaces 0
+par smarthome.hostA numTunInterfaces 0
+par smarthome.hostA numVirtInterfaces 0
+par smarthome.hostA fcsMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostA hasIpv4 true
+par smarthome.hostA hasIpv6 false
+par smarthome.hostA hasGn false
+par smarthome.hostA forwarding false
+par smarthome.hostA multicastForwarding false
+par smarthome.hostA hasUdp true
+par smarthome.hostA hasTcp true
+par smarthome.hostA hasSctp false
+par smarthome.hostA numApps 1
+par smarthome.hostB.radioIn[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.mobility typename "\"inet.mobility.static.StationaryMobility\""
+par smarthome.hostB.mobility subjectModule "\"^\""
+par smarthome.hostB.mobility coordinateSystemModule "\"\""
+par smarthome.hostB.mobility displayStringTextFormat "\"p: %p\\nv: %v\""
+attr mutable ""
+par smarthome.hostB.mobility updateDisplayString true
+par smarthome.hostB.mobility constraintAreaMinX "-inf m"
+attr unit m
+par smarthome.hostB.mobility constraintAreaMinY "-inf m"
+attr unit m
+par smarthome.hostB.mobility constraintAreaMinZ "-inf m"
+attr unit m
+par smarthome.hostB.mobility constraintAreaMaxX "inf m"
+attr unit m
+par smarthome.hostB.mobility constraintAreaMaxY "inf m"
+attr unit m
+par smarthome.hostB.mobility constraintAreaMaxZ "inf m"
+attr unit m
+par smarthome.hostB.mobility initialX "nan m"
+attr unit m
+par smarthome.hostB.mobility initialY "nan m"
+attr unit m
+par smarthome.hostB.mobility initialZ 0m
+attr unit m
+par smarthome.hostB.mobility initialLatitude "nan deg"
+attr unit deg
+par smarthome.hostB.mobility initialLongitude "nan deg"
+attr unit deg
+par smarthome.hostB.mobility initialAltitude 0m
+attr unit m
+par smarthome.hostB.mobility initialHeading 0deg
+attr unit deg
+par smarthome.hostB.mobility initialElevation 0deg
+attr unit deg
+par smarthome.hostB.mobility initialBank 0deg
+attr unit deg
+par smarthome.hostB.mobility initFromDisplayString true
+par smarthome.hostB.mobility updateFromDisplayString true
+par smarthome.hostB.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par smarthome.hostB.interfaceTable displayAddresses false
+par smarthome.hostB.cb typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.cb forwardServiceRegistration true
+par smarthome.hostB.cb forwardProtocolRegistration true
+par smarthome.hostB.bl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.bl forwardServiceRegistration true
+par smarthome.hostB.bl forwardProtocolRegistration true
+par smarthome.hostB.li typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.li displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.li forwardServiceRegistration true
+par smarthome.hostB.li forwardProtocolRegistration true
+par smarthome.hostB.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par smarthome.hostB.lo[0].lo interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.lo[0].lo mtu 4470B
+attr unit B
+scalar smarthome.hostB.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostB.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostB.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostB.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par smarthome.hostB.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par smarthome.hostB.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostB.lo[0] recordPcap false
+par smarthome.hostB.lo[0] numPcapRecorders 0
+par smarthome.hostB.lo[0] interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+scalar smarthome.hostB.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostB.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostB.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostB.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostB.wlan[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.wlan[0].radioIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.wlan[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.wlan[0].queue typename "\"inet.queueing.queue.DropTailQueue\""
+par smarthome.hostB.wlan[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par smarthome.hostB.wlan[0].queue packetCapacity 100
+par smarthome.hostB.wlan[0].queue dataCapacity -1b
+attr unit b
+par smarthome.hostB.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par smarthome.hostB.wlan[0].queue comparatorClass "\"\""
+par smarthome.hostB.wlan[0].queue bufferModule "\"\""
+scalar smarthome.hostB.wlan[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar smarthome.hostB.wlan[0].queue queueLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar smarthome.hostB.wlan[0].queue queueLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar smarthome.hostB.wlan[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar smarthome.hostB.wlan[0].queue queueBitLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar smarthome.hostB.wlan[0].queue queueBitLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic smarthome.hostB.wlan[0].queue queueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostB.wlan[0].queue outgoingPackets:count 0
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar smarthome.hostB.wlan[0].queue outgoingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic smarthome.hostB.wlan[0].queue outgoingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostB.wlan[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostB.wlan[0].queue incomingPackets:count 0
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar smarthome.hostB.wlan[0].queue incomingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic smarthome.hostB.wlan[0].queue incomingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostB.wlan[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar smarthome.hostB.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par smarthome.hostB.wlan[0].mac typename "\"inet.linklayer.acking.AckingMac\""
+par smarthome.hostB.wlan[0].mac interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.wlan[0].mac address "\"auto\""
+attr mutable ""
+par smarthome.hostB.wlan[0].mac bitrate 1e+06bps
+attr unit bps
+par smarthome.hostB.wlan[0].mac mtu 4470B
+attr unit B
+par smarthome.hostB.wlan[0].mac headerLength 23B
+attr unit B
+par smarthome.hostB.wlan[0].mac promiscuous false
+par smarthome.hostB.wlan[0].mac fullDuplex false
+par smarthome.hostB.wlan[0].mac useAck false
+par smarthome.hostB.wlan[0].mac ackTimeout 0.1s
+attr unit s
+scalar smarthome.hostB.wlan[0].mac rcvdPkFromLl:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, count"
+scalar smarthome.hostB.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 7357
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac sentDownPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets sent to lower layer, count"
+scalar smarthome.hostB.wlan[0].mac sentDownPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets sent to lower layer, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostB.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac passedUpPk:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostB.wlan[0].mac passedUpPk:sum(packetBytes) 7196
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar smarthome.hostB.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar smarthome.hostB.wlan[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac packetDropNotAddressedToUs:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar smarthome.hostB.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0].mac linkBroken:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source linkBroken
+attr title "link break, count"
+par smarthome.hostB.wlan[0].radio.antenna typename "\"inet.physicallayer.wireless.common.antenna.IsotropicAntenna\""
+par smarthome.hostB.wlan[0].radio.antenna mobilityModule "\"^.^.^.mobility\""
+par smarthome.hostB.wlan[0].radio.antenna numAntennas 1
+par smarthome.hostB.wlan[0].radio.transmitter typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskTransmitter\""
+par smarthome.hostB.wlan[0].radio.transmitter preambleDuration 0s
+attr unit s
+par smarthome.hostB.wlan[0].radio.transmitter headerLength 96b
+attr unit b
+par smarthome.hostB.wlan[0].radio.transmitter bitrate 1e+06bps
+attr unit bps
+par smarthome.hostB.wlan[0].radio.transmitter communicationRange 500m
+attr unit m
+par smarthome.hostB.wlan[0].radio.transmitter interferenceRange 500m
+attr unit m
+par smarthome.hostB.wlan[0].radio.transmitter detectionRange 500m
+attr unit m
+par smarthome.hostB.wlan[0].radio.receiver typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskReceiver\""
+par smarthome.hostB.wlan[0].radio.receiver ignoreInterference true
+par smarthome.hostB.wlan[0].radio typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskRadio\""
+par smarthome.hostB.wlan[0].radio radioMediumModule "\"radioMedium\""
+par smarthome.hostB.wlan[0].radio energySourceModule "\"\""
+par smarthome.hostB.wlan[0].radio initialRadioMode "\"off\""
+attr enum off,sleep,receiver,transmitter,transceiver
+par smarthome.hostB.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
+par smarthome.hostB.wlan[0].radio sendRawBytes false
+par smarthome.hostB.wlan[0].radio separateTransmissionParts false
+par smarthome.hostB.wlan[0].radio separateReceptionParts false
+par smarthome.hostB.wlan[0].radio displayCommunicationRange false
+par smarthome.hostB.wlan[0].radio displayInterferenceRange false
+statistic smarthome.hostB.wlan[0].radio minSnir:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source minimumSnir(packetSentToUpper)
+attr title "Min SNIR"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostB.wlan[0].radio packetErrorRate:histogram
+field count 7
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source packetErrorRate(packetSentToUpper)
+attr title "Packet error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	7
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostB.wlan[0].radio bitErrorRate:histogram
+field count 7
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source bitErrorRate(packetSentToUpper)
+attr title "Bit error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	7
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostB.wlan[0].radio symbolErrorRate:histogram
+field count 7
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source symbolErrorRate(packetSentToUpper)
+attr title "Symbol error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	7
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar smarthome.hostB.wlan[0].radio transmissionState:count 0
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source transmissionStateChanged
+attr title "Radio transmission state, count"
+scalar smarthome.hostB.wlan[0].radio receptionState:count 15
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source receptionStateChanged
+attr title "Radio reception state, count"
+scalar smarthome.hostB.wlan[0].radio radioMode:count 3
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source radioModeChanged
+attr title "Radio mode, count"
+par smarthome.hostB.wlan[0] typename "\"inet.linklayer.acking.AckingWirelessInterface\""
+par smarthome.hostB.wlan[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostB.wlan[0] recordPcap false
+par smarthome.hostB.wlan[0] numPcapRecorders 0
+par smarthome.hostB.wlan[0] interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.wlan[0] energySourceModule "\"\""
+par smarthome.hostB.wlan[0] bitrate 1e+06bps
+attr unit bps
+scalar smarthome.hostB.wlan[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostB.wlan[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostB.wlan[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostB.wlan[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostB.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostB.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par smarthome.hostB.ipv4.configurator interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4.configurator routingTableModule "\"smarthome.hostB.ipv4.routingTable\""
+par smarthome.hostB.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par smarthome.hostB.ipv4.configurator configureRoutingTable true
+par smarthome.hostB.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par smarthome.hostB.ipv4.routingTable interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4.routingTable routerId "\"auto\""
+par smarthome.hostB.ipv4.routingTable netmaskRoutes "\"*\""
+par smarthome.hostB.ipv4.routingTable forwarding false
+par smarthome.hostB.ipv4.routingTable multicastForwarding false
+par smarthome.hostB.ipv4.routingTable useAdminDist false
+par smarthome.hostB.ipv4.routingTable routingFile "\"\""
+par smarthome.hostB.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par smarthome.hostB.ipv4.natTable networkProtocolModule "\"^.ip\""
+par smarthome.hostB.ipv4.natTable config "<config/> at content:1"
+par smarthome.hostB.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.ipv4.up forwardServiceRegistration true
+par smarthome.hostB.ipv4.up forwardProtocolRegistration true
+par smarthome.hostB.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par smarthome.hostB.ipv4.igmp interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4.igmp routingTableModule "\"smarthome.hostB.ipv4.routingTable\""
+par smarthome.hostB.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostB.ipv4.igmp enabled true
+par smarthome.hostB.ipv4.igmp robustnessVariable 2
+par smarthome.hostB.ipv4.igmp queryInterval 125s
+attr unit s
+par smarthome.hostB.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par smarthome.hostB.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par smarthome.hostB.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par smarthome.hostB.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par smarthome.hostB.ipv4.igmp startupQueryCount 2
+par smarthome.hostB.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par smarthome.hostB.ipv4.igmp lastMemberQueryCount 2
+par smarthome.hostB.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par smarthome.hostB.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par smarthome.hostB.ipv4.icmp interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4.icmp routingTableModule "\"smarthome.hostB.ipv4.routingTable\""
+par smarthome.hostB.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par smarthome.hostB.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par smarthome.hostB.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.ipv4.mp forwardServiceRegistration true
+par smarthome.hostB.ipv4.mp forwardProtocolRegistration true
+par smarthome.hostB.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par smarthome.hostB.ipv4.ip interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4.ip routingTableModule "\"smarthome.hostB.ipv4.routingTable\""
+par smarthome.hostB.ipv4.ip arpModule "\"smarthome.hostB.ipv4.arp\""
+par smarthome.hostB.ipv4.ip icmpModule "\"smarthome.hostB.ipv4.icmp\""
+par smarthome.hostB.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostB.ipv4.ip timeToLive 32
+par smarthome.hostB.ipv4.ip multicastTimeToLive 32
+par smarthome.hostB.ipv4.ip fragmentTimeout 60s
+attr unit s
+par smarthome.hostB.ipv4.ip limitedBroadcast false
+par smarthome.hostB.ipv4.ip directBroadcastInterfaces "\"\""
+scalar smarthome.hostB.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar smarthome.hostB.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar smarthome.hostB.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar smarthome.hostB.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar smarthome.hostB.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar smarthome.hostB.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar smarthome.hostB.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar smarthome.hostB.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar smarthome.hostB.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar smarthome.hostB.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar smarthome.hostB.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar smarthome.hostB.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par smarthome.hostB.ipv4.arp typename "\"inet.networklayer.arp.ipv4.GlobalArp\""
+par smarthome.hostB.ipv4.arp interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4.arp addressType "\"ipv4\""
+attr enum ipv4,ipv6,mac,moduleid,modulepath
+par smarthome.hostB.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.ipv4.lp forwardServiceRegistration true
+par smarthome.hostB.ipv4.lp forwardProtocolRegistration true
+par smarthome.hostB.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par smarthome.hostB.ipv4 forwarding false
+par smarthome.hostB.ipv4 multicastForwarding false
+par smarthome.hostB.ipv4 interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.ipv4 displayStringTextFormat "\"%i\""
+par smarthome.hostB.nl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.nl forwardServiceRegistration true
+par smarthome.hostB.nl forwardProtocolRegistration true
+par smarthome.hostB.udp typename "\"inet.transportlayer.udp.Udp\""
+par smarthome.hostB.udp interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.udp icmpModule "\"^.ipv4.icmp\""
+par smarthome.hostB.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par smarthome.hostB.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par smarthome.hostB.udp defaultMulticastLoop true
+scalar smarthome.hostB.udp packetReceived:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostB.udp packetReceived:sum(packetBytes) 7056
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar smarthome.hostB.udp packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar smarthome.hostB.udp packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar smarthome.hostB.udp passedUpPk:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar smarthome.hostB.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar smarthome.hostB.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par smarthome.hostB.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par smarthome.hostB.tcp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostB.tcp advertisedWindow 7504
+par smarthome.hostB.tcp delayedAcksEnabled false
+par smarthome.hostB.tcp nagleEnabled true
+par smarthome.hostB.tcp limitedTransmitEnabled false
+par smarthome.hostB.tcp increasedIWEnabled false
+par smarthome.hostB.tcp sackSupport false
+par smarthome.hostB.tcp windowScalingSupport false
+par smarthome.hostB.tcp windowScalingFactor -1
+par smarthome.hostB.tcp timestampSupport false
+par smarthome.hostB.tcp mss 536
+par smarthome.hostB.tcp msl 120s
+attr unit s
+par smarthome.hostB.tcp tcpAlgorithmClass "\"TcpReno\""
+par smarthome.hostB.tcp useDataNotification false
+par smarthome.hostB.tcp dupthresh 3
+par smarthome.hostB.tcp initialSsthresh 4294967295
+par smarthome.hostB.tcp stopOperationExtraTime 0s
+attr unit s
+par smarthome.hostB.tcp stopOperationTimeout 2s
+attr unit s
+par smarthome.hostB.tcp ecnWillingness false
+par smarthome.hostB.tcp dctcpGamma 0.0625
+par smarthome.hostB.tn typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.tn forwardServiceRegistration true
+par smarthome.hostB.tn forwardProtocolRegistration true
+par smarthome.hostB.app[0] typename "\"inet.applications.udpapp.UdpSink\""
+par smarthome.hostB.app[0] interfaceTableModule "\"smarthome.hostB.interfaceTable\""
+par smarthome.hostB.app[0] startTime 0s
+attr unit s
+par smarthome.hostB.app[0] stopTime -1s
+attr unit s
+par smarthome.hostB.app[0] localPort 5000
+par smarthome.hostB.app[0] receiveBroadcast false
+par smarthome.hostB.app[0] multicastGroup "\"\""
+par smarthome.hostB.app[0] multicastSources "\"\""
+par smarthome.hostB.app[0] stopOperationExtraTime -1s
+attr unit s
+par smarthome.hostB.app[0] stopOperationTimeout 2s
+attr unit s
+scalar smarthome.hostB.app[0] packetReceived:count 7
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostB.app[0] packetReceived:sum(packetBytes) 7000
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+statistic smarthome.hostB.app[0] endToEndDelay:histogram
+field count 7
+field mean 0.0093896146185714
+field stddev 0.0011511481480906
+field min 0.008505334256
+field max 0.011206108997
+field sum 0.06572730233
+field sqrsum 0.00062510489115015
+attr interpolationmode none
+attr recordingmode histogram
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+bin	-inf	0
+bin	0.0078	0
+bin	0.00785	0
+bin	0.0079	0
+bin	0.00795	0
+bin	0.008	0
+bin	0.00805	0
+bin	0.0081	0
+bin	0.00815	0
+bin	0.0082	0
+bin	0.00825	0
+bin	0.0083	0
+bin	0.00835	0
+bin	0.0084	0
+bin	0.00845	0
+bin	0.0085	4
+bin	0.00855	0
+bin	0.0086	0
+bin	0.00865	0
+bin	0.0087	0
+bin	0.00875	0
+bin	0.0088	0
+bin	0.00885	0
+bin	0.0089	0
+bin	0.00895	0
+bin	0.009	0
+bin	0.00905	0
+bin	0.0091	0
+bin	0.00915	0
+bin	0.0092	0
+bin	0.00925	0
+bin	0.0093	0
+bin	0.00935	0
+bin	0.0094	0
+bin	0.00945	0
+bin	0.0095	0
+bin	0.00955	0
+bin	0.0096	0
+bin	0.00965	0
+bin	0.0097	0
+bin	0.00975	0
+bin	0.0098	0
+bin	0.00985	0
+bin	0.0099	0
+bin	0.00995	0
+bin	0.01	0
+bin	0.01005	0
+bin	0.0101	1
+bin	0.01015	0
+bin	0.0102	0
+bin	0.01025	0
+bin	0.0103	0
+bin	0.01035	1
+bin	0.0104	0
+bin	0.01045	0
+bin	0.0105	0
+bin	0.01055	0
+bin	0.0106	0
+bin	0.01065	0
+bin	0.0107	0
+bin	0.01075	0
+bin	0.0108	0
+bin	0.01085	0
+bin	0.0109	0
+bin	0.01095	0
+bin	0.011	0
+bin	0.01105	0
+bin	0.0111	0
+bin	0.01115	0
+bin	0.0112	1
+bin	0.01125	0
+bin	0.0113	0
+bin	0.01135	0
+bin	0.0114	0
+bin	0.01145	0
+bin	0.0115	0
+bin	0.01155	0
+bin	0.0116	0
+bin	0.01165	0
+bin	0.0117	0
+bin	0.01175	0
+bin	0.0118	0
+bin	0.01185	0
+bin	0.0119	0
+par smarthome.hostB.at typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostB.at displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostB.at forwardServiceRegistration true
+par smarthome.hostB.at forwardProtocolRegistration true
+par smarthome.hostB typename "\"inet.node.inet.WirelessHost\""
+par smarthome.hostB hasStatus false
+par smarthome.hostB osgModel "\"\""
+par smarthome.hostB osgModelColor "\"\""
+par smarthome.hostB canvasImage "\"\""
+par smarthome.hostB canvasImageColor "\"\""
+par smarthome.hostB recordPcap false
+par smarthome.hostB numPcapRecorders 0
+par smarthome.hostB numLoInterfaces 1
+par smarthome.hostB numWlanInterfaces 1
+par smarthome.hostB numEthInterfaces 0
+par smarthome.hostB numPppInterfaces 0
+par smarthome.hostB numTunInterfaces 0
+par smarthome.hostB numVirtInterfaces 0
+par smarthome.hostB fcsMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostB hasIpv4 true
+par smarthome.hostB hasIpv6 false
+par smarthome.hostB hasGn false
+par smarthome.hostB forwarding false
+par smarthome.hostB multicastForwarding false
+par smarthome.hostB hasUdp true
+par smarthome.hostB hasTcp true
+par smarthome.hostB hasSctp false
+par smarthome.hostB numApps 1
+par smarthome typename "\"smarthome\""
+
