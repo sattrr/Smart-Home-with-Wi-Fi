@@ -20,7 +20,7 @@ import inet.visualizer.contract.IIntegratedVisualizer;
 
 network smarthome
 {
-    parameters:
+  	parameters:
         @display("bgb=650,500;bgg=100,1,grey95");
         @figure[title](type=label; pos=0,-1; anchor=sw; color=darkblue);
 
@@ -42,5 +42,14 @@ network smarthome
         }
         hostB: <default("WirelessHost")> like INetworkNode {
             @display("p=450,325");
+        }
+        hostR1: <default("WirelessHost")> like INetworkNode {
+            @display("p=250,300");
+        }
+        hostR2: <default("WirelessHost")> like INetworkNode {
+            @display("p=150,450");
+        }
+        hostR3: <default("WirelessHost")> like INetworkNode {
+            @display("p=350,450");
         }
 }

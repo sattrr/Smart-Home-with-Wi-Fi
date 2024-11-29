@@ -1,8 +1,8 @@
 version 3
-run Wireless01-0-20241129-19:16:16-12644
+run Wireless01-0-20241129-19:33:24-11332
 attr configname Wireless01
-attr datetime 20241129-19:16:16
-attr datetimef 20241129-191616
+attr datetime 20241129-19:33:24
+attr datetimef 20241129-193324
 attr experiment Wireless01
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,14 +10,14 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network smarthome
-attr processid 12644
+attr processid 11332
 attr repetition 0
 attr replication #0
 attr resultdir results
 attr runnumber 0
 attr seedset 0
 config image-path ../../inet4.5/images
-config description "Two hosts communicating wirelessly"
+config description "Five hosts communicating wirelessly"
 config network smarthome
 config sim-time-limit 20s
 config *.host*.ipv4.arp.typename GlobalArp
@@ -37,6 +37,8 @@ config *.host*.wlan[0].mac.fullDuplex false
 config *.host*.wlan[0].radio.transmitter.communicationRange 500m
 config *.host*.wlan[0].radio.receiver.ignoreInterference true
 config *.host*.wlan[0].mac.headerLength 23B
+config *.host*.wlan[0].radio.transmitter.communicationRange 250m
+config *.hostR1.wlan[0].radio.displayCommunicationRange true
 config *.host*.**.bitrate 1Mbps
 
 par smarthome.visualizer.sceneVisualizer typename "\"inet.visualizer.canvas.scene.SceneCanvasVisualizer\""
@@ -750,7 +752,7 @@ attr unit mps
 par smarthome.radioMedium.propagation ignoreMovementDuringTransmission true
 par smarthome.radioMedium.propagation ignoreMovementDuringPropagation true
 par smarthome.radioMedium.propagation ignoreMovementDuringReception true
-scalar smarthome.radioMedium.propagation "Arrival computation count" 7
+scalar smarthome.radioMedium.propagation "Arrival computation count" 12
 par smarthome.radioMedium.analogModel typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskAnalogModel\""
 par smarthome.radioMedium.pathLoss typename "\"inet.physicallayer.wireless.common.pathloss.FreeSpacePathLoss\""
 par smarthome.radioMedium.pathLoss alpha 2
@@ -788,13 +790,13 @@ par smarthome.radioMedium listeningFilter false
 par smarthome.radioMedium macAddressFilter false
 par smarthome.radioMedium recordTransmissionLog false
 par smarthome.radioMedium recordReceptionLog false
-scalar smarthome.radioMedium "transmission count" 7
-scalar smarthome.radioMedium "signal send count" 7
-scalar smarthome.radioMedium "reception computation count" 7
-scalar smarthome.radioMedium "interference computation count" 32
-scalar smarthome.radioMedium "reception decision computation count" 7
-scalar smarthome.radioMedium "listening decision computation count" 18
-scalar smarthome.radioMedium "reception cache hit" 86.538461538462
+scalar smarthome.radioMedium "transmission count" 3
+scalar smarthome.radioMedium "signal send count" 12
+scalar smarthome.radioMedium "reception computation count" 12
+scalar smarthome.radioMedium "interference computation count" 40
+scalar smarthome.radioMedium "reception decision computation count" 8
+scalar smarthome.radioMedium "listening decision computation count" 20
+scalar smarthome.radioMedium "reception cache hit" 84.210526315789
 attr unit %
 scalar smarthome.radioMedium "interference cache hit" 66.666666666667
 attr unit %
@@ -935,7 +937,7 @@ attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length, max"
 attr unit pk
-scalar smarthome.hostA.wlan[0].queue queueLength:timeavg 0.046978163243911
+scalar smarthome.hostA.wlan[0].queue queueLength:timeavg 0.22506294262388
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -956,7 +958,7 @@ attr recordingmode max
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length, max"
 attr unit b
-scalar smarthome.hostA.wlan[0].queue queueBitLength:timeavg 386.34841451792
+scalar smarthome.hostA.wlan[0].queue queueBitLength:timeavg 1850.9176401388
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode timeavg
@@ -964,107 +966,107 @@ attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetP
 attr title "queue bit length, timeavg"
 attr unit b
 statistic smarthome.hostA.wlan[0].queue queueingTime:histogram
-field count 7
-field mean 0.00088428036257143
-field stddev 0.0011511481480906
+field count 3
+field mean 0.0033593654803333
+field stddev 0.0029309138477483
 field min 0
-field max 0.002700774741
-field sum 0.006189962538
-field sqrsum 1.3424514670521e-05
+field max 0.005394370131
+field sum 0.010078096441
+field sqrsum 5.1036521257211e-05
 attr interpolationmode none
 attr recordingmode histogram
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
 bin	-inf	0
-bin	0	4
-bin	5e-05	0
+bin	0	1
 bin	0.0001	0
-bin	0.00015	0
 bin	0.0002	0
-bin	0.00025	0
 bin	0.0003	0
-bin	0.00035	0
 bin	0.0004	0
-bin	0.00045	0
 bin	0.0005	0
-bin	0.00055	0
 bin	0.0006	0
-bin	0.00065	0
 bin	0.0007	0
-bin	0.00075	0
 bin	0.0008	0
-bin	0.00085	0
 bin	0.0009	0
-bin	0.00095	0
 bin	0.001	0
-bin	0.00105	0
 bin	0.0011	0
-bin	0.00115	0
 bin	0.0012	0
-bin	0.00125	0
 bin	0.0013	0
-bin	0.00135	0
 bin	0.0014	0
-bin	0.00145	0
 bin	0.0015	0
-bin	0.00155	1
 bin	0.0016	0
-bin	0.00165	0
 bin	0.0017	0
-bin	0.00175	0
 bin	0.0018	0
-bin	0.00185	1
 bin	0.0019	0
-bin	0.00195	0
 bin	0.002	0
-bin	0.00205	0
 bin	0.0021	0
-bin	0.00215	0
 bin	0.0022	0
-bin	0.00225	0
 bin	0.0023	0
-bin	0.00235	0
 bin	0.0024	0
-bin	0.00245	0
 bin	0.0025	0
-bin	0.00255	0
 bin	0.0026	0
-bin	0.00265	0
-bin	0.0027	1
-bin	0.00275	0
+bin	0.0027	0
 bin	0.0028	0
-bin	0.00285	0
 bin	0.0029	0
-bin	0.00295	0
 bin	0.003	0
-bin	0.00305	0
 bin	0.0031	0
-bin	0.00315	0
 bin	0.0032	0
-bin	0.00325	0
 bin	0.0033	0
-bin	0.00335	0
 bin	0.0034	0
-scalar smarthome.hostA.wlan[0].queue outgoingPackets:count 7
+bin	0.0035	0
+bin	0.0036	0
+bin	0.0037	0
+bin	0.0038	0
+bin	0.0039	0
+bin	0.004	0
+bin	0.0041	0
+bin	0.0042	0
+bin	0.0043	0
+bin	0.0044	0
+bin	0.0045	0
+bin	0.0046	1
+bin	0.0047	0
+bin	0.0048	0
+bin	0.0049	0
+bin	0.005	0
+bin	0.0051	0
+bin	0.0052	0
+bin	0.0053	1
+bin	0.0054	0
+bin	0.0055	0
+bin	0.0056	0
+bin	0.0057	0
+bin	0.0058	0
+bin	0.0059	0
+bin	0.006	0
+bin	0.0061	0
+bin	0.0062	0
+bin	0.0063	0
+bin	0.0064	0
+bin	0.0065	0
+bin	0.0066	0
+bin	0.0067	0
+bin	0.0068	0
+scalar smarthome.hostA.wlan[0].queue outgoingPackets:count 3
 attr recordingmode count
 attr source packetPulled
 attr title "outgoing packets, count"
 attr unit pk
-scalar smarthome.hostA.wlan[0].queue outgoingPacketLengths:sum 57568
+scalar smarthome.hostA.wlan[0].queue outgoingPacketLengths:sum 24672
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths, sum"
 attr unit b
 statistic smarthome.hostA.wlan[0].queue outgoingPacketLengths:histogram
-field count 7
+field count 3
 field mean 8224
 field stddev 0
 field min 8224
 field max 8224
-field sum 57568
-field sqrsum 473439232
+field sum 24672
+field sqrsum 202902528
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPulled)
@@ -1072,7 +1074,7 @@ attr title "outgoing packet lengths"
 attr unit b
 bin	-inf	0
 bin	8223	0
-bin	8224	7
+bin	8224	3
 bin	8225	0
 statistic smarthome.hostA.wlan[0].queue flowQueueingTime:histogram
 field count 0
@@ -1090,25 +1092,25 @@ attr unit s
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar smarthome.hostA.wlan[0].queue incomingPackets:count 7
+scalar smarthome.hostA.wlan[0].queue incomingPackets:count 3
 attr recordingmode count
 attr source packetPushStarted
 attr title "incoming packets, count"
 attr unit pk
-scalar smarthome.hostA.wlan[0].queue incomingPacketLengths:sum 57568
+scalar smarthome.hostA.wlan[0].queue incomingPacketLengths:sum 24672
 attr interpolationmode none
 attr recordingmode sum
 attr source packetLength(packetPushStarted)
 attr title "incoming packet lengths, sum"
 attr unit b
 statistic smarthome.hostA.wlan[0].queue incomingPacketLengths:histogram
-field count 7
+field count 3
 field mean 8224
 field stddev 0
 field min 8224
 field max 8224
-field sum 57568
-field sqrsum 473439232
+field sum 24672
+field sqrsum 202902528
 attr interpolationmode none
 attr recordingmode histogram
 attr source packetLength(packetPushStarted)
@@ -1116,7 +1118,7 @@ attr title "incoming packet lengths"
 attr unit b
 bin	-inf	0
 bin	8223	0
-bin	8224	7
+bin	8224	3
 bin	8225	0
 scalar smarthome.hostA.wlan[0].queue droppedPacketsQueueOverflow:count 0
 attr interpolationmode none
@@ -1155,22 +1157,22 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceivedFromLower
 attr title "packets received from lower layer, sum(packetBytes)"
-scalar smarthome.hostA.wlan[0].mac sentDownPk:count 7
+scalar smarthome.hostA.wlan[0].mac sentDownPk:count 3
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToLower
 attr title "packets sent to lower layer, count"
-scalar smarthome.hostA.wlan[0].mac sentDownPk:sum(packetBytes) 7357
+scalar smarthome.hostA.wlan[0].mac sentDownPk:sum(packetBytes) 3153
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSentToLower
 attr title "packets sent to lower layer, sum(packetBytes)"
-scalar smarthome.hostA.wlan[0].mac rcvdPkFromHl:count 7
+scalar smarthome.hostA.wlan[0].mac rcvdPkFromHl:count 3
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceivedFromUpper
 attr title "packets received from higher layer, count"
-scalar smarthome.hostA.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 7196
+scalar smarthome.hostA.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 3084
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceivedFromUpper
@@ -1305,17 +1307,17 @@ attr title "Symbol error rate"
 bin	-inf	0
 bin	0	0
 bin	1	0
-scalar smarthome.hostA.wlan[0].radio transmissionState:count 28
+scalar smarthome.hostA.wlan[0].radio transmissionState:count 10
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
-scalar smarthome.hostA.wlan[0].radio receptionState:count 15
+scalar smarthome.hostA.wlan[0].radio receptionState:count 6
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
 attr title "Radio reception state, count"
-scalar smarthome.hostA.wlan[0].radio radioMode:count 17
+scalar smarthome.hostA.wlan[0].radio radioMode:count 8
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source radioModeChanged
@@ -1515,12 +1517,12 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
-scalar smarthome.hostA.udp packetSent:count 7
+scalar smarthome.hostA.udp packetSent:count 3
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar smarthome.hostA.udp packetSent:sum(packetBytes) 7056
+scalar smarthome.hostA.udp packetSent:sum(packetBytes) 3024
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -1596,7 +1598,7 @@ par smarthome.hostA.app[0] stopOperationExtraTime -1s
 attr unit s
 par smarthome.hostA.app[0] stopOperationTimeout 2s
 attr unit s
-scalar smarthome.hostA.app[0] "packets sent" 7
+scalar smarthome.hostA.app[0] "packets sent" 3
 scalar smarthome.hostA.app[0] "packets received" 0
 scalar smarthome.hostA.app[0] packetReceived:count 0
 attr interpolationmode none
@@ -1621,12 +1623,12 @@ attr recordingmode stats
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-scalar smarthome.hostA.app[0] packetSent:count 7
+scalar smarthome.hostA.app[0] packetSent:count 3
 attr interpolationmode none
 attr recordingmode count
 attr source packetSent
 attr title "packets sent, count"
-scalar smarthome.hostA.app[0] packetSent:sum(packetBytes) 7000
+scalar smarthome.hostA.app[0] packetSent:sum(packetBytes) 3000
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
@@ -1930,12 +1932,12 @@ par smarthome.hostB.wlan[0].mac fullDuplex false
 par smarthome.hostB.wlan[0].mac useAck false
 par smarthome.hostB.wlan[0].mac ackTimeout 0.1s
 attr unit s
-scalar smarthome.hostB.wlan[0].mac rcvdPkFromLl:count 7
+scalar smarthome.hostB.wlan[0].mac rcvdPkFromLl:count 2
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceivedFromLower
 attr title "packets received from lower layer, count"
-scalar smarthome.hostB.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 7357
+scalar smarthome.hostB.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 2102
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceivedFromLower
@@ -1960,12 +1962,12 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceivedFromUpper
 attr title "packets received from higher layer, sum(packetBytes)"
-scalar smarthome.hostB.wlan[0].mac passedUpPk:count 7
+scalar smarthome.hostB.wlan[0].mac passedUpPk:count 2
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToUpper
 attr title "packets passed to higher layer, count"
-scalar smarthome.hostB.wlan[0].mac passedUpPk:sum(packetBytes) 7196
+scalar smarthome.hostB.wlan[0].mac passedUpPk:sum(packetBytes) 2056
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSentToUpper
@@ -2049,7 +2051,7 @@ bin	-inf	0
 bin	0	0
 bin	1	0
 statistic smarthome.hostB.wlan[0].radio packetErrorRate:histogram
-field count 7
+field count 2
 field mean 0
 field stddev 0
 field min 0
@@ -2085,7 +2087,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	7
+bin	0	2
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -2112,7 +2114,7 @@ bin	0.46	0
 bin	0.48	0
 bin	0.5	0
 statistic smarthome.hostB.wlan[0].radio bitErrorRate:histogram
-field count 7
+field count 2
 field mean 0
 field stddev 0
 field min 0
@@ -2148,7 +2150,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	7
+bin	0	2
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -2175,7 +2177,7 @@ bin	0.46	0
 bin	0.48	0
 bin	0.5	0
 statistic smarthome.hostB.wlan[0].radio symbolErrorRate:histogram
-field count 7
+field count 2
 field mean 0
 field stddev 0
 field min 0
@@ -2211,7 +2213,7 @@ bin	-0.08	0
 bin	-0.06	0
 bin	-0.04	0
 bin	-0.02	0
-bin	0	7
+bin	0	2
 bin	0.02	0
 bin	0.04	0
 bin	0.06	0
@@ -2242,7 +2244,7 @@ attr interpolationmode sample-hold
 attr recordingmode count
 attr source transmissionStateChanged
 attr title "Radio transmission state, count"
-scalar smarthome.hostB.wlan[0].radio receptionState:count 15
+scalar smarthome.hostB.wlan[0].radio receptionState:count 6
 attr interpolationmode sample-hold
 attr recordingmode count
 attr source receptionStateChanged
@@ -2437,12 +2439,12 @@ par smarthome.hostB.udp icmpv6Module "\"^.ipv6.icmpv6\""
 par smarthome.hostB.udp crcMode "\"declared\""
 attr enum disabled,declared,computed
 par smarthome.hostB.udp defaultMulticastLoop true
-scalar smarthome.hostB.udp packetReceived:count 7
+scalar smarthome.hostB.udp packetReceived:count 2
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar smarthome.hostB.udp packetReceived:sum(packetBytes) 7056
+scalar smarthome.hostB.udp packetReceived:sum(packetBytes) 2016
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
@@ -2457,7 +2459,7 @@ attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetSent
 attr title "packets sent, sum(packetBytes)"
-scalar smarthome.hostB.udp passedUpPk:count 7
+scalar smarthome.hostB.udp passedUpPk:count 2
 attr interpolationmode none
 attr recordingmode count
 attr source packetSentToUpper
@@ -2515,113 +2517,102 @@ par smarthome.hostB.app[0] stopOperationExtraTime -1s
 attr unit s
 par smarthome.hostB.app[0] stopOperationTimeout 2s
 attr unit s
-scalar smarthome.hostB.app[0] packetReceived:count 7
+scalar smarthome.hostB.app[0] packetReceived:count 2
 attr interpolationmode none
 attr recordingmode count
 attr source packetReceived
 attr title "packets received, count"
-scalar smarthome.hostB.app[0] packetReceived:sum(packetBytes) 7000
+scalar smarthome.hostB.app[0] packetReceived:sum(packetBytes) 2000
 attr interpolationmode none
 attr recordingmode sum(packetBytes)
 attr source packetReceived
 attr title "packets received, sum(packetBytes)"
 statistic smarthome.hostB.app[0] endToEndDelay:histogram
-field count 7
-field mean 0.0093896146185714
-field stddev 0.0011511481480906
+field count 2
+field mean 0.010847197411
+field stddev 0.0033118946350228
 field min 0.008505334256
-field max 0.011206108997
-field sum 0.06572730233
-field sqrsum 0.00062510489115015
+field max 0.013189060566
+field sum 0.021694394822
+field sqrsum 0.0002462920294199
 attr interpolationmode none
 attr recordingmode histogram
 attr source dataAge(packetReceived)
 attr title "end-to-end delay"
 attr unit s
 bin	-inf	0
+bin	0.0073	0
+bin	0.0074	0
+bin	0.0075	0
+bin	0.0076	0
+bin	0.0077	0
 bin	0.0078	0
-bin	0.00785	0
 bin	0.0079	0
-bin	0.00795	0
 bin	0.008	0
-bin	0.00805	0
 bin	0.0081	0
-bin	0.00815	0
 bin	0.0082	0
-bin	0.00825	0
 bin	0.0083	0
-bin	0.00835	0
 bin	0.0084	0
-bin	0.00845	0
-bin	0.0085	4
-bin	0.00855	0
+bin	0.0085	1
 bin	0.0086	0
-bin	0.00865	0
 bin	0.0087	0
-bin	0.00875	0
 bin	0.0088	0
-bin	0.00885	0
 bin	0.0089	0
-bin	0.00895	0
 bin	0.009	0
-bin	0.00905	0
 bin	0.0091	0
-bin	0.00915	0
 bin	0.0092	0
-bin	0.00925	0
 bin	0.0093	0
-bin	0.00935	0
 bin	0.0094	0
-bin	0.00945	0
 bin	0.0095	0
-bin	0.00955	0
 bin	0.0096	0
-bin	0.00965	0
 bin	0.0097	0
-bin	0.00975	0
 bin	0.0098	0
-bin	0.00985	0
 bin	0.0099	0
-bin	0.00995	0
 bin	0.01	0
-bin	0.01005	0
-bin	0.0101	1
-bin	0.01015	0
+bin	0.0101	0
 bin	0.0102	0
-bin	0.01025	0
 bin	0.0103	0
-bin	0.01035	1
 bin	0.0104	0
-bin	0.01045	0
 bin	0.0105	0
-bin	0.01055	0
 bin	0.0106	0
-bin	0.01065	0
 bin	0.0107	0
-bin	0.01075	0
 bin	0.0108	0
-bin	0.01085	0
 bin	0.0109	0
-bin	0.01095	0
 bin	0.011	0
-bin	0.01105	0
 bin	0.0111	0
-bin	0.01115	0
-bin	0.0112	1
-bin	0.01125	0
+bin	0.0112	0
 bin	0.0113	0
-bin	0.01135	0
 bin	0.0114	0
-bin	0.01145	0
 bin	0.0115	0
-bin	0.01155	0
 bin	0.0116	0
-bin	0.01165	0
 bin	0.0117	0
-bin	0.01175	0
 bin	0.0118	0
-bin	0.01185	0
 bin	0.0119	0
+bin	0.012	0
+bin	0.0121	0
+bin	0.0122	0
+bin	0.0123	0
+bin	0.0124	0
+bin	0.0125	0
+bin	0.0126	0
+bin	0.0127	0
+bin	0.0128	0
+bin	0.0129	0
+bin	0.013	0
+bin	0.0131	1
+bin	0.0132	0
+bin	0.0133	0
+bin	0.0134	0
+bin	0.0135	0
+bin	0.0136	0
+bin	0.0137	0
+bin	0.0138	0
+bin	0.0139	0
+bin	0.014	0
+bin	0.0141	0
+bin	0.0142	0
+bin	0.0143	0
+bin	0.0144	0
 par smarthome.hostB.at typename "\"inet.common.MessageDispatcher\""
 par smarthome.hostB.at displayStringTextFormat "\"processed %p pk (%l)\""
 par smarthome.hostB.at forwardServiceRegistration true
@@ -2651,5 +2642,2615 @@ par smarthome.hostB hasUdp true
 par smarthome.hostB hasTcp true
 par smarthome.hostB hasSctp false
 par smarthome.hostB numApps 1
+par smarthome.hostR1.radioIn[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.mobility typename "\"inet.mobility.static.StationaryMobility\""
+par smarthome.hostR1.mobility subjectModule "\"^\""
+par smarthome.hostR1.mobility coordinateSystemModule "\"\""
+par smarthome.hostR1.mobility displayStringTextFormat "\"p: %p\\nv: %v\""
+attr mutable ""
+par smarthome.hostR1.mobility updateDisplayString true
+par smarthome.hostR1.mobility constraintAreaMinX "-inf m"
+attr unit m
+par smarthome.hostR1.mobility constraintAreaMinY "-inf m"
+attr unit m
+par smarthome.hostR1.mobility constraintAreaMinZ "-inf m"
+attr unit m
+par smarthome.hostR1.mobility constraintAreaMaxX "inf m"
+attr unit m
+par smarthome.hostR1.mobility constraintAreaMaxY "inf m"
+attr unit m
+par smarthome.hostR1.mobility constraintAreaMaxZ "inf m"
+attr unit m
+par smarthome.hostR1.mobility initialX "nan m"
+attr unit m
+par smarthome.hostR1.mobility initialY "nan m"
+attr unit m
+par smarthome.hostR1.mobility initialZ 0m
+attr unit m
+par smarthome.hostR1.mobility initialLatitude "nan deg"
+attr unit deg
+par smarthome.hostR1.mobility initialLongitude "nan deg"
+attr unit deg
+par smarthome.hostR1.mobility initialAltitude 0m
+attr unit m
+par smarthome.hostR1.mobility initialHeading 0deg
+attr unit deg
+par smarthome.hostR1.mobility initialElevation 0deg
+attr unit deg
+par smarthome.hostR1.mobility initialBank 0deg
+attr unit deg
+par smarthome.hostR1.mobility initFromDisplayString true
+par smarthome.hostR1.mobility updateFromDisplayString true
+par smarthome.hostR1.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par smarthome.hostR1.interfaceTable displayAddresses false
+par smarthome.hostR1.cb typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.cb forwardServiceRegistration true
+par smarthome.hostR1.cb forwardProtocolRegistration true
+par smarthome.hostR1.bl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.bl forwardServiceRegistration true
+par smarthome.hostR1.bl forwardProtocolRegistration true
+par smarthome.hostR1.li typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.li displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.li forwardServiceRegistration true
+par smarthome.hostR1.li forwardProtocolRegistration true
+par smarthome.hostR1.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par smarthome.hostR1.lo[0].lo interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.lo[0].lo mtu 4470B
+attr unit B
+scalar smarthome.hostR1.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostR1.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostR1.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostR1.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par smarthome.hostR1.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par smarthome.hostR1.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostR1.lo[0] recordPcap false
+par smarthome.hostR1.lo[0] numPcapRecorders 0
+par smarthome.hostR1.lo[0] interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+scalar smarthome.hostR1.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostR1.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostR1.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostR1.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostR1.wlan[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.wlan[0].radioIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.wlan[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.wlan[0].queue typename "\"inet.queueing.queue.DropTailQueue\""
+par smarthome.hostR1.wlan[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par smarthome.hostR1.wlan[0].queue packetCapacity 100
+par smarthome.hostR1.wlan[0].queue dataCapacity -1b
+attr unit b
+par smarthome.hostR1.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par smarthome.hostR1.wlan[0].queue comparatorClass "\"\""
+par smarthome.hostR1.wlan[0].queue bufferModule "\"\""
+scalar smarthome.hostR1.wlan[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar smarthome.hostR1.wlan[0].queue queueLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar smarthome.hostR1.wlan[0].queue queueLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar smarthome.hostR1.wlan[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar smarthome.hostR1.wlan[0].queue queueBitLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar smarthome.hostR1.wlan[0].queue queueBitLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic smarthome.hostR1.wlan[0].queue queueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR1.wlan[0].queue outgoingPackets:count 0
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar smarthome.hostR1.wlan[0].queue outgoingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic smarthome.hostR1.wlan[0].queue outgoingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostR1.wlan[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR1.wlan[0].queue incomingPackets:count 0
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar smarthome.hostR1.wlan[0].queue incomingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic smarthome.hostR1.wlan[0].queue incomingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR1.wlan[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar smarthome.hostR1.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par smarthome.hostR1.wlan[0].mac typename "\"inet.linklayer.acking.AckingMac\""
+par smarthome.hostR1.wlan[0].mac interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.wlan[0].mac address "\"auto\""
+attr mutable ""
+par smarthome.hostR1.wlan[0].mac bitrate 1e+06bps
+attr unit bps
+par smarthome.hostR1.wlan[0].mac mtu 4470B
+attr unit B
+par smarthome.hostR1.wlan[0].mac headerLength 23B
+attr unit B
+par smarthome.hostR1.wlan[0].mac promiscuous false
+par smarthome.hostR1.wlan[0].mac fullDuplex false
+par smarthome.hostR1.wlan[0].mac useAck false
+par smarthome.hostR1.wlan[0].mac ackTimeout 0.1s
+attr unit s
+scalar smarthome.hostR1.wlan[0].mac rcvdPkFromLl:count 2
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, count"
+scalar smarthome.hostR1.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 2102
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac sentDownPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets sent to lower layer, count"
+scalar smarthome.hostR1.wlan[0].mac sentDownPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets sent to lower layer, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostR1.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostR1.wlan[0].mac passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar smarthome.hostR1.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar smarthome.hostR1.wlan[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac packetDropNotAddressedToUs:count 2
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar smarthome.hostR1.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 2102
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0].mac linkBroken:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source linkBroken
+attr title "link break, count"
+par smarthome.hostR1.wlan[0].radio.antenna typename "\"inet.physicallayer.wireless.common.antenna.IsotropicAntenna\""
+par smarthome.hostR1.wlan[0].radio.antenna mobilityModule "\"^.^.^.mobility\""
+par smarthome.hostR1.wlan[0].radio.antenna numAntennas 1
+par smarthome.hostR1.wlan[0].radio.transmitter typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskTransmitter\""
+par smarthome.hostR1.wlan[0].radio.transmitter preambleDuration 0s
+attr unit s
+par smarthome.hostR1.wlan[0].radio.transmitter headerLength 96b
+attr unit b
+par smarthome.hostR1.wlan[0].radio.transmitter bitrate 1e+06bps
+attr unit bps
+par smarthome.hostR1.wlan[0].radio.transmitter communicationRange 500m
+attr unit m
+par smarthome.hostR1.wlan[0].radio.transmitter interferenceRange 500m
+attr unit m
+par smarthome.hostR1.wlan[0].radio.transmitter detectionRange 500m
+attr unit m
+par smarthome.hostR1.wlan[0].radio.receiver typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskReceiver\""
+par smarthome.hostR1.wlan[0].radio.receiver ignoreInterference true
+par smarthome.hostR1.wlan[0].radio typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskRadio\""
+par smarthome.hostR1.wlan[0].radio radioMediumModule "\"radioMedium\""
+par smarthome.hostR1.wlan[0].radio energySourceModule "\"\""
+par smarthome.hostR1.wlan[0].radio initialRadioMode "\"off\""
+attr enum off,sleep,receiver,transmitter,transceiver
+par smarthome.hostR1.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
+par smarthome.hostR1.wlan[0].radio sendRawBytes false
+par smarthome.hostR1.wlan[0].radio separateTransmissionParts false
+par smarthome.hostR1.wlan[0].radio separateReceptionParts false
+par smarthome.hostR1.wlan[0].radio displayCommunicationRange true
+par smarthome.hostR1.wlan[0].radio displayInterferenceRange false
+statistic smarthome.hostR1.wlan[0].radio minSnir:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source minimumSnir(packetSentToUpper)
+attr title "Min SNIR"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostR1.wlan[0].radio packetErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source packetErrorRate(packetSentToUpper)
+attr title "Packet error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostR1.wlan[0].radio bitErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source bitErrorRate(packetSentToUpper)
+attr title "Bit error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostR1.wlan[0].radio symbolErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source symbolErrorRate(packetSentToUpper)
+attr title "Symbol error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar smarthome.hostR1.wlan[0].radio transmissionState:count 0
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source transmissionStateChanged
+attr title "Radio transmission state, count"
+scalar smarthome.hostR1.wlan[0].radio receptionState:count 6
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source receptionStateChanged
+attr title "Radio reception state, count"
+scalar smarthome.hostR1.wlan[0].radio radioMode:count 3
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source radioModeChanged
+attr title "Radio mode, count"
+par smarthome.hostR1.wlan[0] typename "\"inet.linklayer.acking.AckingWirelessInterface\""
+par smarthome.hostR1.wlan[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostR1.wlan[0] recordPcap false
+par smarthome.hostR1.wlan[0] numPcapRecorders 0
+par smarthome.hostR1.wlan[0] interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.wlan[0] energySourceModule "\"\""
+par smarthome.hostR1.wlan[0] bitrate 1e+06bps
+attr unit bps
+scalar smarthome.hostR1.wlan[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostR1.wlan[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostR1.wlan[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostR1.wlan[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostR1.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR1.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par smarthome.hostR1.ipv4.configurator interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4.configurator routingTableModule "\"smarthome.hostR1.ipv4.routingTable\""
+par smarthome.hostR1.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par smarthome.hostR1.ipv4.configurator configureRoutingTable true
+par smarthome.hostR1.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par smarthome.hostR1.ipv4.routingTable interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4.routingTable routerId "\"auto\""
+par smarthome.hostR1.ipv4.routingTable netmaskRoutes "\"*\""
+par smarthome.hostR1.ipv4.routingTable forwarding false
+par smarthome.hostR1.ipv4.routingTable multicastForwarding false
+par smarthome.hostR1.ipv4.routingTable useAdminDist false
+par smarthome.hostR1.ipv4.routingTable routingFile "\"\""
+par smarthome.hostR1.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par smarthome.hostR1.ipv4.natTable networkProtocolModule "\"^.ip\""
+par smarthome.hostR1.ipv4.natTable config "<config/> at content:1"
+par smarthome.hostR1.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.ipv4.up forwardServiceRegistration true
+par smarthome.hostR1.ipv4.up forwardProtocolRegistration true
+par smarthome.hostR1.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par smarthome.hostR1.ipv4.igmp interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4.igmp routingTableModule "\"smarthome.hostR1.ipv4.routingTable\""
+par smarthome.hostR1.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR1.ipv4.igmp enabled true
+par smarthome.hostR1.ipv4.igmp robustnessVariable 2
+par smarthome.hostR1.ipv4.igmp queryInterval 125s
+attr unit s
+par smarthome.hostR1.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par smarthome.hostR1.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par smarthome.hostR1.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par smarthome.hostR1.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par smarthome.hostR1.ipv4.igmp startupQueryCount 2
+par smarthome.hostR1.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par smarthome.hostR1.ipv4.igmp lastMemberQueryCount 2
+par smarthome.hostR1.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par smarthome.hostR1.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par smarthome.hostR1.ipv4.icmp interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4.icmp routingTableModule "\"smarthome.hostR1.ipv4.routingTable\""
+par smarthome.hostR1.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par smarthome.hostR1.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par smarthome.hostR1.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.ipv4.mp forwardServiceRegistration true
+par smarthome.hostR1.ipv4.mp forwardProtocolRegistration true
+par smarthome.hostR1.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par smarthome.hostR1.ipv4.ip interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4.ip routingTableModule "\"smarthome.hostR1.ipv4.routingTable\""
+par smarthome.hostR1.ipv4.ip arpModule "\"smarthome.hostR1.ipv4.arp\""
+par smarthome.hostR1.ipv4.ip icmpModule "\"smarthome.hostR1.ipv4.icmp\""
+par smarthome.hostR1.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR1.ipv4.ip timeToLive 32
+par smarthome.hostR1.ipv4.ip multicastTimeToLive 32
+par smarthome.hostR1.ipv4.ip fragmentTimeout 60s
+attr unit s
+par smarthome.hostR1.ipv4.ip limitedBroadcast false
+par smarthome.hostR1.ipv4.ip directBroadcastInterfaces "\"\""
+scalar smarthome.hostR1.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar smarthome.hostR1.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar smarthome.hostR1.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar smarthome.hostR1.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar smarthome.hostR1.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar smarthome.hostR1.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar smarthome.hostR1.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar smarthome.hostR1.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar smarthome.hostR1.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar smarthome.hostR1.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar smarthome.hostR1.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar smarthome.hostR1.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par smarthome.hostR1.ipv4.arp typename "\"inet.networklayer.arp.ipv4.GlobalArp\""
+par smarthome.hostR1.ipv4.arp interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4.arp addressType "\"ipv4\""
+attr enum ipv4,ipv6,mac,moduleid,modulepath
+par smarthome.hostR1.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.ipv4.lp forwardServiceRegistration true
+par smarthome.hostR1.ipv4.lp forwardProtocolRegistration true
+par smarthome.hostR1.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par smarthome.hostR1.ipv4 forwarding false
+par smarthome.hostR1.ipv4 multicastForwarding false
+par smarthome.hostR1.ipv4 interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.ipv4 displayStringTextFormat "\"%i\""
+par smarthome.hostR1.nl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.nl forwardServiceRegistration true
+par smarthome.hostR1.nl forwardProtocolRegistration true
+par smarthome.hostR1.udp typename "\"inet.transportlayer.udp.Udp\""
+par smarthome.hostR1.udp interfaceTableModule "\"smarthome.hostR1.interfaceTable\""
+par smarthome.hostR1.udp icmpModule "\"^.ipv4.icmp\""
+par smarthome.hostR1.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par smarthome.hostR1.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par smarthome.hostR1.udp defaultMulticastLoop true
+scalar smarthome.hostR1.udp packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostR1.udp packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar smarthome.hostR1.udp packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar smarthome.hostR1.udp packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar smarthome.hostR1.udp passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar smarthome.hostR1.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar smarthome.hostR1.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par smarthome.hostR1.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par smarthome.hostR1.tcp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR1.tcp advertisedWindow 7504
+par smarthome.hostR1.tcp delayedAcksEnabled false
+par smarthome.hostR1.tcp nagleEnabled true
+par smarthome.hostR1.tcp limitedTransmitEnabled false
+par smarthome.hostR1.tcp increasedIWEnabled false
+par smarthome.hostR1.tcp sackSupport false
+par smarthome.hostR1.tcp windowScalingSupport false
+par smarthome.hostR1.tcp windowScalingFactor -1
+par smarthome.hostR1.tcp timestampSupport false
+par smarthome.hostR1.tcp mss 536
+par smarthome.hostR1.tcp msl 120s
+attr unit s
+par smarthome.hostR1.tcp tcpAlgorithmClass "\"TcpReno\""
+par smarthome.hostR1.tcp useDataNotification false
+par smarthome.hostR1.tcp dupthresh 3
+par smarthome.hostR1.tcp initialSsthresh 4294967295
+par smarthome.hostR1.tcp stopOperationExtraTime 0s
+attr unit s
+par smarthome.hostR1.tcp stopOperationTimeout 2s
+attr unit s
+par smarthome.hostR1.tcp ecnWillingness false
+par smarthome.hostR1.tcp dctcpGamma 0.0625
+par smarthome.hostR1.tn typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.tn forwardServiceRegistration true
+par smarthome.hostR1.tn forwardProtocolRegistration true
+par smarthome.hostR1.at typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR1.at displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR1.at forwardServiceRegistration true
+par smarthome.hostR1.at forwardProtocolRegistration true
+par smarthome.hostR1 typename "\"inet.node.inet.WirelessHost\""
+par smarthome.hostR1 hasStatus false
+par smarthome.hostR1 osgModel "\"\""
+par smarthome.hostR1 osgModelColor "\"\""
+par smarthome.hostR1 canvasImage "\"\""
+par smarthome.hostR1 canvasImageColor "\"\""
+par smarthome.hostR1 recordPcap false
+par smarthome.hostR1 numPcapRecorders 0
+par smarthome.hostR1 numLoInterfaces 1
+par smarthome.hostR1 numWlanInterfaces 1
+par smarthome.hostR1 numEthInterfaces 0
+par smarthome.hostR1 numPppInterfaces 0
+par smarthome.hostR1 numTunInterfaces 0
+par smarthome.hostR1 numVirtInterfaces 0
+par smarthome.hostR1 fcsMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR1 hasIpv4 true
+par smarthome.hostR1 hasIpv6 false
+par smarthome.hostR1 hasGn false
+par smarthome.hostR1 forwarding false
+par smarthome.hostR1 multicastForwarding false
+par smarthome.hostR1 hasUdp true
+par smarthome.hostR1 hasTcp true
+par smarthome.hostR1 hasSctp false
+par smarthome.hostR1 numApps 0
+par smarthome.hostR2.radioIn[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.mobility typename "\"inet.mobility.static.StationaryMobility\""
+par smarthome.hostR2.mobility subjectModule "\"^\""
+par smarthome.hostR2.mobility coordinateSystemModule "\"\""
+par smarthome.hostR2.mobility displayStringTextFormat "\"p: %p\\nv: %v\""
+attr mutable ""
+par smarthome.hostR2.mobility updateDisplayString true
+par smarthome.hostR2.mobility constraintAreaMinX "-inf m"
+attr unit m
+par smarthome.hostR2.mobility constraintAreaMinY "-inf m"
+attr unit m
+par smarthome.hostR2.mobility constraintAreaMinZ "-inf m"
+attr unit m
+par smarthome.hostR2.mobility constraintAreaMaxX "inf m"
+attr unit m
+par smarthome.hostR2.mobility constraintAreaMaxY "inf m"
+attr unit m
+par smarthome.hostR2.mobility constraintAreaMaxZ "inf m"
+attr unit m
+par smarthome.hostR2.mobility initialX "nan m"
+attr unit m
+par smarthome.hostR2.mobility initialY "nan m"
+attr unit m
+par smarthome.hostR2.mobility initialZ 0m
+attr unit m
+par smarthome.hostR2.mobility initialLatitude "nan deg"
+attr unit deg
+par smarthome.hostR2.mobility initialLongitude "nan deg"
+attr unit deg
+par smarthome.hostR2.mobility initialAltitude 0m
+attr unit m
+par smarthome.hostR2.mobility initialHeading 0deg
+attr unit deg
+par smarthome.hostR2.mobility initialElevation 0deg
+attr unit deg
+par smarthome.hostR2.mobility initialBank 0deg
+attr unit deg
+par smarthome.hostR2.mobility initFromDisplayString true
+par smarthome.hostR2.mobility updateFromDisplayString true
+par smarthome.hostR2.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par smarthome.hostR2.interfaceTable displayAddresses false
+par smarthome.hostR2.cb typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.cb forwardServiceRegistration true
+par smarthome.hostR2.cb forwardProtocolRegistration true
+par smarthome.hostR2.bl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.bl forwardServiceRegistration true
+par smarthome.hostR2.bl forwardProtocolRegistration true
+par smarthome.hostR2.li typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.li displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.li forwardServiceRegistration true
+par smarthome.hostR2.li forwardProtocolRegistration true
+par smarthome.hostR2.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par smarthome.hostR2.lo[0].lo interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.lo[0].lo mtu 4470B
+attr unit B
+scalar smarthome.hostR2.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostR2.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostR2.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostR2.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par smarthome.hostR2.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par smarthome.hostR2.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostR2.lo[0] recordPcap false
+par smarthome.hostR2.lo[0] numPcapRecorders 0
+par smarthome.hostR2.lo[0] interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+scalar smarthome.hostR2.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostR2.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostR2.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostR2.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostR2.wlan[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.wlan[0].radioIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.wlan[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.wlan[0].queue typename "\"inet.queueing.queue.DropTailQueue\""
+par smarthome.hostR2.wlan[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par smarthome.hostR2.wlan[0].queue packetCapacity 100
+par smarthome.hostR2.wlan[0].queue dataCapacity -1b
+attr unit b
+par smarthome.hostR2.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par smarthome.hostR2.wlan[0].queue comparatorClass "\"\""
+par smarthome.hostR2.wlan[0].queue bufferModule "\"\""
+scalar smarthome.hostR2.wlan[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar smarthome.hostR2.wlan[0].queue queueLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar smarthome.hostR2.wlan[0].queue queueLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar smarthome.hostR2.wlan[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar smarthome.hostR2.wlan[0].queue queueBitLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar smarthome.hostR2.wlan[0].queue queueBitLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic smarthome.hostR2.wlan[0].queue queueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR2.wlan[0].queue outgoingPackets:count 0
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar smarthome.hostR2.wlan[0].queue outgoingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic smarthome.hostR2.wlan[0].queue outgoingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostR2.wlan[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR2.wlan[0].queue incomingPackets:count 0
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar smarthome.hostR2.wlan[0].queue incomingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic smarthome.hostR2.wlan[0].queue incomingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR2.wlan[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar smarthome.hostR2.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par smarthome.hostR2.wlan[0].mac typename "\"inet.linklayer.acking.AckingMac\""
+par smarthome.hostR2.wlan[0].mac interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.wlan[0].mac address "\"auto\""
+attr mutable ""
+par smarthome.hostR2.wlan[0].mac bitrate 1e+06bps
+attr unit bps
+par smarthome.hostR2.wlan[0].mac mtu 4470B
+attr unit B
+par smarthome.hostR2.wlan[0].mac headerLength 23B
+attr unit B
+par smarthome.hostR2.wlan[0].mac promiscuous false
+par smarthome.hostR2.wlan[0].mac fullDuplex false
+par smarthome.hostR2.wlan[0].mac useAck false
+par smarthome.hostR2.wlan[0].mac ackTimeout 0.1s
+attr unit s
+scalar smarthome.hostR2.wlan[0].mac rcvdPkFromLl:count 2
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, count"
+scalar smarthome.hostR2.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 2102
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac sentDownPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets sent to lower layer, count"
+scalar smarthome.hostR2.wlan[0].mac sentDownPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets sent to lower layer, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostR2.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostR2.wlan[0].mac passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar smarthome.hostR2.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar smarthome.hostR2.wlan[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac packetDropNotAddressedToUs:count 2
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar smarthome.hostR2.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 2102
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0].mac linkBroken:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source linkBroken
+attr title "link break, count"
+par smarthome.hostR2.wlan[0].radio.antenna typename "\"inet.physicallayer.wireless.common.antenna.IsotropicAntenna\""
+par smarthome.hostR2.wlan[0].radio.antenna mobilityModule "\"^.^.^.mobility\""
+par smarthome.hostR2.wlan[0].radio.antenna numAntennas 1
+par smarthome.hostR2.wlan[0].radio.transmitter typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskTransmitter\""
+par smarthome.hostR2.wlan[0].radio.transmitter preambleDuration 0s
+attr unit s
+par smarthome.hostR2.wlan[0].radio.transmitter headerLength 96b
+attr unit b
+par smarthome.hostR2.wlan[0].radio.transmitter bitrate 1e+06bps
+attr unit bps
+par smarthome.hostR2.wlan[0].radio.transmitter communicationRange 500m
+attr unit m
+par smarthome.hostR2.wlan[0].radio.transmitter interferenceRange 500m
+attr unit m
+par smarthome.hostR2.wlan[0].radio.transmitter detectionRange 500m
+attr unit m
+par smarthome.hostR2.wlan[0].radio.receiver typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskReceiver\""
+par smarthome.hostR2.wlan[0].radio.receiver ignoreInterference true
+par smarthome.hostR2.wlan[0].radio typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskRadio\""
+par smarthome.hostR2.wlan[0].radio radioMediumModule "\"radioMedium\""
+par smarthome.hostR2.wlan[0].radio energySourceModule "\"\""
+par smarthome.hostR2.wlan[0].radio initialRadioMode "\"off\""
+attr enum off,sleep,receiver,transmitter,transceiver
+par smarthome.hostR2.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
+par smarthome.hostR2.wlan[0].radio sendRawBytes false
+par smarthome.hostR2.wlan[0].radio separateTransmissionParts false
+par smarthome.hostR2.wlan[0].radio separateReceptionParts false
+par smarthome.hostR2.wlan[0].radio displayCommunicationRange false
+par smarthome.hostR2.wlan[0].radio displayInterferenceRange false
+statistic smarthome.hostR2.wlan[0].radio minSnir:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source minimumSnir(packetSentToUpper)
+attr title "Min SNIR"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostR2.wlan[0].radio packetErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source packetErrorRate(packetSentToUpper)
+attr title "Packet error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostR2.wlan[0].radio bitErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source bitErrorRate(packetSentToUpper)
+attr title "Bit error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostR2.wlan[0].radio symbolErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source symbolErrorRate(packetSentToUpper)
+attr title "Symbol error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar smarthome.hostR2.wlan[0].radio transmissionState:count 0
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source transmissionStateChanged
+attr title "Radio transmission state, count"
+scalar smarthome.hostR2.wlan[0].radio receptionState:count 6
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source receptionStateChanged
+attr title "Radio reception state, count"
+scalar smarthome.hostR2.wlan[0].radio radioMode:count 3
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source radioModeChanged
+attr title "Radio mode, count"
+par smarthome.hostR2.wlan[0] typename "\"inet.linklayer.acking.AckingWirelessInterface\""
+par smarthome.hostR2.wlan[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostR2.wlan[0] recordPcap false
+par smarthome.hostR2.wlan[0] numPcapRecorders 0
+par smarthome.hostR2.wlan[0] interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.wlan[0] energySourceModule "\"\""
+par smarthome.hostR2.wlan[0] bitrate 1e+06bps
+attr unit bps
+scalar smarthome.hostR2.wlan[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostR2.wlan[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostR2.wlan[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostR2.wlan[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostR2.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR2.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par smarthome.hostR2.ipv4.configurator interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4.configurator routingTableModule "\"smarthome.hostR2.ipv4.routingTable\""
+par smarthome.hostR2.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par smarthome.hostR2.ipv4.configurator configureRoutingTable true
+par smarthome.hostR2.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par smarthome.hostR2.ipv4.routingTable interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4.routingTable routerId "\"auto\""
+par smarthome.hostR2.ipv4.routingTable netmaskRoutes "\"*\""
+par smarthome.hostR2.ipv4.routingTable forwarding false
+par smarthome.hostR2.ipv4.routingTable multicastForwarding false
+par smarthome.hostR2.ipv4.routingTable useAdminDist false
+par smarthome.hostR2.ipv4.routingTable routingFile "\"\""
+par smarthome.hostR2.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par smarthome.hostR2.ipv4.natTable networkProtocolModule "\"^.ip\""
+par smarthome.hostR2.ipv4.natTable config "<config/> at content:1"
+par smarthome.hostR2.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.ipv4.up forwardServiceRegistration true
+par smarthome.hostR2.ipv4.up forwardProtocolRegistration true
+par smarthome.hostR2.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par smarthome.hostR2.ipv4.igmp interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4.igmp routingTableModule "\"smarthome.hostR2.ipv4.routingTable\""
+par smarthome.hostR2.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR2.ipv4.igmp enabled true
+par smarthome.hostR2.ipv4.igmp robustnessVariable 2
+par smarthome.hostR2.ipv4.igmp queryInterval 125s
+attr unit s
+par smarthome.hostR2.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par smarthome.hostR2.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par smarthome.hostR2.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par smarthome.hostR2.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par smarthome.hostR2.ipv4.igmp startupQueryCount 2
+par smarthome.hostR2.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par smarthome.hostR2.ipv4.igmp lastMemberQueryCount 2
+par smarthome.hostR2.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par smarthome.hostR2.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par smarthome.hostR2.ipv4.icmp interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4.icmp routingTableModule "\"smarthome.hostR2.ipv4.routingTable\""
+par smarthome.hostR2.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par smarthome.hostR2.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par smarthome.hostR2.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.ipv4.mp forwardServiceRegistration true
+par smarthome.hostR2.ipv4.mp forwardProtocolRegistration true
+par smarthome.hostR2.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par smarthome.hostR2.ipv4.ip interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4.ip routingTableModule "\"smarthome.hostR2.ipv4.routingTable\""
+par smarthome.hostR2.ipv4.ip arpModule "\"smarthome.hostR2.ipv4.arp\""
+par smarthome.hostR2.ipv4.ip icmpModule "\"smarthome.hostR2.ipv4.icmp\""
+par smarthome.hostR2.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR2.ipv4.ip timeToLive 32
+par smarthome.hostR2.ipv4.ip multicastTimeToLive 32
+par smarthome.hostR2.ipv4.ip fragmentTimeout 60s
+attr unit s
+par smarthome.hostR2.ipv4.ip limitedBroadcast false
+par smarthome.hostR2.ipv4.ip directBroadcastInterfaces "\"\""
+scalar smarthome.hostR2.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar smarthome.hostR2.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar smarthome.hostR2.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar smarthome.hostR2.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar smarthome.hostR2.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar smarthome.hostR2.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar smarthome.hostR2.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar smarthome.hostR2.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar smarthome.hostR2.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar smarthome.hostR2.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar smarthome.hostR2.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar smarthome.hostR2.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par smarthome.hostR2.ipv4.arp typename "\"inet.networklayer.arp.ipv4.GlobalArp\""
+par smarthome.hostR2.ipv4.arp interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4.arp addressType "\"ipv4\""
+attr enum ipv4,ipv6,mac,moduleid,modulepath
+par smarthome.hostR2.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.ipv4.lp forwardServiceRegistration true
+par smarthome.hostR2.ipv4.lp forwardProtocolRegistration true
+par smarthome.hostR2.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par smarthome.hostR2.ipv4 forwarding false
+par smarthome.hostR2.ipv4 multicastForwarding false
+par smarthome.hostR2.ipv4 interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.ipv4 displayStringTextFormat "\"%i\""
+par smarthome.hostR2.nl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.nl forwardServiceRegistration true
+par smarthome.hostR2.nl forwardProtocolRegistration true
+par smarthome.hostR2.udp typename "\"inet.transportlayer.udp.Udp\""
+par smarthome.hostR2.udp interfaceTableModule "\"smarthome.hostR2.interfaceTable\""
+par smarthome.hostR2.udp icmpModule "\"^.ipv4.icmp\""
+par smarthome.hostR2.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par smarthome.hostR2.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par smarthome.hostR2.udp defaultMulticastLoop true
+scalar smarthome.hostR2.udp packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostR2.udp packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar smarthome.hostR2.udp packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar smarthome.hostR2.udp packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar smarthome.hostR2.udp passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar smarthome.hostR2.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar smarthome.hostR2.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par smarthome.hostR2.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par smarthome.hostR2.tcp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR2.tcp advertisedWindow 7504
+par smarthome.hostR2.tcp delayedAcksEnabled false
+par smarthome.hostR2.tcp nagleEnabled true
+par smarthome.hostR2.tcp limitedTransmitEnabled false
+par smarthome.hostR2.tcp increasedIWEnabled false
+par smarthome.hostR2.tcp sackSupport false
+par smarthome.hostR2.tcp windowScalingSupport false
+par smarthome.hostR2.tcp windowScalingFactor -1
+par smarthome.hostR2.tcp timestampSupport false
+par smarthome.hostR2.tcp mss 536
+par smarthome.hostR2.tcp msl 120s
+attr unit s
+par smarthome.hostR2.tcp tcpAlgorithmClass "\"TcpReno\""
+par smarthome.hostR2.tcp useDataNotification false
+par smarthome.hostR2.tcp dupthresh 3
+par smarthome.hostR2.tcp initialSsthresh 4294967295
+par smarthome.hostR2.tcp stopOperationExtraTime 0s
+attr unit s
+par smarthome.hostR2.tcp stopOperationTimeout 2s
+attr unit s
+par smarthome.hostR2.tcp ecnWillingness false
+par smarthome.hostR2.tcp dctcpGamma 0.0625
+par smarthome.hostR2.tn typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.tn forwardServiceRegistration true
+par smarthome.hostR2.tn forwardProtocolRegistration true
+par smarthome.hostR2.at typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR2.at displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR2.at forwardServiceRegistration true
+par smarthome.hostR2.at forwardProtocolRegistration true
+par smarthome.hostR2 typename "\"inet.node.inet.WirelessHost\""
+par smarthome.hostR2 hasStatus false
+par smarthome.hostR2 osgModel "\"\""
+par smarthome.hostR2 osgModelColor "\"\""
+par smarthome.hostR2 canvasImage "\"\""
+par smarthome.hostR2 canvasImageColor "\"\""
+par smarthome.hostR2 recordPcap false
+par smarthome.hostR2 numPcapRecorders 0
+par smarthome.hostR2 numLoInterfaces 1
+par smarthome.hostR2 numWlanInterfaces 1
+par smarthome.hostR2 numEthInterfaces 0
+par smarthome.hostR2 numPppInterfaces 0
+par smarthome.hostR2 numTunInterfaces 0
+par smarthome.hostR2 numVirtInterfaces 0
+par smarthome.hostR2 fcsMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR2 hasIpv4 true
+par smarthome.hostR2 hasIpv6 false
+par smarthome.hostR2 hasGn false
+par smarthome.hostR2 forwarding false
+par smarthome.hostR2 multicastForwarding false
+par smarthome.hostR2 hasUdp true
+par smarthome.hostR2 hasTcp true
+par smarthome.hostR2 hasSctp false
+par smarthome.hostR2 numApps 0
+par smarthome.hostR3.radioIn[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.mobility typename "\"inet.mobility.static.StationaryMobility\""
+par smarthome.hostR3.mobility subjectModule "\"^\""
+par smarthome.hostR3.mobility coordinateSystemModule "\"\""
+par smarthome.hostR3.mobility displayStringTextFormat "\"p: %p\\nv: %v\""
+attr mutable ""
+par smarthome.hostR3.mobility updateDisplayString true
+par smarthome.hostR3.mobility constraintAreaMinX "-inf m"
+attr unit m
+par smarthome.hostR3.mobility constraintAreaMinY "-inf m"
+attr unit m
+par smarthome.hostR3.mobility constraintAreaMinZ "-inf m"
+attr unit m
+par smarthome.hostR3.mobility constraintAreaMaxX "inf m"
+attr unit m
+par smarthome.hostR3.mobility constraintAreaMaxY "inf m"
+attr unit m
+par smarthome.hostR3.mobility constraintAreaMaxZ "inf m"
+attr unit m
+par smarthome.hostR3.mobility initialX "nan m"
+attr unit m
+par smarthome.hostR3.mobility initialY "nan m"
+attr unit m
+par smarthome.hostR3.mobility initialZ 0m
+attr unit m
+par smarthome.hostR3.mobility initialLatitude "nan deg"
+attr unit deg
+par smarthome.hostR3.mobility initialLongitude "nan deg"
+attr unit deg
+par smarthome.hostR3.mobility initialAltitude 0m
+attr unit m
+par smarthome.hostR3.mobility initialHeading 0deg
+attr unit deg
+par smarthome.hostR3.mobility initialElevation 0deg
+attr unit deg
+par smarthome.hostR3.mobility initialBank 0deg
+attr unit deg
+par smarthome.hostR3.mobility initFromDisplayString true
+par smarthome.hostR3.mobility updateFromDisplayString true
+par smarthome.hostR3.interfaceTable typename "\"inet.networklayer.common.InterfaceTable\""
+par smarthome.hostR3.interfaceTable displayAddresses false
+par smarthome.hostR3.cb typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.cb displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.cb forwardServiceRegistration true
+par smarthome.hostR3.cb forwardProtocolRegistration true
+par smarthome.hostR3.bl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.bl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.bl forwardServiceRegistration true
+par smarthome.hostR3.bl forwardProtocolRegistration true
+par smarthome.hostR3.li typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.li displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.li forwardServiceRegistration true
+par smarthome.hostR3.li forwardProtocolRegistration true
+par smarthome.hostR3.lo[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.lo[0].lo.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.lo[0].lo typename "\"inet.linklayer.loopback.Loopback\""
+par smarthome.hostR3.lo[0].lo interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.lo[0].lo mtu 4470B
+attr unit B
+scalar smarthome.hostR3.lo[0].lo rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostR3.lo[0].lo rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostR3.lo[0].lo passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostR3.lo[0].lo passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+par smarthome.hostR3.lo[0] typename "\"inet.linklayer.loopback.LoopbackInterface\""
+par smarthome.hostR3.lo[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostR3.lo[0] recordPcap false
+par smarthome.hostR3.lo[0] numPcapRecorders 0
+par smarthome.hostR3.lo[0] interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+scalar smarthome.hostR3.lo[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostR3.lo[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostR3.lo[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostR3.lo[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostR3.wlan[0].upperLayerIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.wlan[0].radioIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.wlan[0].mac.upperLayerOut.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.wlan[0].queue typename "\"inet.queueing.queue.DropTailQueue\""
+par smarthome.hostR3.wlan[0].queue displayStringTextFormat "\"contains %p pk (%l) pushed %u\\npulled %o removed %r dropped %d\""
+par smarthome.hostR3.wlan[0].queue packetCapacity 100
+par smarthome.hostR3.wlan[0].queue dataCapacity -1b
+attr unit b
+par smarthome.hostR3.wlan[0].queue dropperClass "\"inet::queueing::PacketAtCollectionEndDropper\""
+par smarthome.hostR3.wlan[0].queue comparatorClass "\"\""
+par smarthome.hostR3.wlan[0].queue bufferModule "\"\""
+scalar smarthome.hostR3.wlan[0].queue queueLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, last"
+attr unit pk
+scalar smarthome.hostR3.wlan[0].queue queueLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, max"
+attr unit pk
+scalar smarthome.hostR3.wlan[0].queue queueLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length, timeavg"
+attr unit pk
+scalar smarthome.hostR3.wlan[0].queue queueBitLength:last 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode last
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, last"
+attr unit b
+scalar smarthome.hostR3.wlan[0].queue queueBitLength:max 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode max
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, max"
+attr unit b
+scalar smarthome.hostR3.wlan[0].queue queueBitLength:timeavg 0
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode timeavg
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length, timeavg"
+attr unit b
+statistic smarthome.hostR3.wlan[0].queue queueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR3.wlan[0].queue outgoingPackets:count 0
+attr recordingmode count
+attr source packetPulled
+attr title "outgoing packets, count"
+attr unit pk
+scalar smarthome.hostR3.wlan[0].queue outgoingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths, sum"
+attr unit b
+statistic smarthome.hostR3.wlan[0].queue outgoingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostR3.wlan[0].queue flowQueueingTime:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR3.wlan[0].queue incomingPackets:count 0
+attr recordingmode count
+attr source packetPushStarted
+attr title "incoming packets, count"
+attr unit pk
+scalar smarthome.hostR3.wlan[0].queue incomingPacketLengths:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths, sum"
+attr unit b
+statistic smarthome.hostR3.wlan[0].queue incomingPacketLengths:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr interpolationmode none
+attr recordingmode histogram
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+bin	-inf	0
+bin	0	0
+bin	1	0
+scalar smarthome.hostR3.wlan[0].queue droppedPacketsQueueOverflow:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "dropped packets: queue overflow, count"
+attr unit pk
+scalar smarthome.hostR3.wlan[0].queue droppedPacketLengthsQueueOverflow:sum 0
+attr interpolationmode none
+attr recordingmode sum
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow, sum"
+attr unit b
+par smarthome.hostR3.wlan[0].mac typename "\"inet.linklayer.acking.AckingMac\""
+par smarthome.hostR3.wlan[0].mac interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.wlan[0].mac address "\"auto\""
+attr mutable ""
+par smarthome.hostR3.wlan[0].mac bitrate 1e+06bps
+attr unit bps
+par smarthome.hostR3.wlan[0].mac mtu 4470B
+attr unit B
+par smarthome.hostR3.wlan[0].mac headerLength 23B
+attr unit B
+par smarthome.hostR3.wlan[0].mac promiscuous false
+par smarthome.hostR3.wlan[0].mac fullDuplex false
+par smarthome.hostR3.wlan[0].mac useAck false
+par smarthome.hostR3.wlan[0].mac ackTimeout 0.1s
+attr unit s
+scalar smarthome.hostR3.wlan[0].mac rcvdPkFromLl:count 2
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, count"
+scalar smarthome.hostR3.wlan[0].mac rcvdPkFromLl:sum(packetBytes) 2102
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac sentDownPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToLower
+attr title "packets sent to lower layer, count"
+scalar smarthome.hostR3.wlan[0].mac sentDownPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToLower
+attr title "packets sent to lower layer, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac rcvdPkFromHl:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, count"
+scalar smarthome.hostR3.wlan[0].mac rcvdPkFromHl:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed to higher layer, count"
+scalar smarthome.hostR3.wlan[0].mac passedUpPk:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac packetDropIncorrectlyReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, count"
+scalar smarthome.hostR3.wlan[0].mac packetDropIncorrectlyReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, count"
+scalar smarthome.hostR3.wlan[0].mac packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drop: interface down, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac packetDropNotAddressedToUs:count 2
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, count"
+scalar smarthome.hostR3.wlan[0].mac packetDropNotAddressedToUs:sum(packetBytes) 2102
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drop: not addressed to us, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0].mac linkBroken:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source linkBroken
+attr title "link break, count"
+par smarthome.hostR3.wlan[0].radio.antenna typename "\"inet.physicallayer.wireless.common.antenna.IsotropicAntenna\""
+par smarthome.hostR3.wlan[0].radio.antenna mobilityModule "\"^.^.^.mobility\""
+par smarthome.hostR3.wlan[0].radio.antenna numAntennas 1
+par smarthome.hostR3.wlan[0].radio.transmitter typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskTransmitter\""
+par smarthome.hostR3.wlan[0].radio.transmitter preambleDuration 0s
+attr unit s
+par smarthome.hostR3.wlan[0].radio.transmitter headerLength 96b
+attr unit b
+par smarthome.hostR3.wlan[0].radio.transmitter bitrate 1e+06bps
+attr unit bps
+par smarthome.hostR3.wlan[0].radio.transmitter communicationRange 500m
+attr unit m
+par smarthome.hostR3.wlan[0].radio.transmitter interferenceRange 500m
+attr unit m
+par smarthome.hostR3.wlan[0].radio.transmitter detectionRange 500m
+attr unit m
+par smarthome.hostR3.wlan[0].radio.receiver typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskReceiver\""
+par smarthome.hostR3.wlan[0].radio.receiver ignoreInterference true
+par smarthome.hostR3.wlan[0].radio typename "\"inet.physicallayer.wireless.unitdisk.UnitDiskRadio\""
+par smarthome.hostR3.wlan[0].radio radioMediumModule "\"radioMedium\""
+par smarthome.hostR3.wlan[0].radio energySourceModule "\"\""
+par smarthome.hostR3.wlan[0].radio initialRadioMode "\"off\""
+attr enum off,sleep,receiver,transmitter,transceiver
+par smarthome.hostR3.wlan[0].radio switchingTimes "\"ms 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0\""
+par smarthome.hostR3.wlan[0].radio sendRawBytes false
+par smarthome.hostR3.wlan[0].radio separateTransmissionParts false
+par smarthome.hostR3.wlan[0].radio separateReceptionParts false
+par smarthome.hostR3.wlan[0].radio displayCommunicationRange false
+par smarthome.hostR3.wlan[0].radio displayInterferenceRange false
+statistic smarthome.hostR3.wlan[0].radio minSnir:histogram
+field count 0
+field mean nan
+field stddev nan
+field min nan
+field max nan
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source minimumSnir(packetSentToUpper)
+attr title "Min SNIR"
+bin	-inf	0
+bin	0	0
+bin	1	0
+statistic smarthome.hostR3.wlan[0].radio packetErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source packetErrorRate(packetSentToUpper)
+attr title "Packet error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostR3.wlan[0].radio bitErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source bitErrorRate(packetSentToUpper)
+attr title "Bit error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+statistic smarthome.hostR3.wlan[0].radio symbolErrorRate:histogram
+field count 2
+field mean 0
+field stddev 0
+field min 0
+field max 0
+field sum 0
+field sqrsum 0
+attr recordingmode histogram
+attr source symbolErrorRate(packetSentToUpper)
+attr title "Symbol error rate"
+bin	-inf	0
+bin	-0.5	0
+bin	-0.48	0
+bin	-0.46	0
+bin	-0.44	0
+bin	-0.42	0
+bin	-0.4	0
+bin	-0.38	0
+bin	-0.36	0
+bin	-0.34	0
+bin	-0.32	0
+bin	-0.3	0
+bin	-0.28	0
+bin	-0.26	0
+bin	-0.24	0
+bin	-0.22	0
+bin	-0.2	0
+bin	-0.18	0
+bin	-0.16	0
+bin	-0.14	0
+bin	-0.12	0
+bin	-0.1	0
+bin	-0.08	0
+bin	-0.06	0
+bin	-0.04	0
+bin	-0.02	0
+bin	0	2
+bin	0.02	0
+bin	0.04	0
+bin	0.06	0
+bin	0.08	0
+bin	0.1	0
+bin	0.12	0
+bin	0.14	0
+bin	0.16	0
+bin	0.18	0
+bin	0.2	0
+bin	0.22	0
+bin	0.24	0
+bin	0.26	0
+bin	0.28	0
+bin	0.3	0
+bin	0.32	0
+bin	0.34	0
+bin	0.36	0
+bin	0.38	0
+bin	0.4	0
+bin	0.42	0
+bin	0.44	0
+bin	0.46	0
+bin	0.48	0
+bin	0.5	0
+scalar smarthome.hostR3.wlan[0].radio transmissionState:count 0
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source transmissionStateChanged
+attr title "Radio transmission state, count"
+scalar smarthome.hostR3.wlan[0].radio receptionState:count 6
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source receptionStateChanged
+attr title "Radio reception state, count"
+scalar smarthome.hostR3.wlan[0].radio radioMode:count 3
+attr interpolationmode sample-hold
+attr recordingmode count
+attr source radioModeChanged
+attr title "Radio mode, count"
+par smarthome.hostR3.wlan[0] typename "\"inet.linklayer.acking.AckingWirelessInterface\""
+par smarthome.hostR3.wlan[0] displayStringTextFormat "\"%a (%i)\\n%m\""
+par smarthome.hostR3.wlan[0] recordPcap false
+par smarthome.hostR3.wlan[0] numPcapRecorders 0
+par smarthome.hostR3.wlan[0] interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.wlan[0] energySourceModule "\"\""
+par smarthome.hostR3.wlan[0] bitrate 1e+06bps
+attr unit bps
+scalar smarthome.hostR3.wlan[0] packetDropInterfaceDown:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, count"
+scalar smarthome.hostR3.wlan[0] packetDropInterfaceDown:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, sum(packetBytes)"
+scalar smarthome.hostR3.wlan[0] packetDropNoCarrier:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, count"
+scalar smarthome.hostR3.wlan[0] packetDropNoCarrier:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, sum(packetBytes)"
+par smarthome.hostR3.ipv4.transportIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.ipv4.up.out[0].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.ipv4.lp.out[2].channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.ipv4.ifIn.channel typename "\"ned.IdealChannel\""
+par smarthome.hostR3.ipv4.configurator typename "\"inet.networklayer.configurator.ipv4.Ipv4NodeConfigurator\""
+par smarthome.hostR3.ipv4.configurator interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4.configurator routingTableModule "\"smarthome.hostR3.ipv4.routingTable\""
+par smarthome.hostR3.ipv4.configurator networkConfiguratorModule "\"configurator\""
+par smarthome.hostR3.ipv4.configurator configureRoutingTable true
+par smarthome.hostR3.ipv4.routingTable typename "\"inet.networklayer.ipv4.Ipv4RoutingTable\""
+par smarthome.hostR3.ipv4.routingTable interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4.routingTable routerId "\"auto\""
+par smarthome.hostR3.ipv4.routingTable netmaskRoutes "\"*\""
+par smarthome.hostR3.ipv4.routingTable forwarding false
+par smarthome.hostR3.ipv4.routingTable multicastForwarding false
+par smarthome.hostR3.ipv4.routingTable useAdminDist false
+par smarthome.hostR3.ipv4.routingTable routingFile "\"\""
+par smarthome.hostR3.ipv4.natTable typename "\"inet.networklayer.ipv4.Ipv4NatTable\""
+par smarthome.hostR3.ipv4.natTable networkProtocolModule "\"^.ip\""
+par smarthome.hostR3.ipv4.natTable config "<config/> at content:1"
+par smarthome.hostR3.ipv4.up typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.ipv4.up displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.ipv4.up forwardServiceRegistration true
+par smarthome.hostR3.ipv4.up forwardProtocolRegistration true
+par smarthome.hostR3.ipv4.igmp typename "\"inet.networklayer.ipv4.Igmpv2\""
+par smarthome.hostR3.ipv4.igmp interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4.igmp routingTableModule "\"smarthome.hostR3.ipv4.routingTable\""
+par smarthome.hostR3.ipv4.igmp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR3.ipv4.igmp enabled true
+par smarthome.hostR3.ipv4.igmp robustnessVariable 2
+par smarthome.hostR3.ipv4.igmp queryInterval 125s
+attr unit s
+par smarthome.hostR3.ipv4.igmp queryResponseInterval 10s
+attr unit s
+par smarthome.hostR3.ipv4.igmp groupMembershipInterval 260s
+attr unit s
+par smarthome.hostR3.ipv4.igmp otherQuerierPresentInterval 255s
+attr unit s
+par smarthome.hostR3.ipv4.igmp startupQueryInterval 31.25s
+attr unit s
+par smarthome.hostR3.ipv4.igmp startupQueryCount 2
+par smarthome.hostR3.ipv4.igmp lastMemberQueryInterval 1s
+attr unit s
+par smarthome.hostR3.ipv4.igmp lastMemberQueryCount 2
+par smarthome.hostR3.ipv4.igmp unsolicitedReportInterval 10s
+attr unit s
+par smarthome.hostR3.ipv4.icmp typename "\"inet.networklayer.ipv4.Icmp\""
+par smarthome.hostR3.ipv4.icmp interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4.icmp routingTableModule "\"smarthome.hostR3.ipv4.routingTable\""
+par smarthome.hostR3.ipv4.icmp crcMode "\"declared\""
+attr enum declared,computed
+attr mutable ""
+par smarthome.hostR3.ipv4.icmp quoteLength 8B
+attr mutable ""
+attr unit B
+par smarthome.hostR3.ipv4.mp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.ipv4.mp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.ipv4.mp forwardServiceRegistration true
+par smarthome.hostR3.ipv4.mp forwardProtocolRegistration true
+par smarthome.hostR3.ipv4.ip typename "\"inet.networklayer.ipv4.Ipv4\""
+par smarthome.hostR3.ipv4.ip interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4.ip routingTableModule "\"smarthome.hostR3.ipv4.routingTable\""
+par smarthome.hostR3.ipv4.ip arpModule "\"smarthome.hostR3.ipv4.arp\""
+par smarthome.hostR3.ipv4.ip icmpModule "\"smarthome.hostR3.ipv4.icmp\""
+par smarthome.hostR3.ipv4.ip crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR3.ipv4.ip timeToLive 32
+par smarthome.hostR3.ipv4.ip multicastTimeToLive 32
+par smarthome.hostR3.ipv4.ip fragmentTimeout 60s
+attr unit s
+par smarthome.hostR3.ipv4.ip limitedBroadcast false
+par smarthome.hostR3.ipv4.ip directBroadcastInterfaces "\"\""
+scalar smarthome.hostR3.ipv4.ip packetDropAddressResolutionFailed:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, count"
+scalar smarthome.hostR3.ipv4.ip packetDropAddressResolutionFailed:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, sum(packetBytes)"
+scalar smarthome.hostR3.ipv4.ip packetDropHopLimitReached:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, count"
+scalar smarthome.hostR3.ipv4.ip packetDropHopLimitReached:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, sum(packetBytes)"
+scalar smarthome.hostR3.ipv4.ip packetDropForwardingDisabled:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, count"
+scalar smarthome.hostR3.ipv4.ip packetDropForwardingDisabled:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, sum(packetBytes)"
+scalar smarthome.hostR3.ipv4.ip packetDropNoInterfaceFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, count"
+scalar smarthome.hostR3.ipv4.ip packetDropNoInterfaceFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, sum(packetBytes)"
+scalar smarthome.hostR3.ipv4.ip packetDropNoRouteFound:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, count"
+scalar smarthome.hostR3.ipv4.ip packetDropNoRouteFound:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, sum(packetBytes)"
+scalar smarthome.hostR3.ipv4.ip packetDropUndefined:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, count"
+scalar smarthome.hostR3.ipv4.ip packetDropUndefined:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, sum(packetBytes)"
+par smarthome.hostR3.ipv4.arp typename "\"inet.networklayer.arp.ipv4.GlobalArp\""
+par smarthome.hostR3.ipv4.arp interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4.arp addressType "\"ipv4\""
+attr enum ipv4,ipv6,mac,moduleid,modulepath
+par smarthome.hostR3.ipv4.lp typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.ipv4.lp displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.ipv4.lp forwardServiceRegistration true
+par smarthome.hostR3.ipv4.lp forwardProtocolRegistration true
+par smarthome.hostR3.ipv4 typename "\"inet.networklayer.ipv4.Ipv4NetworkLayer\""
+par smarthome.hostR3.ipv4 forwarding false
+par smarthome.hostR3.ipv4 multicastForwarding false
+par smarthome.hostR3.ipv4 interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.ipv4 displayStringTextFormat "\"%i\""
+par smarthome.hostR3.nl typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.nl displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.nl forwardServiceRegistration true
+par smarthome.hostR3.nl forwardProtocolRegistration true
+par smarthome.hostR3.udp typename "\"inet.transportlayer.udp.Udp\""
+par smarthome.hostR3.udp interfaceTableModule "\"smarthome.hostR3.interfaceTable\""
+par smarthome.hostR3.udp icmpModule "\"^.ipv4.icmp\""
+par smarthome.hostR3.udp icmpv6Module "\"^.ipv6.icmpv6\""
+par smarthome.hostR3.udp crcMode "\"declared\""
+attr enum disabled,declared,computed
+par smarthome.hostR3.udp defaultMulticastLoop true
+scalar smarthome.hostR3.udp packetReceived:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetReceived
+attr title "packets received, count"
+scalar smarthome.hostR3.udp packetReceived:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetReceived
+attr title "packets received, sum(packetBytes)"
+scalar smarthome.hostR3.udp packetSent:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSent
+attr title "packets sent, count"
+scalar smarthome.hostR3.udp packetSent:sum(packetBytes) 0
+attr interpolationmode none
+attr recordingmode sum(packetBytes)
+attr source packetSent
+attr title "packets sent, sum(packetBytes)"
+scalar smarthome.hostR3.udp passedUpPk:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetSentToUpper
+attr title "packets passed up, count"
+scalar smarthome.hostR3.udp droppedPkWrongPort:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+scalar smarthome.hostR3.udp droppedPkBadChecksum:count 0
+attr interpolationmode none
+attr recordingmode count
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+par smarthome.hostR3.tcp typename "\"inet.transportlayer.tcp.Tcp\""
+par smarthome.hostR3.tcp crcMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR3.tcp advertisedWindow 7504
+par smarthome.hostR3.tcp delayedAcksEnabled false
+par smarthome.hostR3.tcp nagleEnabled true
+par smarthome.hostR3.tcp limitedTransmitEnabled false
+par smarthome.hostR3.tcp increasedIWEnabled false
+par smarthome.hostR3.tcp sackSupport false
+par smarthome.hostR3.tcp windowScalingSupport false
+par smarthome.hostR3.tcp windowScalingFactor -1
+par smarthome.hostR3.tcp timestampSupport false
+par smarthome.hostR3.tcp mss 536
+par smarthome.hostR3.tcp msl 120s
+attr unit s
+par smarthome.hostR3.tcp tcpAlgorithmClass "\"TcpReno\""
+par smarthome.hostR3.tcp useDataNotification false
+par smarthome.hostR3.tcp dupthresh 3
+par smarthome.hostR3.tcp initialSsthresh 4294967295
+par smarthome.hostR3.tcp stopOperationExtraTime 0s
+attr unit s
+par smarthome.hostR3.tcp stopOperationTimeout 2s
+attr unit s
+par smarthome.hostR3.tcp ecnWillingness false
+par smarthome.hostR3.tcp dctcpGamma 0.0625
+par smarthome.hostR3.tn typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.tn displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.tn forwardServiceRegistration true
+par smarthome.hostR3.tn forwardProtocolRegistration true
+par smarthome.hostR3.at typename "\"inet.common.MessageDispatcher\""
+par smarthome.hostR3.at displayStringTextFormat "\"processed %p pk (%l)\""
+par smarthome.hostR3.at forwardServiceRegistration true
+par smarthome.hostR3.at forwardProtocolRegistration true
+par smarthome.hostR3 typename "\"inet.node.inet.WirelessHost\""
+par smarthome.hostR3 hasStatus false
+par smarthome.hostR3 osgModel "\"\""
+par smarthome.hostR3 osgModelColor "\"\""
+par smarthome.hostR3 canvasImage "\"\""
+par smarthome.hostR3 canvasImageColor "\"\""
+par smarthome.hostR3 recordPcap false
+par smarthome.hostR3 numPcapRecorders 0
+par smarthome.hostR3 numLoInterfaces 1
+par smarthome.hostR3 numWlanInterfaces 1
+par smarthome.hostR3 numEthInterfaces 0
+par smarthome.hostR3 numPppInterfaces 0
+par smarthome.hostR3 numTunInterfaces 0
+par smarthome.hostR3 numVirtInterfaces 0
+par smarthome.hostR3 fcsMode "\"declared\""
+attr enum declared,computed
+par smarthome.hostR3 hasIpv4 true
+par smarthome.hostR3 hasIpv6 false
+par smarthome.hostR3 hasGn false
+par smarthome.hostR3 forwarding false
+par smarthome.hostR3 multicastForwarding false
+par smarthome.hostR3 hasUdp true
+par smarthome.hostR3 hasTcp true
+par smarthome.hostR3 hasSctp false
+par smarthome.hostR3 numApps 0
 par smarthome typename "\"smarthome\""
 
