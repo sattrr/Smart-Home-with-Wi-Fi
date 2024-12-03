@@ -15,12 +15,13 @@
 
 import inet.networklayer.configurator.ipv4.Ipv4NetworkConfigurator;
 import inet.node.contract.INetworkNode;
+import inet.node.wireless.AccessPoint;
 import inet.physicallayer.wireless.common.contract.packetlevel.IRadioMedium;
 import inet.visualizer.contract.IIntegratedVisualizer;
 
-network smarthome
+network WirelessA
 {
-  	parameters:
+    parameters:
         @display("bgb=650,500;bgg=100,1,grey95");
         @figure[title](type=label; pos=0,-1; anchor=sw; color=darkblue);
 
@@ -38,18 +39,21 @@ network smarthome
             @display("p=580,275");
         }
         hostA: <default("WirelessHost")> like INetworkNode {
-            @display("p=50,325");
+            @display("p=101,200");
         }
         hostB: <default("WirelessHost")> like INetworkNode {
-            @display("p=450,325");
+            @display("p=394,200");
         }
-        hostR1: <default("WirelessHost")> like INetworkNode {
-            @display("p=250,300");
+        hostC: <default("WirelessHost")> like INetworkNode {
+            @display("p=251,86");
         }
-        hostR2: <default("WirelessHost")> like INetworkNode {
-            @display("p=150,450");
+        hostD: <default("WirelessHost")> like INetworkNode {
+            @display("p=182,319");
         }
-        hostR3: <default("WirelessHost")> like INetworkNode {
-            @display("p=350,450");
+        hostE: <default("WirelessHost")> like INetworkNode {
+            @display("p=318,319");
+        }
+        accessPoint: AccessPoint {
+            @display("p=251,199");
         }
 }
