@@ -1,9 +1,9 @@
-file 142044 1734542341                                          
+file 165680 1734678710                                          
 version 3
-run Wireless01-0-20241219-00:13:22-18560
+run Wireless01-0-20241220-14:07:59-18564
 attr configname Wireless01
-attr datetime 20241219-00:13:22
-attr datetimef 20241219-001322
+attr datetime 20241220-14:07:59
+attr datetimef 20241220-140759
 attr experiment Wireless01
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -11,7 +11,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Smarthome
-attr processid 18560
+attr processid 18564
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -39,32 +39,84 @@ config **.mobility.initialX "uniform(0m, 50m)"
 config **.mobility.initialY "uniform(0m, 50m)"
 config **.mobility.initialZ 1.5m
 config *.smartphone.wlan[].mac.address "\"00:00:00:00:00:02\""
-config *.smartLight.wlan[].mac.address "\"00:00:00:00:00:03\""
-config *.smartThermostat.wlan[].mac.address "\"00:00:00:00:00:04\""
+config *.lamp.wlan[].mac.address "\"00:00:00:00:00:03\""
+config *.thermostat.wlan[].mac.address "\"00:00:00:00:00:04\""
 config *.smartTV.wlan[].mac.address "\"00:00:00:00:00:05\""
 config *.securityCamera.wlan[].mac.address "\"00:00:00:00:00:06\""
-config **.smartphone.numApps 1
+config **.smartphone.numApps 2
 config **.smartphone.app[0].typename UdpBasicApp
 config **.smartphone.app[0].destAddresses "\"smartLight\""
-config **.smartphone.app[0].destPort 5000
+config **.smartphone.app[0].destPort 6002
 config **.smartphone.app[0].messageLength 1000B
 config **.smartphone.app[0].sendInterval exponential(1s)
-config **.smartLight.numApps 1
-config **.smartLight.app[0].typename UdpSink
-config **.smartLight.app[0].localPort 5000
-config **.smartThermostat.numApps 1
-config **.smartThermostat.app[0].typename UdpBasicApp
-config **.smartThermostat.app[0].destAddresses "\"securityCamera\""
-config **.smartThermostat.app[0].destPort 6000
-config **.smartThermostat.app[0].messageLength 500B
-config **.smartThermostat.app[0].sendInterval "uniform(0.5s, 2s)"
-config **.securityCamera.numApps 1
-config **.securityCamera.app[0].typename UdpSink
-config **.securityCamera.app[0].localPort 6000
+config **.smartphone.app[0].packetName "\"ControlCommand_Smartphone\""
+config **.smartphone.app[1].typename UdpSink
+config **.smartphone.app[1].localPort 5002
+config **.lamp.numApps 2
+config **.lamp.app[0].typename UdpBasicApp
+config **.lamp.app[0].destAddresses "\"smartphone smartTV\""
+config **.lamp.app[0].destPort 5002
+config **.lamp.app[0].messageLength 500B
+config **.lamp.app[0].sendInterval exponential(5s)
+config **.lamp.app[0].packetName "\"LightStatus\""
+config **.lamp.app[1].typename UdpSink
+config **.lamp.app[1].localPort 6003
+config **.thermostat.numApps 2
+config **.thermostat.app[0].typename UdpBasicApp
+config **.thermostat.app[0].destAddresses "\"smartphone smartTV\""
+config **.thermostat.app[0].destPort 5002
+config **.thermostat.app[0].messageLength 500B
+config **.thermostat.app[0].sendInterval "uniform(0.5s, 2s)"
+config **.thermostat.app[0].packetName "\"TemperatureData\""
+config **.thermostat.app[1].typename UdpSink
+config **.thermostat.app[1].localPort 6004
+config **.securityCamera.numApps 2
+config **.securityCamera.app[0].typename UdpBasicApp
+config **.securityCamera.app[0].destAddresses "\"smartphone smartTV\""
+config **.securityCamera.app[0].destPort 6004
+config **.securityCamera.app[0].messageLength 500B
+config **.securityCamera.app[0].sendInterval exponential(5s)
+config **.securityCamera.app[0].packetName "\"CameraFeed\""
+config **.securityCamera.app[1].typename UdpSink
+config **.securityCamera.app[1].localPort 5003
+config **.smartTV.numApps 2
+config **.smartTV.app[0].typename UdpBasicApp
+config **.smartTV.app[0].destAddresses "\"lamp\""
+config **.smartTV.app[0].destPort 6003
+config **.smartTV.app[0].messageLength 100B
+config **.smartTV.app[0].sendInterval "uniform(2s, 5s)"
+config **.smartTV.app[0].packetName "\"ControlCommand_SmartTV\""
+config **.smartTV.app[1].typename UdpSink
+config **.smartTV.app[1].localPort 5002
+config *.**.**.bitrate 2Mbps
+config *.visualizer.*.interfaceTableVisualizer[0].displayInterfaceTables true
+config *.visualizer.mediumVisualizer.displaySignals true
+config *.visualizer.physicalLinkVisualizer.displayLinks true
+config *.visualizer.physicalLinkVisualizer.packetFilter "\"TemperatureData* or LightStatus* or CameraFeed* or ControlCommand_*\""
+config *.visualizer.networkRouteVisualizer.displayRoutes true
+config *.visualizer.dataLinkVisualizer.displayLinks true
+config *.visualizer.*LinkVisualizer.lineShift 0
+config *.visualizer.networkRouteVisualizer.lineShift 0
+config *.visualizer.networkRouteVisualizer.packetFilter "\"TemperatureData* or LightStatus* or CameraFeed* or ControlCommand_*\""
+config *.visualizer2.*.infoVisualizer.displayInfos true
+config *.visualizer2.*.infoVisualizer.modules "\"*.**.udp\""
+config *.visualizer2.*.infoVisualizer.format "\"%t\""
 config .visualizer..interfaceTableVisualizer.displayInterfaceTables true
 config .visualizer..mobilityVisualizer.displayVelocities true
 config .visualizer..mobilityVisualizer.displayOrientations true
 config *.visualizer.packetVisualizer.displayPackets true
+config *.throughputRecorder.className "\"ThroughputRecorder\""
+config *.throughputRecorder.packetFilter "\"*\""
+config *.throughputRecorder.resultCollectionPeriod 1s
+config *.latencyRecorder.className "\"LatencyRecorder\""
+config *.latencyRecorder.packetFilter "\"TemperatureData* or LightStatus* or CameraFeed* or ControlCommand_*\""
+config *.signalRangeRecorder.className "\"SignalStrengthRecorder\""
+config *.signalRangeRecorder.radioFilter "\"*\""
+config *.signalRangeRecorder.resultCollectionPeriod 1s
+config *.packetLossRecorder.className "\"PacketLossRecorder\""
+config *.packetLossRecorder.packetFilter "\"*\""
+config *.packetLossRecorder.resultCollectionPeriod 1s
+config *.**.debug true
 
 vector 0 Smarthome.accessPoint.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
 attr autoWarmupFilter false
@@ -740,1750 +792,1925 @@ attr interpolationmode none
 attr recordingmode vector
 attr source appPkSeqNo(packetReceived)
 attr title "received packet sequence number"
-vector 133 Smarthome.smartLight.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 134 Smarthome.smartLight.lo[0].lo passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 135 Smarthome.smartLight.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 136 Smarthome.smartLight.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 137 Smarthome.smartLight.wlan[0].agent sentRequest:vector ETV
-attr recordingmode vector
-attr title "sent requests"
-vector 138 Smarthome.smartLight.wlan[0].agent acceptConfirm:vector ETV
-attr recordingmode vector
-attr title "accepted confirms"
-vector 139 Smarthome.smartLight.wlan[0].agent dropConfirm:vector ETV
-attr recordingmode vector
-attr title "dropped confirms"
-vector 140 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
-attr title "queue length"
-attr unit pk
-vector 141 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
-attr title "queue bit length"
-attr unit b
-vector 142 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetPulled)
-attr title "queueing times"
-attr unit s
-vector 143 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPushStarted)
-attr title "incoming packet lengths"
-attr unit b
-vector 144 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPushStarted)
-attr title "incoming datarate"
-attr unit bps
-vector 145 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPulled)
-attr title "outgoing packet lengths"
-attr unit b
-vector 146 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPulled)
-attr title "outgoing datarate"
-attr unit bps
-vector 147 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
-attr title "dropped packet lengths: queue overflow"
-attr unit b
-vector 148 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(demuxFlow(packetPulled))
-attr title "flow queueing times"
-attr unit s
-vector 149 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
-attr title "flow specific incoming data rate"
-attr unit bps
-vector 150 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
-attr title "flow specific outgoing data rate"
-attr unit bps
-vector 151 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetDequeued)
-attr title "queueing times"
-vector 152 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
-attr title "queue length"
-vector 153 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr title "backoff periods"
-vector 154 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source warmup(count(backoffStarted)-count(backoffStopped))
-attr title "backoff active"
-vector 155 Smarthome.smartLight.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
-attr enum IDLE,DEFER,IFS_AND_BACKOFF
-attr interpolationmode none
-attr recordingmode vector
-attr title "contention state changed"
-attr type enum
-vector 156 Smarthome.smartLight.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsDuplicateDetected(packetDropped)
-attr title "packet drops: duplicate detected, packetBytes"
-vector 157 Smarthome.smartLight.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr title "contention window"
-vector 158 Smarthome.smartLight.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent, packetBytes"
-vector 159 Smarthome.smartLight.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Unicast(packetSentToPeer)
-attr title "packets sent: unicast, packetBytes"
-vector 160 Smarthome.smartLight.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Multicast(packetSentToPeer)
-attr title "packets sent: multicast, packetBytes"
-vector 161 Smarthome.smartLight.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Broadcast(packetSentToPeer)
-attr title "packets sent: broadcast , packetBytes"
-vector 162 Smarthome.smartLight.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Retry(packetSentToPeer)
-attr title "packets sent: with retry, packetBytes"
-vector 163 Smarthome.smartLight.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211NotRetry(packetSentToPeer)
-attr title "packets sent: without retry, packetBytes"
-vector 164 Smarthome.smartLight.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received, packetBytes"
-vector 165 Smarthome.smartLight.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Unicast(packetReceivedFromPeer)
-attr title "packets received: unicast, packetBytes"
-vector 166 Smarthome.smartLight.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Multicast(packetReceivedFromPeer)
-attr title "packets received: multicast, packetBytes"
-vector 167 Smarthome.smartLight.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Broadcast(packetReceivedFromPeer)
-attr title "packets received: broadcast, packetBytes"
-vector 168 Smarthome.smartLight.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Retry(packetReceivedFromPeer)
-attr title "packets received: with retry, packetBytes"
-vector 169 Smarthome.smartLight.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211NotRetry(packetReceivedFromPeer)
-attr title "packets received: without retry, packetBytes"
-vector 170 Smarthome.smartLight.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropped
-attr title "packet drops, packetBytes"
-vector 171 Smarthome.smartLight.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNotAddressedToUs(packetDropped)
-attr title "packet drops: not addressed to us, packetBytes"
-vector 172 Smarthome.smartLight.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsQueueOverflow(packetDropped)
-attr title "packet drops: queue overflow, packetBytes"
-vector 173 Smarthome.smartLight.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsRetryLimitReached(packetDropped)
-attr title "packet drops: retry limit reached, packetBytes"
-vector 174 Smarthome.smartLight.wlan[0].mac.dcf frameSequenceActive:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
-attr title "frame sequence active"
-vector 175 Smarthome.smartLight.wlan[0].mac.dcf datarateSelected:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr title "datarates selected"
-vector 176 Smarthome.smartLight.wlan[0].mac.rx nav:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source navChanged
-attr title "network allocation vector"
-vector 177 Smarthome.smartLight.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent to upper layer, packetBytes"
-vector 178 Smarthome.smartLight.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent to lower layer, packetBytes"
-vector 179 Smarthome.smartLight.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received from upper layer, packetBytes"
-vector 180 Smarthome.smartLight.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received from lower layer, packetBytes"
-vector 181 Smarthome.smartLight.wlan[0].mac packetDrop:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropped
-attr title "packet drops, packetBytes"
-vector 182 Smarthome.smartLight.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packet drops: incorrectly received, packetBytes"
-vector 183 Smarthome.smartLight.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNotAddressedToUs(packetDropped)
-attr title "packet drops: not addressed to us, packetBytes"
-vector 184 Smarthome.smartLight.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsQueueOverflow(packetDropped)
-attr title "packet drops: queue overflow, packetBytes"
-vector 185 Smarthome.smartLight.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsRetryLimitReached(packetDropped)
-attr title "packet drops: retry limit reached, packetBytes"
-vector 186 Smarthome.smartLight.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsDuplicateDetected(packetDropped)
-attr title "packet drops: duplicate detected, packetBytes"
-vector 187 Smarthome.smartLight.wlan[0].mac packetDropOther:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsOther(packetDropped)
-attr title "packet drops: other, packetBytes"
-vector 188 Smarthome.smartLight.wlan[0].radio radioMode:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source radioModeChanged
-attr title "Radio mode"
-vector 189 Smarthome.smartLight.wlan[0].radio receptionState:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source receptionStateChanged
-attr title "Radio reception state"
-vector 190 Smarthome.smartLight.wlan[0].radio transmissionState:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source transmissionStateChanged
-attr title "Radio transmission state"
-vector 191 Smarthome.smartLight.wlan[0].radio radioChannel:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source radioChannelChanged
-attr title "Radio channel"
-vector 192 Smarthome.smartLight.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 193 Smarthome.smartLight.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 194 Smarthome.smartLight.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
-attr title "packet drop: address resolution failed, packetBytes"
-vector 195 Smarthome.smartLight.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsHopLimitReached(packetDropped)
-attr title "packet drop: hop limit reached, packetBytes"
-vector 196 Smarthome.smartLight.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsForwardingDisabled(packetDropped)
-attr title "packet drop: forwarding disabled, packetBytes"
-vector 197 Smarthome.smartLight.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoInterfaceFound(packetDropped)
-attr title "packet drop: no interface found, packetBytes"
-vector 198 Smarthome.smartLight.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoRouteFound(packetDropped)
-attr title "packet drop: no route found, packetBytes"
-vector 199 Smarthome.smartLight.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsUndefined(packetDropped)
-attr title "packet drop: undefined, packetBytes"
-vector 200 Smarthome.smartLight.ipv4.arp arpRequestSent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpRequestSent
-attr title "ARP request sent, packetBytes"
-vector 201 Smarthome.smartLight.ipv4.arp arpReplySent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpReplySent
-attr title "ARP replies sent, packetBytes"
-vector 202 Smarthome.smartLight.udp packetSent:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSent
-attr title "packets sent, packetBytes"
-vector 203 Smarthome.smartLight.udp packetReceived:vector(packetBytes) ETV
+vector 133 Smarthome.smartphone.app[1] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetReceived
 attr title "packets received, packetBytes"
-vector 204 Smarthome.smartLight.udp passedUpPk:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetSentToUpper
-attr title "packets passed up, count"
-vector 205 Smarthome.smartLight.udp droppedPkWrongPort:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetDropReasonIsNoPortFound(packetDropped)
-attr title "packets dropped (wrong port), count"
-vector 206 Smarthome.smartLight.udp droppedPkBadChecksum:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packets dropped (checksum error), count"
-vector 207 Smarthome.smartLight.app[0] packetReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
-vector 208 Smarthome.smartLight.app[0] throughput:vector ETV
+vector 134 Smarthome.smartphone.app[1] throughput:vector ETV
 attr recordingmode vector
 attr source throughput(packetReceived)
 attr title throughput
 attr unit bps
-vector 209 Smarthome.smartLight.app[0] endToEndDelay:vector ETV
+vector 135 Smarthome.smartphone.app[1] endToEndDelay:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source dataAge(packetReceived)
 attr title "end-to-end delay"
 attr unit s
-vector 210 Smarthome.smartLight.app[0] rcvdPkSeqNo:vector ETV
+vector 136 Smarthome.smartphone.app[1] rcvdPkSeqNo:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source appPkSeqNo(packetReceived)
 attr title "received packet sequence number"
-vector 211 Smarthome.smartThermostat.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+vector 137 Smarthome.lamp.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetReceivedFromUpper
 attr title "packets received from higher layer, packetBytes"
-vector 212 Smarthome.smartThermostat.lo[0].lo passedUpPk:vector(packetBytes) ETV
+vector 138 Smarthome.lamp.lo[0].lo passedUpPk:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetSentToUpper
 attr title "packets passed to higher layer, packetBytes"
-vector 213 Smarthome.smartThermostat.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+vector 139 Smarthome.lamp.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsInterfaceDown(packetDropped)
 attr title "packet drops: interface down, packetBytes"
-vector 214 Smarthome.smartThermostat.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+vector 140 Smarthome.lamp.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsNoCarrier(packetDropped)
 attr title "packet drops: no carrier, packetBytes"
-vector 215 Smarthome.smartThermostat.wlan[0].agent sentRequest:vector ETV
+vector 141 Smarthome.lamp.wlan[0].agent sentRequest:vector ETV
 attr recordingmode vector
 attr title "sent requests"
-vector 216 Smarthome.smartThermostat.wlan[0].agent acceptConfirm:vector ETV
+vector 142 Smarthome.lamp.wlan[0].agent acceptConfirm:vector ETV
 attr recordingmode vector
 attr title "accepted confirms"
-vector 217 Smarthome.smartThermostat.wlan[0].agent dropConfirm:vector ETV
+vector 143 Smarthome.lamp.wlan[0].agent dropConfirm:vector ETV
 attr recordingmode vector
 attr title "dropped confirms"
-vector 218 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+vector 144 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
 attr title "queue length"
 attr unit pk
-vector 219 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
+vector 145 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
 attr title "queue bit length"
 attr unit b
-vector 220 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+vector 146 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source queueingTime(packetPulled)
 attr title "queueing times"
 attr unit s
-vector 221 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
+vector 147 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source packetLength(packetPushStarted)
 attr title "incoming packet lengths"
 attr unit b
-vector 222 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
+vector 148 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
 attr interpolationmode linear
 attr recordingmode vector
 attr source throughput(packetPushStarted)
 attr title "incoming datarate"
 attr unit bps
-vector 223 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
+vector 149 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source packetLength(packetPulled)
 attr title "outgoing packet lengths"
 attr unit b
-vector 224 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
+vector 150 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
 attr interpolationmode linear
 attr recordingmode vector
 attr source throughput(packetPulled)
 attr title "outgoing datarate"
 attr unit bps
-vector 225 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
+vector 151 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
 attr title "dropped packet lengths: queue overflow"
 attr unit b
-vector 226 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
+vector 152 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source queueingTime(demuxFlow(packetPulled))
 attr title "flow queueing times"
 attr unit s
-vector 227 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
+vector 153 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
 attr interpolationmode linear
 attr recordingmode vector
 attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
 attr title "flow specific incoming data rate"
 attr unit bps
-vector 228 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
+vector 154 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
 attr interpolationmode linear
 attr recordingmode vector
 attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
 attr title "flow specific outgoing data rate"
 attr unit bps
-vector 229 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+vector 155 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source queueingTime(packetDequeued)
 attr title "queueing times"
-vector 230 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+vector 156 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
 attr title "queue length"
-vector 231 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+vector 157 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr title "backoff periods"
-vector 232 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+vector 158 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source warmup(count(backoffStarted)-count(backoffStopped))
 attr title "backoff active"
-vector 233 Smarthome.smartThermostat.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
+vector 159 Smarthome.lamp.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
 attr enum IDLE,DEFER,IFS_AND_BACKOFF
 attr interpolationmode none
 attr recordingmode vector
 attr title "contention state changed"
 attr type enum
-vector 234 Smarthome.smartThermostat.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
+vector 160 Smarthome.lamp.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsDuplicateDetected(packetDropped)
 attr title "packet drops: duplicate detected, packetBytes"
-vector 235 Smarthome.smartThermostat.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+vector 161 Smarthome.lamp.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr title "contention window"
-vector 236 Smarthome.smartThermostat.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+vector 162 Smarthome.lamp.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr title "packets sent, packetBytes"
-vector 237 Smarthome.smartThermostat.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
+vector 163 Smarthome.lamp.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Unicast(packetSentToPeer)
 attr title "packets sent: unicast, packetBytes"
-vector 238 Smarthome.smartThermostat.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+vector 164 Smarthome.lamp.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Multicast(packetSentToPeer)
 attr title "packets sent: multicast, packetBytes"
-vector 239 Smarthome.smartThermostat.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
+vector 165 Smarthome.lamp.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Broadcast(packetSentToPeer)
 attr title "packets sent: broadcast , packetBytes"
-vector 240 Smarthome.smartThermostat.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
+vector 166 Smarthome.lamp.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Retry(packetSentToPeer)
 attr title "packets sent: with retry, packetBytes"
-vector 241 Smarthome.smartThermostat.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+vector 167 Smarthome.lamp.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211NotRetry(packetSentToPeer)
 attr title "packets sent: without retry, packetBytes"
-vector 242 Smarthome.smartThermostat.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+vector 168 Smarthome.lamp.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr title "packets received, packetBytes"
-vector 243 Smarthome.smartThermostat.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
+vector 169 Smarthome.lamp.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Unicast(packetReceivedFromPeer)
 attr title "packets received: unicast, packetBytes"
-vector 244 Smarthome.smartThermostat.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+vector 170 Smarthome.lamp.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Multicast(packetReceivedFromPeer)
 attr title "packets received: multicast, packetBytes"
-vector 245 Smarthome.smartThermostat.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
+vector 171 Smarthome.lamp.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Broadcast(packetReceivedFromPeer)
 attr title "packets received: broadcast, packetBytes"
-vector 246 Smarthome.smartThermostat.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
+vector 172 Smarthome.lamp.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211Retry(packetReceivedFromPeer)
 attr title "packets received: with retry, packetBytes"
-vector 247 Smarthome.smartThermostat.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+vector 173 Smarthome.lamp.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source ieee80211NotRetry(packetReceivedFromPeer)
 attr title "packets received: without retry, packetBytes"
-vector 248 Smarthome.smartThermostat.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
+vector 174 Smarthome.lamp.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropped
 attr title "packet drops, packetBytes"
-vector 249 Smarthome.smartThermostat.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
+vector 175 Smarthome.lamp.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, packetBytes"
-vector 250 Smarthome.smartThermostat.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
+vector 176 Smarthome.lamp.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsQueueOverflow(packetDropped)
 attr title "packet drops: queue overflow, packetBytes"
-vector 251 Smarthome.smartThermostat.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
+vector 177 Smarthome.lamp.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsRetryLimitReached(packetDropped)
 attr title "packet drops: retry limit reached, packetBytes"
-vector 252 Smarthome.smartThermostat.wlan[0].mac.dcf frameSequenceActive:vector ETV
+vector 178 Smarthome.lamp.wlan[0].mac.dcf frameSequenceActive:vector ETV
 attr autoWarmupFilter false
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
 attr title "frame sequence active"
-vector 253 Smarthome.smartThermostat.wlan[0].mac.dcf datarateSelected:vector ETV
+vector 179 Smarthome.lamp.wlan[0].mac.dcf datarateSelected:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr title "datarates selected"
-vector 254 Smarthome.smartThermostat.wlan[0].mac.rx nav:vector ETV
+vector 180 Smarthome.lamp.wlan[0].mac.rx nav:vector ETV
 attr interpolationmode linear
 attr recordingmode vector
 attr source navChanged
 attr title "network allocation vector"
-vector 255 Smarthome.smartThermostat.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+vector 181 Smarthome.lamp.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr title "packets sent to upper layer, packetBytes"
-vector 256 Smarthome.smartThermostat.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+vector 182 Smarthome.lamp.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr title "packets sent to lower layer, packetBytes"
-vector 257 Smarthome.smartThermostat.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+vector 183 Smarthome.lamp.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr title "packets received from upper layer, packetBytes"
-vector 258 Smarthome.smartThermostat.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+vector 184 Smarthome.lamp.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr title "packets received from lower layer, packetBytes"
-vector 259 Smarthome.smartThermostat.wlan[0].mac packetDrop:vector(packetBytes) ETV
+vector 185 Smarthome.lamp.wlan[0].mac packetDrop:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropped
 attr title "packet drops, packetBytes"
-vector 260 Smarthome.smartThermostat.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+vector 186 Smarthome.lamp.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packet drops: incorrectly received, packetBytes"
-vector 261 Smarthome.smartThermostat.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+vector 187 Smarthome.lamp.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsNotAddressedToUs(packetDropped)
 attr title "packet drops: not addressed to us, packetBytes"
-vector 262 Smarthome.smartThermostat.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+vector 188 Smarthome.lamp.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsQueueOverflow(packetDropped)
 attr title "packet drops: queue overflow, packetBytes"
-vector 263 Smarthome.smartThermostat.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
+vector 189 Smarthome.lamp.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsRetryLimitReached(packetDropped)
 attr title "packet drops: retry limit reached, packetBytes"
-vector 264 Smarthome.smartThermostat.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
+vector 190 Smarthome.lamp.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsDuplicateDetected(packetDropped)
 attr title "packet drops: duplicate detected, packetBytes"
-vector 265 Smarthome.smartThermostat.wlan[0].mac packetDropOther:vector(packetBytes) ETV
+vector 191 Smarthome.lamp.wlan[0].mac packetDropOther:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsOther(packetDropped)
 attr title "packet drops: other, packetBytes"
-vector 266 Smarthome.smartThermostat.wlan[0].radio radioMode:vector ETV
+vector 192 Smarthome.lamp.wlan[0].radio radioMode:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source radioModeChanged
 attr title "Radio mode"
-vector 267 Smarthome.smartThermostat.wlan[0].radio receptionState:vector ETV
+vector 193 Smarthome.lamp.wlan[0].radio receptionState:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source receptionStateChanged
 attr title "Radio reception state"
-vector 268 Smarthome.smartThermostat.wlan[0].radio transmissionState:vector ETV
+vector 194 Smarthome.lamp.wlan[0].radio transmissionState:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source transmissionStateChanged
 attr title "Radio transmission state"
-vector 269 Smarthome.smartThermostat.wlan[0].radio radioChannel:vector ETV
+vector 195 Smarthome.lamp.wlan[0].radio radioChannel:vector ETV
 attr interpolationmode sample-hold
 attr recordingmode vector
 attr source radioChannelChanged
 attr title "Radio channel"
-vector 270 Smarthome.smartThermostat.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+vector 196 Smarthome.lamp.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsInterfaceDown(packetDropped)
 attr title "packet drops: interface down, packetBytes"
-vector 271 Smarthome.smartThermostat.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+vector 197 Smarthome.lamp.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsNoCarrier(packetDropped)
 attr title "packet drops: no carrier, packetBytes"
-vector 272 Smarthome.smartThermostat.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+vector 198 Smarthome.lamp.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
 attr title "packet drop: address resolution failed, packetBytes"
-vector 273 Smarthome.smartThermostat.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+vector 199 Smarthome.lamp.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsHopLimitReached(packetDropped)
 attr title "packet drop: hop limit reached, packetBytes"
-vector 274 Smarthome.smartThermostat.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+vector 200 Smarthome.lamp.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsForwardingDisabled(packetDropped)
 attr title "packet drop: forwarding disabled, packetBytes"
-vector 275 Smarthome.smartThermostat.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+vector 201 Smarthome.lamp.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsNoInterfaceFound(packetDropped)
 attr title "packet drop: no interface found, packetBytes"
-vector 276 Smarthome.smartThermostat.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+vector 202 Smarthome.lamp.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsNoRouteFound(packetDropped)
 attr title "packet drop: no route found, packetBytes"
-vector 277 Smarthome.smartThermostat.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+vector 203 Smarthome.lamp.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetDropReasonIsUndefined(packetDropped)
 attr title "packet drop: undefined, packetBytes"
-vector 278 Smarthome.smartThermostat.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+vector 204 Smarthome.lamp.ipv4.arp arpRequestSent:vector(packetBytes) ETV
 attr recordingmode vector(packetBytes)
 attr source arpRequestSent
 attr title "ARP request sent, packetBytes"
-vector 279 Smarthome.smartThermostat.ipv4.arp arpReplySent:vector(packetBytes) ETV
+vector 205 Smarthome.lamp.ipv4.arp arpReplySent:vector(packetBytes) ETV
 attr recordingmode vector(packetBytes)
 attr source arpReplySent
 attr title "ARP replies sent, packetBytes"
-vector 280 Smarthome.smartThermostat.udp packetSent:vector(packetBytes) ETV
+vector 206 Smarthome.lamp.udp packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetSent
 attr title "packets sent, packetBytes"
-vector 281 Smarthome.smartThermostat.udp packetReceived:vector(packetBytes) ETV
+vector 207 Smarthome.lamp.udp packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetReceived
 attr title "packets received, packetBytes"
-vector 282 Smarthome.smartThermostat.udp passedUpPk:vector(count) ETV
+vector 208 Smarthome.lamp.udp passedUpPk:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetSentToUpper
 attr title "packets passed up, count"
-vector 283 Smarthome.smartThermostat.udp droppedPkWrongPort:vector(count) ETV
+vector 209 Smarthome.lamp.udp droppedPkWrongPort:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetDropReasonIsNoPortFound(packetDropped)
 attr title "packets dropped (wrong port), count"
-vector 284 Smarthome.smartThermostat.udp droppedPkBadChecksum:vector(count) ETV
+vector 210 Smarthome.lamp.udp droppedPkBadChecksum:vector(count) ETV
 attr interpolationmode none
 attr recordingmode vector(count)
 attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
 attr title "packets dropped (checksum error), count"
-vector 285 Smarthome.smartThermostat.app[0] packetReceived:vector(packetBytes) ETV
+vector 211 Smarthome.lamp.app[0] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetReceived
 attr title "packets received, packetBytes"
-vector 286 Smarthome.smartThermostat.app[0] throughput:vector ETV
+vector 212 Smarthome.lamp.app[0] throughput:vector ETV
 attr recordingmode vector
 attr source throughput(packetReceived)
 attr title throughput
 attr unit bps
-vector 287 Smarthome.smartThermostat.app[0] packetSent:vector(packetBytes) ETV
+vector 213 Smarthome.lamp.app[0] packetSent:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetSent
 attr title "packets sent, packetBytes"
-vector 288 Smarthome.smartThermostat.app[0] rcvdPkLifetime:vector ETV
+vector 214 Smarthome.lamp.app[0] rcvdPkLifetime:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source dataAge(packetReceived)
 attr title "received packet lifetime"
 attr unit s
-vector 289 Smarthome.smartThermostat.app[0] rcvdPkSeqNo:vector ETV
+vector 215 Smarthome.lamp.app[0] rcvdPkSeqNo:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source appPkSeqNo(packetReceived)
 attr title "received packet sequence number"
-vector 290 Smarthome.smartTV.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 291 Smarthome.smartTV.lo[0].lo passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 292 Smarthome.smartTV.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 293 Smarthome.smartTV.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 294 Smarthome.smartTV.wlan[0].agent sentRequest:vector ETV
-attr recordingmode vector
-attr title "sent requests"
-vector 295 Smarthome.smartTV.wlan[0].agent acceptConfirm:vector ETV
-attr recordingmode vector
-attr title "accepted confirms"
-vector 296 Smarthome.smartTV.wlan[0].agent dropConfirm:vector ETV
-attr recordingmode vector
-attr title "dropped confirms"
-vector 297 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
-attr title "queue length"
-attr unit pk
-vector 298 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
-attr title "queue bit length"
-attr unit b
-vector 299 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetPulled)
-attr title "queueing times"
-attr unit s
-vector 300 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPushStarted)
-attr title "incoming packet lengths"
-attr unit b
-vector 301 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPushStarted)
-attr title "incoming datarate"
-attr unit bps
-vector 302 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPulled)
-attr title "outgoing packet lengths"
-attr unit b
-vector 303 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPulled)
-attr title "outgoing datarate"
-attr unit bps
-vector 304 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
-attr title "dropped packet lengths: queue overflow"
-attr unit b
-vector 305 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(demuxFlow(packetPulled))
-attr title "flow queueing times"
-attr unit s
-vector 306 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
-attr title "flow specific incoming data rate"
-attr unit bps
-vector 307 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
-attr title "flow specific outgoing data rate"
-attr unit bps
-vector 308 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetDequeued)
-attr title "queueing times"
-vector 309 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
-attr title "queue length"
-vector 310 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr title "backoff periods"
-vector 311 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source warmup(count(backoffStarted)-count(backoffStopped))
-attr title "backoff active"
-vector 312 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
-attr enum IDLE,DEFER,IFS_AND_BACKOFF
-attr interpolationmode none
-attr recordingmode vector
-attr title "contention state changed"
-attr type enum
-vector 313 Smarthome.smartTV.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsDuplicateDetected(packetDropped)
-attr title "packet drops: duplicate detected, packetBytes"
-vector 314 Smarthome.smartTV.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr title "contention window"
-vector 315 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent, packetBytes"
-vector 316 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Unicast(packetSentToPeer)
-attr title "packets sent: unicast, packetBytes"
-vector 317 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Multicast(packetSentToPeer)
-attr title "packets sent: multicast, packetBytes"
-vector 318 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Broadcast(packetSentToPeer)
-attr title "packets sent: broadcast , packetBytes"
-vector 319 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Retry(packetSentToPeer)
-attr title "packets sent: with retry, packetBytes"
-vector 320 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211NotRetry(packetSentToPeer)
-attr title "packets sent: without retry, packetBytes"
-vector 321 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received, packetBytes"
-vector 322 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Unicast(packetReceivedFromPeer)
-attr title "packets received: unicast, packetBytes"
-vector 323 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Multicast(packetReceivedFromPeer)
-attr title "packets received: multicast, packetBytes"
-vector 324 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Broadcast(packetReceivedFromPeer)
-attr title "packets received: broadcast, packetBytes"
-vector 325 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Retry(packetReceivedFromPeer)
-attr title "packets received: with retry, packetBytes"
-vector 326 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211NotRetry(packetReceivedFromPeer)
-attr title "packets received: without retry, packetBytes"
-vector 327 Smarthome.smartTV.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropped
-attr title "packet drops, packetBytes"
-vector 328 Smarthome.smartTV.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNotAddressedToUs(packetDropped)
-attr title "packet drops: not addressed to us, packetBytes"
-vector 329 Smarthome.smartTV.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsQueueOverflow(packetDropped)
-attr title "packet drops: queue overflow, packetBytes"
-vector 330 Smarthome.smartTV.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsRetryLimitReached(packetDropped)
-attr title "packet drops: retry limit reached, packetBytes"
-vector 331 Smarthome.smartTV.wlan[0].mac.dcf frameSequenceActive:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
-attr title "frame sequence active"
-vector 332 Smarthome.smartTV.wlan[0].mac.dcf datarateSelected:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr title "datarates selected"
-vector 333 Smarthome.smartTV.wlan[0].mac.rx nav:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source navChanged
-attr title "network allocation vector"
-vector 334 Smarthome.smartTV.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent to upper layer, packetBytes"
-vector 335 Smarthome.smartTV.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent to lower layer, packetBytes"
-vector 336 Smarthome.smartTV.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received from upper layer, packetBytes"
-vector 337 Smarthome.smartTV.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received from lower layer, packetBytes"
-vector 338 Smarthome.smartTV.wlan[0].mac packetDrop:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropped
-attr title "packet drops, packetBytes"
-vector 339 Smarthome.smartTV.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packet drops: incorrectly received, packetBytes"
-vector 340 Smarthome.smartTV.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNotAddressedToUs(packetDropped)
-attr title "packet drops: not addressed to us, packetBytes"
-vector 341 Smarthome.smartTV.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsQueueOverflow(packetDropped)
-attr title "packet drops: queue overflow, packetBytes"
-vector 342 Smarthome.smartTV.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsRetryLimitReached(packetDropped)
-attr title "packet drops: retry limit reached, packetBytes"
-vector 343 Smarthome.smartTV.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsDuplicateDetected(packetDropped)
-attr title "packet drops: duplicate detected, packetBytes"
-vector 344 Smarthome.smartTV.wlan[0].mac packetDropOther:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsOther(packetDropped)
-attr title "packet drops: other, packetBytes"
-vector 345 Smarthome.smartTV.wlan[0].radio radioMode:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source radioModeChanged
-attr title "Radio mode"
-vector 346 Smarthome.smartTV.wlan[0].radio receptionState:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source receptionStateChanged
-attr title "Radio reception state"
-vector 347 Smarthome.smartTV.wlan[0].radio transmissionState:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source transmissionStateChanged
-attr title "Radio transmission state"
-vector 348 Smarthome.smartTV.wlan[0].radio radioChannel:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source radioChannelChanged
-attr title "Radio channel"
-vector 349 Smarthome.smartTV.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 350 Smarthome.smartTV.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 351 Smarthome.smartTV.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
-attr title "packet drop: address resolution failed, packetBytes"
-vector 352 Smarthome.smartTV.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsHopLimitReached(packetDropped)
-attr title "packet drop: hop limit reached, packetBytes"
-vector 353 Smarthome.smartTV.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsForwardingDisabled(packetDropped)
-attr title "packet drop: forwarding disabled, packetBytes"
-vector 354 Smarthome.smartTV.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoInterfaceFound(packetDropped)
-attr title "packet drop: no interface found, packetBytes"
-vector 355 Smarthome.smartTV.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoRouteFound(packetDropped)
-attr title "packet drop: no route found, packetBytes"
-vector 356 Smarthome.smartTV.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsUndefined(packetDropped)
-attr title "packet drop: undefined, packetBytes"
-vector 357 Smarthome.smartTV.ipv4.arp arpRequestSent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpRequestSent
-attr title "ARP request sent, packetBytes"
-vector 358 Smarthome.smartTV.ipv4.arp arpReplySent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpReplySent
-attr title "ARP replies sent, packetBytes"
-vector 359 Smarthome.smartTV.udp packetSent:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSent
-attr title "packets sent, packetBytes"
-vector 360 Smarthome.smartTV.udp packetReceived:vector(packetBytes) ETV
+vector 216 Smarthome.lamp.app[1] packetReceived:vector(packetBytes) ETV
 attr interpolationmode none
 attr recordingmode vector(packetBytes)
 attr source packetReceived
 attr title "packets received, packetBytes"
-vector 361 Smarthome.smartTV.udp passedUpPk:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetSentToUpper
-attr title "packets passed up, count"
-vector 362 Smarthome.smartTV.udp droppedPkWrongPort:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetDropReasonIsNoPortFound(packetDropped)
-attr title "packets dropped (wrong port), count"
-vector 363 Smarthome.smartTV.udp droppedPkBadChecksum:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packets dropped (checksum error), count"
-vector 364 Smarthome.securityCamera.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceivedFromUpper
-attr title "packets received from higher layer, packetBytes"
-vector 365 Smarthome.securityCamera.lo[0].lo passedUpPk:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSentToUpper
-attr title "packets passed to higher layer, packetBytes"
-vector 366 Smarthome.securityCamera.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 367 Smarthome.securityCamera.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 368 Smarthome.securityCamera.wlan[0].agent sentRequest:vector ETV
-attr recordingmode vector
-attr title "sent requests"
-vector 369 Smarthome.securityCamera.wlan[0].agent acceptConfirm:vector ETV
-attr recordingmode vector
-attr title "accepted confirms"
-vector 370 Smarthome.securityCamera.wlan[0].agent dropConfirm:vector ETV
-attr recordingmode vector
-attr title "dropped confirms"
-vector 371 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
-attr title "queue length"
-attr unit pk
-vector 372 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
-attr title "queue bit length"
-attr unit b
-vector 373 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetPulled)
-attr title "queueing times"
-attr unit s
-vector 374 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPushStarted)
-attr title "incoming packet lengths"
-attr unit b
-vector 375 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPushStarted)
-attr title "incoming datarate"
-attr unit bps
-vector 376 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetPulled)
-attr title "outgoing packet lengths"
-attr unit b
-vector 377 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(packetPulled)
-attr title "outgoing datarate"
-attr unit bps
-vector 378 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
-attr title "dropped packet lengths: queue overflow"
-attr unit b
-vector 379 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(demuxFlow(packetPulled))
-attr title "flow queueing times"
-attr unit s
-vector 380 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
-attr title "flow specific incoming data rate"
-attr unit bps
-vector 381 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
-attr title "flow specific outgoing data rate"
-attr unit bps
-vector 382 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr source queueingTime(packetDequeued)
-attr title "queueing times"
-vector 383 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
-attr title "queue length"
-vector 384 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr title "backoff periods"
-vector 385 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source warmup(count(backoffStarted)-count(backoffStopped))
-attr title "backoff active"
-vector 386 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
-attr enum IDLE,DEFER,IFS_AND_BACKOFF
-attr interpolationmode none
-attr recordingmode vector
-attr title "contention state changed"
-attr type enum
-vector 387 Smarthome.securityCamera.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsDuplicateDetected(packetDropped)
-attr title "packet drops: duplicate detected, packetBytes"
-vector 388 Smarthome.securityCamera.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr title "contention window"
-vector 389 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent, packetBytes"
-vector 390 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Unicast(packetSentToPeer)
-attr title "packets sent: unicast, packetBytes"
-vector 391 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Multicast(packetSentToPeer)
-attr title "packets sent: multicast, packetBytes"
-vector 392 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Broadcast(packetSentToPeer)
-attr title "packets sent: broadcast , packetBytes"
-vector 393 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Retry(packetSentToPeer)
-attr title "packets sent: with retry, packetBytes"
-vector 394 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211NotRetry(packetSentToPeer)
-attr title "packets sent: without retry, packetBytes"
-vector 395 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received, packetBytes"
-vector 396 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Unicast(packetReceivedFromPeer)
-attr title "packets received: unicast, packetBytes"
-vector 397 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Multicast(packetReceivedFromPeer)
-attr title "packets received: multicast, packetBytes"
-vector 398 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Broadcast(packetReceivedFromPeer)
-attr title "packets received: broadcast, packetBytes"
-vector 399 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211Retry(packetReceivedFromPeer)
-attr title "packets received: with retry, packetBytes"
-vector 400 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source ieee80211NotRetry(packetReceivedFromPeer)
-attr title "packets received: without retry, packetBytes"
-vector 401 Smarthome.securityCamera.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropped
-attr title "packet drops, packetBytes"
-vector 402 Smarthome.securityCamera.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNotAddressedToUs(packetDropped)
-attr title "packet drops: not addressed to us, packetBytes"
-vector 403 Smarthome.securityCamera.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsQueueOverflow(packetDropped)
-attr title "packet drops: queue overflow, packetBytes"
-vector 404 Smarthome.securityCamera.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsRetryLimitReached(packetDropped)
-attr title "packet drops: retry limit reached, packetBytes"
-vector 405 Smarthome.securityCamera.wlan[0].mac.dcf frameSequenceActive:vector ETV
-attr autoWarmupFilter false
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
-attr title "frame sequence active"
-vector 406 Smarthome.securityCamera.wlan[0].mac.dcf datarateSelected:vector ETV
-attr interpolationmode none
-attr recordingmode vector
-attr title "datarates selected"
-vector 407 Smarthome.securityCamera.wlan[0].mac.rx nav:vector ETV
-attr interpolationmode linear
-attr recordingmode vector
-attr source navChanged
-attr title "network allocation vector"
-vector 408 Smarthome.securityCamera.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent to upper layer, packetBytes"
-vector 409 Smarthome.securityCamera.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets sent to lower layer, packetBytes"
-vector 410 Smarthome.securityCamera.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received from upper layer, packetBytes"
-vector 411 Smarthome.securityCamera.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr title "packets received from lower layer, packetBytes"
-vector 412 Smarthome.securityCamera.wlan[0].mac packetDrop:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropped
-attr title "packet drops, packetBytes"
-vector 413 Smarthome.securityCamera.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packet drops: incorrectly received, packetBytes"
-vector 414 Smarthome.securityCamera.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNotAddressedToUs(packetDropped)
-attr title "packet drops: not addressed to us, packetBytes"
-vector 415 Smarthome.securityCamera.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsQueueOverflow(packetDropped)
-attr title "packet drops: queue overflow, packetBytes"
-vector 416 Smarthome.securityCamera.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsRetryLimitReached(packetDropped)
-attr title "packet drops: retry limit reached, packetBytes"
-vector 417 Smarthome.securityCamera.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsDuplicateDetected(packetDropped)
-attr title "packet drops: duplicate detected, packetBytes"
-vector 418 Smarthome.securityCamera.wlan[0].mac packetDropOther:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsOther(packetDropped)
-attr title "packet drops: other, packetBytes"
-vector 419 Smarthome.securityCamera.wlan[0].radio radioMode:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source radioModeChanged
-attr title "Radio mode"
-vector 420 Smarthome.securityCamera.wlan[0].radio receptionState:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source receptionStateChanged
-attr title "Radio reception state"
-vector 421 Smarthome.securityCamera.wlan[0].radio transmissionState:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source transmissionStateChanged
-attr title "Radio transmission state"
-vector 422 Smarthome.securityCamera.wlan[0].radio radioChannel:vector ETV
-attr interpolationmode sample-hold
-attr recordingmode vector
-attr source radioChannelChanged
-attr title "Radio channel"
-vector 423 Smarthome.securityCamera.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsInterfaceDown(packetDropped)
-attr title "packet drops: interface down, packetBytes"
-vector 424 Smarthome.securityCamera.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoCarrier(packetDropped)
-attr title "packet drops: no carrier, packetBytes"
-vector 425 Smarthome.securityCamera.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
-attr title "packet drop: address resolution failed, packetBytes"
-vector 426 Smarthome.securityCamera.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsHopLimitReached(packetDropped)
-attr title "packet drop: hop limit reached, packetBytes"
-vector 427 Smarthome.securityCamera.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsForwardingDisabled(packetDropped)
-attr title "packet drop: forwarding disabled, packetBytes"
-vector 428 Smarthome.securityCamera.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoInterfaceFound(packetDropped)
-attr title "packet drop: no interface found, packetBytes"
-vector 429 Smarthome.securityCamera.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsNoRouteFound(packetDropped)
-attr title "packet drop: no route found, packetBytes"
-vector 430 Smarthome.securityCamera.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetDropReasonIsUndefined(packetDropped)
-attr title "packet drop: undefined, packetBytes"
-vector 431 Smarthome.securityCamera.ipv4.arp arpRequestSent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpRequestSent
-attr title "ARP request sent, packetBytes"
-vector 432 Smarthome.securityCamera.ipv4.arp arpReplySent:vector(packetBytes) ETV
-attr recordingmode vector(packetBytes)
-attr source arpReplySent
-attr title "ARP replies sent, packetBytes"
-vector 433 Smarthome.securityCamera.udp packetSent:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetSent
-attr title "packets sent, packetBytes"
-vector 434 Smarthome.securityCamera.udp packetReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
-vector 435 Smarthome.securityCamera.udp passedUpPk:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetSentToUpper
-attr title "packets passed up, count"
-vector 436 Smarthome.securityCamera.udp droppedPkWrongPort:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetDropReasonIsNoPortFound(packetDropped)
-attr title "packets dropped (wrong port), count"
-vector 437 Smarthome.securityCamera.udp droppedPkBadChecksum:vector(count) ETV
-attr interpolationmode none
-attr recordingmode vector(count)
-attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
-attr title "packets dropped (checksum error), count"
-vector 438 Smarthome.securityCamera.app[0] packetReceived:vector(packetBytes) ETV
-attr interpolationmode none
-attr recordingmode vector(packetBytes)
-attr source packetReceived
-attr title "packets received, packetBytes"
-vector 439 Smarthome.securityCamera.app[0] throughput:vector ETV
+vector 217 Smarthome.lamp.app[1] throughput:vector ETV
 attr recordingmode vector
 attr source throughput(packetReceived)
 attr title throughput
 attr unit bps
-vector 440 Smarthome.securityCamera.app[0] endToEndDelay:vector ETV
+vector 218 Smarthome.lamp.app[1] endToEndDelay:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source dataAge(packetReceived)
 attr title "end-to-end delay"
 attr unit s
-vector 441 Smarthome.securityCamera.app[0] rcvdPkSeqNo:vector ETV
+vector 219 Smarthome.lamp.app[1] rcvdPkSeqNo:vector ETV
 attr interpolationmode none
 attr recordingmode vector
 attr source appPkSeqNo(packetReceived)
 attr title "received packet sequence number"
-0	114157 327 0 317 0 0.247766511166 17 0 1 6 6
-1	114484 339 0 317 0 0.247766511166 17 0 384 2304 884736
-2	114823 159 14 317 0.047766511166 0.247766511166 6 0 0.00055 0.00145 7.147e-07
-3	114982 153 12 315 0.047766511166 0.247766511166 6 384 384 2304 884736
-4	115135 32 64 254 0.1 0.2 2 3840 11520 15360 147456000
-5	115167 153 14 317 0.047766511166 0.247766511166 6 384 384 2304 884736
-6	115320 32 78 265 0.1 0.2 2 3840 11520 15360 147456000
-11	115352 169 22 304 0.047812511166 0.215712854491 5 4.6e-05 9.159873e-05 0.000366559386 2.9359634905696e-08
-12	115521 290 0 317 0 0.247766511166 13 0 1 6 6
-13	115811 152 12 315 0.047766511166 0.247766511166 6 6 25 98 1844
-14	115963 314 0 316 0 0.247766511166 14 0 1 6 6
-15	116277 1440 0 318 0 0.247766511166 60 0 2 24 48
-17	117717 11 0 0 0 0 1 31 31 31 961
-18	117728 127 22 273 0.047812511166 0.215667255761 5 48 48 240 11520
-19	117855 76 86 273 0.117608661921 0.215667255761 3 48 48 144 6912
-20	117931 51 22 138 0.047812511166 0.147812511166 2 48 48 96 4608
-21	117982 51 22 138 0.047812511166 0.147812511166 2 48 48 96 4608
-23	118033 127 22 273 0.047812511166 0.215667255761 5 48 48 240 11520
-24	118160 153 62 304 0.117052661921 0.215712854491 6 14 32 138 3660
-25	118313 77 115 304 0.117654200327 0.215712854491 3 14 14 42 588
-26	118390 76 62 252 0.117052661921 0.215071255761 3 32 32 96 3072
-27	118466 76 62 252 0.117052661921 0.215071255761 3 32 32 96 3072
-29	118542 153 62 304 0.117052661921 0.215712854491 6 14 32 138 3660
-34	118695 290 0 317 0 0.247766511166 13 0 1 6 6
-35	118985 189 14 317 0.047766511166 0.247766511166 6 24000000 24000000 144000000 3.456e+15
-36	119174 238 86 294 0.117608661921 0.215711255761 9 0 4.4e-05 0.000132 5.808e-09
-38	119412 153 14 317 0.047766511166 0.247766511166 6 48 48 288 13824
-40	119565 153 62 304 0.117052661921 0.215712854491 6 14 32 138 3660
-48	119718 299 0 318 0 0.247766511166 14 0 3 30 78
-49	120017 573 0 318 0 0.247766511166 24 0 3 30 66
-50	120590 538 15 319 0.047766511166 0.247766511166 22 0 2 23 35
-51	121128 10 0 0 0 0 1 0 0 0 0
-61	121138 50 0 0 0 0 5 0 0 0 0
-62	121188 50 0 0 0 0 5 0 0 0 0
-73	121238 20 0 0 0 0 2 0 0 0 0
-75	121258 20 0 0 0 0 2 0 0 0 0
-76	121278 1102 0 301 0 0.215712815915 46 0 0 0 0
-78	122380 11 0 0 0 0 1 31 31 31 961
-85	122391 128 37 249 0.047813792091 0.215071217185 5 32 48 192 7680
-87	122519 128 37 249 0.047813792091 0.215071217185 5 32 48 192 7680
-88	122647 128 37 249 0.047813792091 0.215071217185 5 32 48 192 7680
-90	122775 128 37 249 0.047813792091 0.215071217185 5 32 48 192 7680
-91	122903 153 98 302 0.117609942846 0.215712815915 6 14 48 186 7500
-92	123056 153 98 302 0.117609942846 0.215712815915 6 14 48 186 7500
-95	123209 20 0 0 0 0 2 0 0 0 0
-97	123229 241 98 300 0.117609942846 0.215712536686 9 0 4.4e-05 0.000132 5.808e-09
-101	123470 292 37 302 0.047813792091 0.215712815915 11 14 48 378 15180
-102	123762 159 98 302 0.117609942846 0.215712815915 6 14 48 186 7500
-104	123921 159 98 302 0.117609942846 0.215712815915 6 14 48 186 7500
-109	124080 33 0 0 0 0 3 0 2 2 4
-110	124113 573 0 301 0 0.215712815915 23 1 3 45 111
-112	124686 11 0 0 0 0 1 0 0 0 0
-125	124697 11 0 0 0 0 1 0 0 0 0
-126	124708 11 0 0 0 0 1 0 0 0 0
-127	124719 11 0 0 0 0 1 0 0 0 0
-137	124730 24 7 7 0.017013892718 0.017013892718 1 1 1 1 1
-140	124754 105 0 51 0 0.117013892718 7 0 1 1 1
-141	124859 107 0 51 0 0.117013892718 7 0 256 256 65536
-142	124966 25 51 51 0.117013892718 0.117013892718 1 0 0 0 0
-143	124991 27 49 49 0.117013892718 0.117013892718 1 256 256 256 65536
-144	125018 14 49 49 0.1 0.1 1 0 0 0 0
-145	125032 27 51 51 0.117013892718 0.117013892718 1 256 256 256 65536
-146	125059 14 51 51 0.1 0.1 1 0 0 0 0
-151	125073 31 59 59 0.117051892718 0.117051892718 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
-152	125104 72 0 59 0 0.117051892718 4 0 1 1 1
-153	125176 25 49 49 0.117013892718 0.117013892718 1 7 7 7 49
-154	125201 72 0 50 0 0.117013892718 4 0 1 1 1
-155	125273 1254 0 305 0 0.215713105307 50 0 2 4 8
-157	126527 12 0 0 0 0 1 31 31 31 961
-158	126539 53 59 109 0.117051892718 0.117653431124 2 14 32 46 1220
-159	126592 27 109 109 0.117653431124 0.117653431124 1 14 14 14 196
-160	126619 26 59 59 0.117051892718 0.117051892718 1 32 32 32 1024
-161	126645 26 59 59 0.117051892718 0.117051892718 1 32 32 32 1024
-163	126671 53 59 109 0.117051892718 0.117653431124 2 14 32 46 1220
-164	126724 133 28 256 0.047813280369 0.215071506577 5 32 48 208 8960
-165	126857 26 91 91 0.117609431124 0.117609431124 1 48 48 48 2304
-166	126883 107 28 256 0.047813280369 0.215071506577 4 32 48 160 6656
-167	126990 107 28 256 0.047813280369 0.215071506577 4 32 48 160 6656
-169	127097 133 28 256 0.047813280369 0.215071506577 5 32 48 208 8960
-170	127230 108 200 306 0.182272368683 0.215713105307 4 14 48 124 5000
-171	127338 108 200 306 0.182272368683 0.215713105307 4 14 48 124 5000
-174	127446 72 0 59 0 0.117051892718 4 0 1 1 1
-175	127518 64 51 91 0.117013892718 0.117609431124 2 24000000 24000000 48000000 1.152e+15
-176	127582 168 200 296 0.182272368683 0.215712024964 6 0 4.4e-05 8.8e-05 3.872e-09
-178	127750 52 51 99 0.117013892718 0.117619431124 2 14 32 46 1220
-180	127802 241 28 306 0.047813280369 0.215713105307 9 14 48 332 13960
-181	128043 108 200 306 0.182272368683 0.215713105307 4 14 48 124 5000
-183	128151 108 200 306 0.182272368683 0.215713105307 4 14 48 124 5000
-188	128259 135 0 110 0 0.117653431124 7 0 3 12 30
-189	128394 577 0 305 0 0.215713105307 23 0 3 39 93
-190	128971 204 52 110 0.117013892718 0.117653431124 8 0 2 8 12
-191	129175 36 0 10 0 0.017013892718 2 0 0 0 0
-204	129211 11 0 0 0 0 1 0 0 0 0
-205	129222 11 0 0 0 0 1 0 0 0 0
-206	129233 11 0 0 0 0 1 0 0 0 0
-218	129244 55 0 0 0 0 5 0 0 0 0
-219	129299 55 0 0 0 0 5 0 0 0 0
-230	129354 22 0 0 0 0 2 0 0 0 0
-232	129376 22 0 0 0 0 2 0 0 0 0
-233	129398 1150 0 309 0 0.215713923624 46 0 0 0 0
-235	130548 12 0 0 0 0 1 31 31 31 961
-242	130560 133 34 262 0.047813640023 0.215072324894 5 32 48 192 7680
-244	130693 133 34 262 0.047813640023 0.215072324894 5 32 48 192 7680
-245	130826 133 34 262 0.047813640023 0.215072324894 5 32 48 192 7680
-247	130959 133 34 262 0.047813640023 0.215072324894 5 32 48 192 7680
-248	131092 160 96 310 0.117609790778 0.215713923624 6 14 48 186 7500
-249	131252 160 96 310 0.117609790778 0.215713923624 6 14 48 186 7500
-252	131412 22 0 0 0 0 2 0 0 0 0
-254	131434 250 96 299 0.117609790778 0.215712384618 9 0 4.4e-05 0.000132 5.808e-09
-258	131684 293 34 310 0.047813640023 0.215713923624 11 14 48 378 15180
-259	131977 160 96 310 0.117609790778 0.215713923624 6 14 48 186 7500
-261	132137 160 96 310 0.117609790778 0.215713923624 6 14 48 186 7500
-266	132297 33 0 0 0 0 3 0 2 2 4
-267	132330 575 0 309 0 0.215713923624 23 1 3 45 111
-269	132905 11 0 0 0 0 1 0 0 0 0
-282	132916 11 0 0 0 0 1 0 0 0 0
-283	132927 11 0 0 0 0 1 0 0 0 0
-284	132938 11 0 0 0 0 1 0 0 0 0
-294	132949 25 40 40 0.081796888355 0.081796888355 1 1 1 1 1
-297	132974 107 0 159 0 0.181796888355 7 0 1 1 1
-298	133081 109 0 159 0 0.181796888355 7 0 256 256 65536
-299	133190 26 159 159 0.181796888355 0.181796888355 1 0 0 0 0
-300	133216 28 157 157 0.181796888355 0.181796888355 1 256 256 256 65536
-301	133244 15 157 157 0.1 0.1 1 0 0 0 0
-302	133259 28 159 159 0.181796888355 0.181796888355 1 256 256 256 65536
-303	133287 15 159 159 0.1 0.1 1 0 0 0 0
-308	133302 32 167 167 0.181834888355 0.181834888355 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
-309	133334 74 0 167 0 0.181834888355 4 0 1 1 1
-310	133408 27 157 157 0.181796888355 0.181796888355 1 24 24 24 576
-311	133435 74 0 158 0 0.181796888355 4 0 1 1 1
-312	133509 1252 0 307 0 0.215713265964 50 0 2 4 8
-314	134761 12 0 0 0 0 1 31 31 31 961
-315	134773 54 167 216 0.181834888355 0.182316310605 2 14 32 46 1220
-316	134827 27 216 216 0.182316310605 0.182316310605 1 14 14 14 196
-317	134854 27 167 167 0.181834888355 0.181834888355 1 32 32 32 1024
-318	134881 27 167 167 0.181834888355 0.181834888355 1 32 32 32 1024
-320	134908 54 167 216 0.181834888355 0.182316310605 2 14 32 46 1220
-321	134962 133 25 259 0.047813222291 0.215071667234 5 32 48 208 8960
-322	135095 27 197 197 0.182272310605 0.182272310605 1 48 48 48 2304
-323	135122 106 25 259 0.047813222291 0.215071667234 4 32 48 160 6656
-324	135228 106 25 259 0.047813222291 0.215071667234 4 32 48 160 6656
-326	135334 133 25 259 0.047813222291 0.215071667234 5 32 48 208 8960
-327	135467 105 89 308 0.117609373046 0.215713265964 4 14 48 124 5000
-328	135572 105 89 308 0.117609373046 0.215713265964 4 14 48 124 5000
-331	135677 74 0 167 0 0.181834888355 4 0 1 1 1
-332	135751 66 159 197 0.181796888355 0.182272310605 2 24000000 24000000 48000000 1.152e+15
-333	135817 166 89 295 0.117609373046 0.215711966886 6 0 4.4e-05 8.8e-05 3.872e-09
-335	135983 54 159 207 0.181796888355 0.182282310605 2 14 32 46 1220
-337	136037 238 25 308 0.047813222291 0.215713265964 9 14 48 332 13960
-338	136275 105 89 308 0.117609373046 0.215713265964 4 14 48 124 5000
-340	136380 105 89 308 0.117609373046 0.215713265964 4 14 48 124 5000
-345	136485 137 0 217 0 0.182316310605 7 0 3 12 30
-346	136622 573 0 307 0 0.215713265964 23 0 3 39 93
-347	137195 208 160 217 0.181796888355 0.182316310605 8 0 2 8 12
-348	137403 36 0 43 0 0.081796888355 2 0 0 0 0
-361	137439 11 0 0 0 0 1 0 0 0 0
-362	137450 11 0 0 0 0 1 0 0 0 0
-363	137461 11 0 0 0 0 1 0 0 0 0
-368	137472 25 44 44 0.115032456396 0.115032456396 1 1 1 1 1
-371	137497 107 0 238 0 0.215032456396 7 0 1 1 1
-372	137604 109 0 238 0 0.215032456396 7 0 256 256 65536
-373	137713 26 238 238 0.215032456396 0.215032456396 1 0 0 0 0
-374	137739 28 236 236 0.215032456396 0.215032456396 1 256 256 256 65536
-375	137767 30 236 236 0.1 0.2 2 0 0 0 0
-376	137797 28 238 238 0.215032456396 0.215032456396 1 256 256 256 65536
-377	137825 30 238 238 0.1 0.2 2 0 0 0 0
-382	137855 32 246 246 0.215070456396 0.215070456396 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
-383	137887 74 0 246 0 0.215070456396 4 0 1 1 1
-384	137961 26 236 236 0.215032456396 0.215032456396 1 5 5 5 25
-385	137987 74 0 237 0 0.215032456396 4 0 1 1 1
-386	138061 1256 0 298 0 0.215712055126 50 0 2 4 8
-388	139317 12 0 0 0 0 1 31 31 31 961
-389	139329 54 246 297 0.215070456396 0.215712055126 2 14 32 46 1220
-390	139383 27 297 297 0.215712055126 0.215712055126 1 14 14 14 196
-391	139410 27 246 246 0.215070456396 0.215070456396 1 32 32 32 1024
-392	139437 27 246 246 0.215070456396 0.215070456396 1 32 32 32 1024
-394	139464 54 246 297 0.215070456396 0.215712055126 2 14 32 46 1220
-395	139518 133 31 280 0.047813310531 0.215668055126 5 32 48 208 8960
-396	139651 27 280 280 0.215668055126 0.215668055126 1 48 48 48 2304
-397	139678 106 31 177 0.047813310531 0.181836099193 4 32 48 160 6656
-398	139784 106 31 177 0.047813310531 0.181836099193 4 32 48 160 6656
-400	139890 133 31 280 0.047813310531 0.215668055126 5 32 48 208 8960
-401	140023 107 94 227 0.117609461286 0.182317521443 4 14 48 124 5000
-402	140130 107 94 227 0.117609461286 0.182317521443 4 14 48 124 5000
-405	140237 74 0 246 0 0.215070456396 4 0 1 1 1
-406	140311 66 238 280 0.215032456396 0.215668055126 2 24000000 24000000 48000000 1.152e+15
-407	140377 166 94 219 0.117609461286 0.182316398845 6 0 4.4e-05 8.8e-05 3.872e-09
-409	140543 54 238 286 0.215032456396 0.215678055126 2 14 32 46 1220
-411	140597 240 31 280 0.047813310531 0.215668055126 9 14 48 332 13960
-412	140837 107 94 227 0.117609461286 0.182317521443 4 14 48 124 5000
-414	140944 107 94 227 0.117609461286 0.182317521443 4 14 48 124 5000
-419	141051 137 0 298 0 0.215712055126 7 0 3 12 30
-420	141188 577 0 298 0 0.215712055126 23 0 3 39 93
-421	141765 208 239 298 0.215032456396 0.215712055126 8 0 2 8 12
-422	141973 36 0 47 0 0.115032456396 2 0 0 0 0
-435	142009 11 0 0 0 0 1 0 0 0 0
-436	142020 11 0 0 0 0 1 0 0 0 0
-437	142031 11 0 0 0 0 1 0 0 0 0
+vector 220 Smarthome.thermostat.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 221 Smarthome.thermostat.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 222 Smarthome.thermostat.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 223 Smarthome.thermostat.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 224 Smarthome.thermostat.wlan[0].agent sentRequest:vector ETV
+attr recordingmode vector
+attr title "sent requests"
+vector 225 Smarthome.thermostat.wlan[0].agent acceptConfirm:vector ETV
+attr recordingmode vector
+attr title "accepted confirms"
+vector 226 Smarthome.thermostat.wlan[0].agent dropConfirm:vector ETV
+attr recordingmode vector
+attr title "dropped confirms"
+vector 227 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 228 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 229 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 230 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 231 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 232 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 233 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 234 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 235 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 236 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 237 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 238 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetDequeued)
+attr title "queueing times"
+vector 239 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
+attr title "queue length"
+vector 240 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "backoff periods"
+vector 241 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source warmup(count(backoffStarted)-count(backoffStopped))
+attr title "backoff active"
+vector 242 Smarthome.thermostat.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
+attr enum IDLE,DEFER,IFS_AND_BACKOFF
+attr interpolationmode none
+attr recordingmode vector
+attr title "contention state changed"
+attr type enum
+vector 243 Smarthome.thermostat.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsDuplicateDetected(packetDropped)
+attr title "packet drops: duplicate detected, packetBytes"
+vector 244 Smarthome.thermostat.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr title "contention window"
+vector 245 Smarthome.thermostat.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent, packetBytes"
+vector 246 Smarthome.thermostat.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Unicast(packetSentToPeer)
+attr title "packets sent: unicast, packetBytes"
+vector 247 Smarthome.thermostat.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Multicast(packetSentToPeer)
+attr title "packets sent: multicast, packetBytes"
+vector 248 Smarthome.thermostat.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Broadcast(packetSentToPeer)
+attr title "packets sent: broadcast , packetBytes"
+vector 249 Smarthome.thermostat.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Retry(packetSentToPeer)
+attr title "packets sent: with retry, packetBytes"
+vector 250 Smarthome.thermostat.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211NotRetry(packetSentToPeer)
+attr title "packets sent: without retry, packetBytes"
+vector 251 Smarthome.thermostat.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received, packetBytes"
+vector 252 Smarthome.thermostat.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Unicast(packetReceivedFromPeer)
+attr title "packets received: unicast, packetBytes"
+vector 253 Smarthome.thermostat.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Multicast(packetReceivedFromPeer)
+attr title "packets received: multicast, packetBytes"
+vector 254 Smarthome.thermostat.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Broadcast(packetReceivedFromPeer)
+attr title "packets received: broadcast, packetBytes"
+vector 255 Smarthome.thermostat.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Retry(packetReceivedFromPeer)
+attr title "packets received: with retry, packetBytes"
+vector 256 Smarthome.thermostat.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211NotRetry(packetReceivedFromPeer)
+attr title "packets received: without retry, packetBytes"
+vector 257 Smarthome.thermostat.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packet drops, packetBytes"
+vector 258 Smarthome.thermostat.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drops: not addressed to us, packetBytes"
+vector 259 Smarthome.thermostat.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drops: queue overflow, packetBytes"
+vector 260 Smarthome.thermostat.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drops: retry limit reached, packetBytes"
+vector 261 Smarthome.thermostat.wlan[0].mac.dcf frameSequenceActive:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
+attr title "frame sequence active"
+vector 262 Smarthome.thermostat.wlan[0].mac.dcf datarateSelected:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "datarates selected"
+vector 263 Smarthome.thermostat.wlan[0].mac.rx nav:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source navChanged
+attr title "network allocation vector"
+vector 264 Smarthome.thermostat.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent to upper layer, packetBytes"
+vector 265 Smarthome.thermostat.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent to lower layer, packetBytes"
+vector 266 Smarthome.thermostat.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received from upper layer, packetBytes"
+vector 267 Smarthome.thermostat.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received from lower layer, packetBytes"
+vector 268 Smarthome.thermostat.wlan[0].mac packetDrop:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packet drops, packetBytes"
+vector 269 Smarthome.thermostat.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drops: incorrectly received, packetBytes"
+vector 270 Smarthome.thermostat.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drops: not addressed to us, packetBytes"
+vector 271 Smarthome.thermostat.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drops: queue overflow, packetBytes"
+vector 272 Smarthome.thermostat.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drops: retry limit reached, packetBytes"
+vector 273 Smarthome.thermostat.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsDuplicateDetected(packetDropped)
+attr title "packet drops: duplicate detected, packetBytes"
+vector 274 Smarthome.thermostat.wlan[0].mac packetDropOther:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsOther(packetDropped)
+attr title "packet drops: other, packetBytes"
+vector 275 Smarthome.thermostat.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 276 Smarthome.thermostat.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 277 Smarthome.thermostat.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 278 Smarthome.thermostat.wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioChannelChanged
+attr title "Radio channel"
+vector 279 Smarthome.thermostat.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 280 Smarthome.thermostat.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 281 Smarthome.thermostat.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 282 Smarthome.thermostat.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 283 Smarthome.thermostat.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 284 Smarthome.thermostat.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 285 Smarthome.thermostat.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 286 Smarthome.thermostat.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 287 Smarthome.thermostat.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 288 Smarthome.thermostat.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 289 Smarthome.thermostat.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 290 Smarthome.thermostat.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 291 Smarthome.thermostat.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 292 Smarthome.thermostat.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 293 Smarthome.thermostat.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 294 Smarthome.thermostat.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 295 Smarthome.thermostat.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 296 Smarthome.thermostat.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 297 Smarthome.thermostat.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 298 Smarthome.thermostat.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 299 Smarthome.thermostat.app[1] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 300 Smarthome.thermostat.app[1] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 301 Smarthome.thermostat.app[1] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 302 Smarthome.thermostat.app[1] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 303 Smarthome.smartTV.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 304 Smarthome.smartTV.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 305 Smarthome.smartTV.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 306 Smarthome.smartTV.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 307 Smarthome.smartTV.wlan[0].agent sentRequest:vector ETV
+attr recordingmode vector
+attr title "sent requests"
+vector 308 Smarthome.smartTV.wlan[0].agent acceptConfirm:vector ETV
+attr recordingmode vector
+attr title "accepted confirms"
+vector 309 Smarthome.smartTV.wlan[0].agent dropConfirm:vector ETV
+attr recordingmode vector
+attr title "dropped confirms"
+vector 310 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 311 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 312 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 313 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 314 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 315 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 316 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 317 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 318 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 319 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 320 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 321 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetDequeued)
+attr title "queueing times"
+vector 322 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
+attr title "queue length"
+vector 323 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "backoff periods"
+vector 324 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source warmup(count(backoffStarted)-count(backoffStopped))
+attr title "backoff active"
+vector 325 Smarthome.smartTV.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
+attr enum IDLE,DEFER,IFS_AND_BACKOFF
+attr interpolationmode none
+attr recordingmode vector
+attr title "contention state changed"
+attr type enum
+vector 326 Smarthome.smartTV.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsDuplicateDetected(packetDropped)
+attr title "packet drops: duplicate detected, packetBytes"
+vector 327 Smarthome.smartTV.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr title "contention window"
+vector 328 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent, packetBytes"
+vector 329 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Unicast(packetSentToPeer)
+attr title "packets sent: unicast, packetBytes"
+vector 330 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Multicast(packetSentToPeer)
+attr title "packets sent: multicast, packetBytes"
+vector 331 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Broadcast(packetSentToPeer)
+attr title "packets sent: broadcast , packetBytes"
+vector 332 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Retry(packetSentToPeer)
+attr title "packets sent: with retry, packetBytes"
+vector 333 Smarthome.smartTV.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211NotRetry(packetSentToPeer)
+attr title "packets sent: without retry, packetBytes"
+vector 334 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received, packetBytes"
+vector 335 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Unicast(packetReceivedFromPeer)
+attr title "packets received: unicast, packetBytes"
+vector 336 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Multicast(packetReceivedFromPeer)
+attr title "packets received: multicast, packetBytes"
+vector 337 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Broadcast(packetReceivedFromPeer)
+attr title "packets received: broadcast, packetBytes"
+vector 338 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Retry(packetReceivedFromPeer)
+attr title "packets received: with retry, packetBytes"
+vector 339 Smarthome.smartTV.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211NotRetry(packetReceivedFromPeer)
+attr title "packets received: without retry, packetBytes"
+vector 340 Smarthome.smartTV.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packet drops, packetBytes"
+vector 341 Smarthome.smartTV.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drops: not addressed to us, packetBytes"
+vector 342 Smarthome.smartTV.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drops: queue overflow, packetBytes"
+vector 343 Smarthome.smartTV.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drops: retry limit reached, packetBytes"
+vector 344 Smarthome.smartTV.wlan[0].mac.dcf frameSequenceActive:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
+attr title "frame sequence active"
+vector 345 Smarthome.smartTV.wlan[0].mac.dcf datarateSelected:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "datarates selected"
+vector 346 Smarthome.smartTV.wlan[0].mac.rx nav:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source navChanged
+attr title "network allocation vector"
+vector 347 Smarthome.smartTV.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent to upper layer, packetBytes"
+vector 348 Smarthome.smartTV.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent to lower layer, packetBytes"
+vector 349 Smarthome.smartTV.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received from upper layer, packetBytes"
+vector 350 Smarthome.smartTV.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received from lower layer, packetBytes"
+vector 351 Smarthome.smartTV.wlan[0].mac packetDrop:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packet drops, packetBytes"
+vector 352 Smarthome.smartTV.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drops: incorrectly received, packetBytes"
+vector 353 Smarthome.smartTV.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drops: not addressed to us, packetBytes"
+vector 354 Smarthome.smartTV.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drops: queue overflow, packetBytes"
+vector 355 Smarthome.smartTV.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drops: retry limit reached, packetBytes"
+vector 356 Smarthome.smartTV.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsDuplicateDetected(packetDropped)
+attr title "packet drops: duplicate detected, packetBytes"
+vector 357 Smarthome.smartTV.wlan[0].mac packetDropOther:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsOther(packetDropped)
+attr title "packet drops: other, packetBytes"
+vector 358 Smarthome.smartTV.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 359 Smarthome.smartTV.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 360 Smarthome.smartTV.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 361 Smarthome.smartTV.wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioChannelChanged
+attr title "Radio channel"
+vector 362 Smarthome.smartTV.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 363 Smarthome.smartTV.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 364 Smarthome.smartTV.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 365 Smarthome.smartTV.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 366 Smarthome.smartTV.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 367 Smarthome.smartTV.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 368 Smarthome.smartTV.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 369 Smarthome.smartTV.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 370 Smarthome.smartTV.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 371 Smarthome.smartTV.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 372 Smarthome.smartTV.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 373 Smarthome.smartTV.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 374 Smarthome.smartTV.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 375 Smarthome.smartTV.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 376 Smarthome.smartTV.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 377 Smarthome.smartTV.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 378 Smarthome.smartTV.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 379 Smarthome.smartTV.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 380 Smarthome.smartTV.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 381 Smarthome.smartTV.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 382 Smarthome.smartTV.app[1] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 383 Smarthome.smartTV.app[1] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 384 Smarthome.smartTV.app[1] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 385 Smarthome.smartTV.app[1] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 386 Smarthome.securityCamera.lo[0].lo rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 387 Smarthome.securityCamera.lo[0].lo passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 388 Smarthome.securityCamera.lo[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 389 Smarthome.securityCamera.lo[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 390 Smarthome.securityCamera.wlan[0].agent sentRequest:vector ETV
+attr recordingmode vector
+attr title "sent requests"
+vector 391 Smarthome.securityCamera.wlan[0].agent acceptConfirm:vector ETV
+attr recordingmode vector
+attr title "accepted confirms"
+vector 392 Smarthome.securityCamera.wlan[0].agent dropConfirm:vector ETV
+attr recordingmode vector
+attr title "dropped confirms"
+vector 393 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 394 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 395 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 396 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 397 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 398 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 399 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 400 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue droppedPacketLengthsQueueOverflow:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetDropReasonIsQueueOverflow(packetDropped))
+attr title "dropped packet lengths: queue overflow"
+attr unit b
+vector 401 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue flowQueueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(demuxFlow(packetPulled))
+attr title "flow queueing times"
+attr unit s
+vector 402 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue flowIncomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPushStarted)))
+attr title "flow specific incoming data rate"
+attr unit bps
+vector 403 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.pendingQueue flowOutgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(flowPacketLength(demuxFlow(packetPulled)))
+attr title "flow specific outgoing data rate"
+attr unit bps
+vector 404 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetDequeued)
+attr title "queueing times"
+vector 405 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(count(packetEnqueued) - count(packetDequeued))"
+attr title "queue length"
+vector 406 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "backoff periods"
+vector 407 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source warmup(count(backoffStarted)-count(backoffStopped))
+attr title "backoff active"
+vector 408 Smarthome.securityCamera.wlan[0].mac.dcf.channelAccess.contention stateChanged:vector ETV
+attr enum IDLE,DEFER,IFS_AND_BACKOFF
+attr interpolationmode none
+attr recordingmode vector
+attr title "contention state changed"
+attr type enum
+vector 409 Smarthome.securityCamera.wlan[0].mac.dcf.recipientMacDataService packetDropDuplicateDetected:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsDuplicateDetected(packetDropped)
+attr title "packet drops: duplicate detected, packetBytes"
+vector 410 Smarthome.securityCamera.wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr title "contention window"
+vector 411 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent, packetBytes"
+vector 412 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Unicast(packetSentToPeer)
+attr title "packets sent: unicast, packetBytes"
+vector 413 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Multicast(packetSentToPeer)
+attr title "packets sent: multicast, packetBytes"
+vector 414 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Broadcast(packetSentToPeer)
+attr title "packets sent: broadcast , packetBytes"
+vector 415 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerWithRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Retry(packetSentToPeer)
+attr title "packets sent: with retry, packetBytes"
+vector 416 Smarthome.securityCamera.wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211NotRetry(packetSentToPeer)
+attr title "packets sent: without retry, packetBytes"
+vector 417 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received, packetBytes"
+vector 418 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Unicast(packetReceivedFromPeer)
+attr title "packets received: unicast, packetBytes"
+vector 419 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Multicast(packetReceivedFromPeer)
+attr title "packets received: multicast, packetBytes"
+vector 420 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Broadcast(packetReceivedFromPeer)
+attr title "packets received: broadcast, packetBytes"
+vector 421 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerWithRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211Retry(packetReceivedFromPeer)
+attr title "packets received: with retry, packetBytes"
+vector 422 Smarthome.securityCamera.wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source ieee80211NotRetry(packetReceivedFromPeer)
+attr title "packets received: without retry, packetBytes"
+vector 423 Smarthome.securityCamera.wlan[0].mac.dcf packetDrop:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packet drops, packetBytes"
+vector 424 Smarthome.securityCamera.wlan[0].mac.dcf packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drops: not addressed to us, packetBytes"
+vector 425 Smarthome.securityCamera.wlan[0].mac.dcf packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drops: queue overflow, packetBytes"
+vector 426 Smarthome.securityCamera.wlan[0].mac.dcf packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drops: retry limit reached, packetBytes"
+vector 427 Smarthome.securityCamera.wlan[0].mac.dcf frameSequenceActive:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source warmup(count(frameSequenceStarted)-count(frameSequenceFinished))
+attr title "frame sequence active"
+vector 428 Smarthome.securityCamera.wlan[0].mac.dcf datarateSelected:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr title "datarates selected"
+vector 429 Smarthome.securityCamera.wlan[0].mac.rx nav:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source navChanged
+attr title "network allocation vector"
+vector 430 Smarthome.securityCamera.wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent to upper layer, packetBytes"
+vector 431 Smarthome.securityCamera.wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets sent to lower layer, packetBytes"
+vector 432 Smarthome.securityCamera.wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received from upper layer, packetBytes"
+vector 433 Smarthome.securityCamera.wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr title "packets received from lower layer, packetBytes"
+vector 434 Smarthome.securityCamera.wlan[0].mac packetDrop:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropped
+attr title "packet drops, packetBytes"
+vector 435 Smarthome.securityCamera.wlan[0].mac packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drops: incorrectly received, packetBytes"
+vector 436 Smarthome.securityCamera.wlan[0].mac packetDropNotAddressedToUs:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNotAddressedToUs(packetDropped)
+attr title "packet drops: not addressed to us, packetBytes"
+vector 437 Smarthome.securityCamera.wlan[0].mac packetDropQueueOverflow:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsQueueOverflow(packetDropped)
+attr title "packet drops: queue overflow, packetBytes"
+vector 438 Smarthome.securityCamera.wlan[0].mac packetDropRetryLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsRetryLimitReached(packetDropped)
+attr title "packet drops: retry limit reached, packetBytes"
+vector 439 Smarthome.securityCamera.wlan[0].mac packetDropDuplicateDetected:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsDuplicateDetected(packetDropped)
+attr title "packet drops: duplicate detected, packetBytes"
+vector 440 Smarthome.securityCamera.wlan[0].mac packetDropOther:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsOther(packetDropped)
+attr title "packet drops: other, packetBytes"
+vector 441 Smarthome.securityCamera.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 442 Smarthome.securityCamera.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 443 Smarthome.securityCamera.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 444 Smarthome.securityCamera.wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioChannelChanged
+attr title "Radio channel"
+vector 445 Smarthome.securityCamera.wlan[0] packetDropInterfaceDown:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsInterfaceDown(packetDropped)
+attr title "packet drops: interface down, packetBytes"
+vector 446 Smarthome.securityCamera.wlan[0] packetDropNoCarrier:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoCarrier(packetDropped)
+attr title "packet drops: no carrier, packetBytes"
+vector 447 Smarthome.securityCamera.ipv4.ip packetDropAddressResolutionFailed:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsAddressResolutionFailed(packetDropped)
+attr title "packet drop: address resolution failed, packetBytes"
+vector 448 Smarthome.securityCamera.ipv4.ip packetDropHopLimitReached:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsHopLimitReached(packetDropped)
+attr title "packet drop: hop limit reached, packetBytes"
+vector 449 Smarthome.securityCamera.ipv4.ip packetDropForwardingDisabled:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsForwardingDisabled(packetDropped)
+attr title "packet drop: forwarding disabled, packetBytes"
+vector 450 Smarthome.securityCamera.ipv4.ip packetDropNoInterfaceFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoInterfaceFound(packetDropped)
+attr title "packet drop: no interface found, packetBytes"
+vector 451 Smarthome.securityCamera.ipv4.ip packetDropNoRouteFound:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsNoRouteFound(packetDropped)
+attr title "packet drop: no route found, packetBytes"
+vector 452 Smarthome.securityCamera.ipv4.ip packetDropUndefined:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsUndefined(packetDropped)
+attr title "packet drop: undefined, packetBytes"
+vector 453 Smarthome.securityCamera.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 454 Smarthome.securityCamera.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 455 Smarthome.securityCamera.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 456 Smarthome.securityCamera.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 457 Smarthome.securityCamera.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 458 Smarthome.securityCamera.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 459 Smarthome.securityCamera.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 460 Smarthome.securityCamera.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 461 Smarthome.securityCamera.app[0] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 462 Smarthome.securityCamera.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 463 Smarthome.securityCamera.app[0] rcvdPkLifetime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "received packet lifetime"
+attr unit s
+vector 464 Smarthome.securityCamera.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+vector 465 Smarthome.securityCamera.app[1] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 466 Smarthome.securityCamera.app[1] throughput:vector ETV
+attr recordingmode vector
+attr source throughput(packetReceived)
+attr title throughput
+attr unit bps
+vector 467 Smarthome.securityCamera.app[1] endToEndDelay:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source dataAge(packetReceived)
+attr title "end-to-end delay"
+attr unit s
+vector 468 Smarthome.securityCamera.app[1] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number"
+0	121586 447 0 517 0 0.352889492153 22 0 1 9 9
+1	122033 465 0 517 0 0.352889492153 22 0 384 3456 1327104
+2	122498 219 19 467 0.052889492153 0.343839417304 8 0 0.00037 0.00121 3.309e-07
+3	122717 231 17 517 0.052889492153 0.352889492153 9 384 384 3456 1327104
+4	122948 48 58 376 0.1 0.3 3 3840 11520 23040 206438400
+5	122996 205 19 467 0.052889492153 0.343839417304 8 384 384 3072 1179648
+6	123201 48 60 390 0.1 0.3 3 3840 11520 23040 206438400
+11	123249 272 27 506 0.052935492153 0.343931016034 8 4.6e-05 9.256185e-05 0.00059737895 4.8554816773625e-08
+12	123521 414 0 506 0 0.343931016034 18 0 1 8 8
+13	123935 228 17 517 0.052889492153 0.352889492153 9 5 30 136 2628
+14	124163 439 0 517 0 0.352889492153 19 0 1 9 9
+15	124602 2140 0 517 0 0.352889492153 88 0 2 34 68
+17	126742 11 0 0 0 0 1 31 31 31 961
+18	126753 205 27 475 0.052935492153 0.343885417304 8 48 48 384 18432
+19	126958 129 124 475 0.18203216928 0.343885417304 5 48 48 240 11520
+20	127087 76 27 338 0.052935492153 0.252935492153 3 48 48 144 6912
+21	127163 76 27 338 0.052935492153 0.252935492153 3 48 48 144 6912
+23	127239 205 27 475 0.052935492153 0.343885417304 8 48 48 384 18432
+24	127444 258 106 506 0.18183616928 0.343931016034 10 14 32 230 6100
+25	127702 129 157 506 0.18207873113 0.343931016034 5 14 14 70 980
+26	127831 129 106 454 0.18183616928 0.343689417304 5 32 32 160 5120
+27	127960 129 106 454 0.18183616928 0.343689417304 5 32 32 160 5120
+29	128089 258 106 506 0.18183616928 0.343931016034 10 14 32 230 6100
+34	128347 414 0 506 0 0.343931016034 18 0 1 8 8
+35	128761 253 19 467 0.052889492153 0.343839417304 8 24000000 24000000 192000000 4.608e+15
+36	129014 402 124 496 0.18203216928 0.343929417304 15 0 4.4e-05 0.00022 9.68e-09
+38	129416 205 19 467 0.052889492153 0.343839417304 8 48 48 384 18432
+40	129621 258 106 506 0.18183616928 0.343931016034 10 14 32 230 6100
+48	129879 424 0 476 0 0.343885417304 19 0 3 42 108
+49	130303 899 0 505 0 0.343931016034 37 0 3 49 109
+50	131202 788 20 476 0.052889492153 0.343885417304 32 0 2 32 48
+51	131990 10 0 0 0 0 1 0 0 0 0
+58	132000 24 45 45 0.081796888355 0.081796888355 1 1 1 1 1
+61	132024 98 0 89 0 0.181796888355 7 0 1 1 1
+62	132122 100 0 89 0 0.181796888355 7 0 256 256 65536
+63	132222 24 89 89 0.181796888355 0.181796888355 1 0 0 0 0
+64	132246 26 87 87 0.181796888355 0.181796888355 1 256 256 256 65536
+65	132272 13 87 87 0.1 0.1 1 0 0 0 0
+66	132285 26 89 89 0.181796888355 0.181796888355 1 256 256 256 65536
+67	132311 13 89 89 0.1 0.1 1 0 0 0 0
+72	132324 30 97 97 0.181834888355 0.181834888355 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
+73	132354 68 0 97 0 0.181834888355 4 0 1 1 1
+74	132422 25 87 87 0.181796888355 0.181796888355 1 17 17 17 289
+75	132447 68 0 88 0 0.181796888355 4 0 1 1 1
+76	132515 1904 0 503 0 0.343930977458 78 0 2 4 8
+78	134419 11 0 0 0 0 1 31 31 31 961
+79	134430 51 97 150 0.181834888355 0.182077450205 2 14 32 46 1220
+80	134481 26 150 150 0.182077450205 0.182077450205 1 14 14 14 196
+81	134507 25 97 97 0.181834888355 0.181834888355 1 32 32 32 1024
+82	134532 25 97 97 0.181834888355 0.181834888355 1 32 32 32 1024
+84	134557 51 97 150 0.181834888355 0.182077450205 2 14 32 46 1220
+85	134608 206 42 451 0.052936773078 0.343689378728 8 32 48 320 13312
+86	134814 26 135 135 0.182033450205 0.182033450205 1 48 48 48 2304
+87	134840 180 42 451 0.052936773078 0.343689378728 7 32 48 272 11008
+88	135020 180 42 451 0.052936773078 0.343689378728 7 32 48 272 11008
+90	135200 206 42 451 0.052936773078 0.343689378728 8 32 48 320 13312
+91	135406 208 215 504 0.215428506524 0.343930977458 8 14 48 248 10000
+92	135614 208 215 504 0.215428506524 0.343930977458 8 14 48 248 10000
+95	135822 68 0 97 0 0.181834888355 4 0 1 1 1
+96	135890 63 89 135 0.181796888355 0.182033450205 2 24000000 24000000 48000000 1.152e+15
+97	135953 324 215 502 0.215428506524 0.343930698229 12 0 4.4e-05 0.000176 7.744e-09
+99	136277 51 89 137 0.181796888355 0.182043450205 2 14 32 46 1220
+101	136328 430 42 504 0.052936773078 0.343930977458 16 14 48 568 23312
+102	136758 216 215 504 0.215428506524 0.343930977458 8 14 48 248 10000
+104	136974 216 215 504 0.215428506524 0.343930977458 8 14 48 248 10000
+109	137190 135 0 151 0 0.182077450205 7 0 3 12 30
+110	137325 941 0 503 0 0.343930977458 37 0 3 67 163
+111	138266 204 90 151 0.181796888355 0.182077450205 8 0 2 8 12
+112	138470 36 0 48 0 0.081796888355 2 0 0 0 0
+125	138506 11 0 0 0 0 1 0 0 0 0
+126	138517 11 0 0 0 0 1 0 0 0 0
+127	138528 11 0 0 0 0 1 0 0 0 0
+141	138539 25 49 49 0.115032456396 0.115032456396 1 1 1 1 1
+144	138564 107 0 168 0 0.215032456396 7 0 1 1 1
+145	138671 109 0 168 0 0.215032456396 7 0 256 256 65536
+146	138780 26 168 168 0.215032456396 0.215032456396 1 0 0 0 0
+147	138806 28 166 166 0.215032456396 0.215032456396 1 256 256 256 65536
+148	138834 30 166 166 0.1 0.2 2 0 0 0 0
+149	138864 28 168 168 0.215032456396 0.215032456396 1 256 256 256 65536
+150	138892 30 168 168 0.1 0.2 2 0 0 0 0
+155	138922 32 176 176 0.215070456396 0.215070456396 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
+156	138954 74 0 176 0 0.215070456396 4 0 1 1 1
+157	139028 27 166 166 0.215032456396 0.215032456396 1 25 25 25 625
+158	139055 74 0 167 0 0.215032456396 4 0 1 1 1
+159	139129 1982 0 507 0 0.34393126685 78 0 2 4 8
+161	141111 12 0 0 0 0 1 31 31 31 961
+162	141123 54 176 226 0.215070456396 0.215471994802 2 14 32 46 1220
+163	141177 27 226 226 0.215471994802 0.215471994802 1 14 14 14 196
+164	141204 27 176 176 0.215070456396 0.215070456396 1 32 32 32 1024
+165	141231 27 176 176 0.215070456396 0.215070456396 1 32 32 32 1024
+167	141258 54 176 226 0.215070456396 0.215471994802 2 14 32 46 1220
+168	141312 213 33 458 0.052936261356 0.34368966812 8 32 48 320 13312
+169	141525 27 208 208 0.215427994802 0.215427994802 1 48 48 48 2304
+170	141552 186 33 458 0.052936261356 0.34368966812 7 32 48 272 11008
+171	141738 186 33 458 0.052936261356 0.34368966812 7 32 48 272 11008
+173	141924 213 33 458 0.052936261356 0.34368966812 8 32 48 320 13312
+174	142137 215 129 508 0.182032938483 0.34393126685 8 14 48 248 10000
+175	142352 215 129 508 0.182032938483 0.34393126685 8 14 48 248 10000
+178	142567 74 0 176 0 0.215070456396 4 0 1 1 1
+179	142641 66 168 208 0.215032456396 0.215427994802 2 24000000 24000000 48000000 1.152e+15
+180	142707 336 129 498 0.182032938483 0.343930186507 12 0 4.4e-05 0.000176 7.744e-09
+182	143043 54 168 216 0.215032456396 0.215437994802 2 14 32 46 1220
+184	143097 428 33 508 0.052936261356 0.34393126685 16 14 48 568 23312
+185	143525 215 129 508 0.182032938483 0.34393126685 8 14 48 248 10000
+187	143740 215 129 508 0.182032938483 0.34393126685 8 14 48 248 10000
+192	143955 137 0 227 0 0.215471994802 7 0 3 12 30
+193	144092 938 0 507 0 0.34393126685 37 0 3 67 163
+194	145030 208 169 227 0.215032456396 0.215471994802 8 0 2 8 12
+195	145238 36 0 52 0 0.115032456396 2 0 0 0 0
+208	145274 11 0 0 0 0 1 0 0 0 0
+209	145285 11 0 0 0 0 1 0 0 0 0
+210	145296 11 0 0 0 0 1 0 0 0 0
+224	145307 25 53 53 0.143299533497 0.143299533497 1 1 1 1 1
+227	145332 107 0 251 0 0.243299533497 7 0 1 1 1
+228	145439 109 0 251 0 0.243299533497 7 0 256 256 65536
+229	145548 26 251 251 0.243299533497 0.243299533497 1 0 0 0 0
+230	145574 28 249 249 0.243299533497 0.243299533497 1 256 256 256 65536
+231	145602 30 249 249 0.1 0.2 2 0 0 0 0
+232	145632 28 251 251 0.243299533497 0.243299533497 1 256 256 256 65536
+233	145660 30 251 251 0.1 0.2 2 0 0 0 0
+238	145690 32 259 259 0.243337533497 0.243337533497 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
+239	145722 74 0 259 0 0.243337533497 4 0 1 1 1
+240	145796 26 249 249 0.243299533497 0.243299533497 1 8 8 8 64
+241	145822 74 0 250 0 0.243299533497 4 0 1 1 1
+242	145896 1970 0 511 0 0.343932085167 78 0 2 4 8
+244	147866 12 0 0 0 0 1 31 31 31 961
+245	147878 54 259 314 0.243337533497 0.243659791211 2 14 32 46 1220
+246	147932 27 314 314 0.243659791211 0.243659791211 1 14 14 14 196
+247	147959 27 259 259 0.243337533497 0.243337533497 1 32 32 32 1024
+248	147986 27 259 259 0.243337533497 0.243337533497 1 32 32 32 1024
+250	148013 54 259 314 0.243337533497 0.243659791211 2 14 32 46 1220
+251	148067 210 39 464 0.05293662101 0.343690486437 8 32 48 320 13312
+252	148277 27 295 295 0.243615791211 0.243615791211 1 48 48 48 2304
+253	148304 183 39 464 0.05293662101 0.343690486437 7 32 48 272 11008
+254	148487 183 39 464 0.05293662101 0.343690486437 7 32 48 272 11008
+256	148670 210 39 464 0.05293662101 0.343690486437 8 32 48 320 13312
+257	148880 215 133 512 0.182033298137 0.343932085167 8 14 48 248 10000
+258	149095 215 133 512 0.182033298137 0.343932085167 8 14 48 248 10000
+261	149310 74 0 259 0 0.243337533497 4 0 1 1 1
+262	149384 66 251 295 0.243299533497 0.243615791211 2 24000000 24000000 48000000 1.152e+15
+263	149450 336 133 501 0.182033298137 0.343930546161 12 0 4.4e-05 0.000176 7.744e-09
+265	149786 54 251 299 0.243299533497 0.243625791211 2 14 32 46 1220
+267	149840 425 39 512 0.05293662101 0.343932085167 16 14 48 568 23312
+268	150265 215 133 512 0.182033298137 0.343932085167 8 14 48 248 10000
+270	150480 215 133 512 0.182033298137 0.343932085167 8 14 48 248 10000
+275	150695 137 0 315 0 0.243659791211 7 0 3 12 30
+276	150832 932 0 511 0 0.343932085167 37 0 3 67 163
+277	151764 208 252 315 0.243299533497 0.243659791211 8 0 2 8 12
+278	151972 36 0 56 0 0.143299533497 2 0 0 0 0
+291	152008 11 0 0 0 0 1 0 0 0 0
+292	152019 11 0 0 0 0 1 0 0 0 0
+293	152030 11 0 0 0 0 1 0 0 0 0
+307	152041 26 244 244 0.237517510029 0.237517510029 1 1 1 1 1
+310	152067 107 0 363 0 0.337517510029 7 0 1 1 1
+311	152174 109 0 363 0 0.337517510029 7 0 256 256 65536
+312	152283 26 363 363 0.337517510029 0.337517510029 1 0 0 0 0
+313	152309 28 361 361 0.337517510029 0.337517510029 1 256 256 256 65536
+314	152337 45 361 361 0.1 0.3 3 0 0 0 0
+315	152382 28 363 363 0.337517510029 0.337517510029 1 256 256 256 65536
+316	152410 45 363 363 0.1 0.3 3 0 0 0 0
+321	152455 32 371 371 0.337555510029 0.337555510029 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
+322	152487 74 0 371 0 0.337555510029 4 0 1 1 1
+323	152561 27 361 361 0.337517510029 0.337517510029 1 19 19 19 361
+324	152588 74 0 362 0 0.337517510029 4 0 1 1 1
+325	152662 1988 0 509 0 0.343931427507 78 0 2 4 8
+327	154650 12 0 0 0 0 1 31 31 31 961
+328	154662 54 371 420 0.337555510029 0.338016932279 2 14 32 46 1220
+329	154716 27 420 420 0.338016932279 0.338016932279 1 14 14 14 196
+330	154743 27 371 371 0.337555510029 0.337555510029 1 32 32 32 1024
+331	154770 27 371 371 0.337555510029 0.337555510029 1 32 32 32 1024
+333	154797 54 371 420 0.337555510029 0.338016932279 2 14 32 46 1220
+334	154851 214 30 461 0.052936203278 0.343689828777 8 32 48 320 13312
+335	155065 27 401 401 0.337972932279 0.337972932279 1 48 48 48 2304
+336	155092 187 30 461 0.052936203278 0.343689828777 7 32 48 272 11008
+337	155279 187 30 461 0.052936203278 0.343689828777 7 32 48 272 11008
+339	155466 214 30 461 0.052936203278 0.343689828777 8 32 48 320 13312
+340	155680 216 127 510 0.182032880405 0.343931427507 8 14 48 248 10000
+341	155896 216 127 510 0.182032880405 0.343931427507 8 14 48 248 10000
+344	156112 74 0 371 0 0.337555510029 4 0 1 1 1
+345	156186 66 363 401 0.337517510029 0.337972932279 2 24000000 24000000 48000000 1.152e+15
+346	156252 336 127 497 0.182032880405 0.343930128429 12 0 4.4e-05 0.000176 7.744e-09
+348	156588 54 363 411 0.337517510029 0.337982932279 2 14 32 46 1220
+350	156642 430 30 510 0.052936203278 0.343931427507 16 14 48 568 23312
+351	157072 216 127 510 0.182032880405 0.343931427507 8 14 48 248 10000
+353	157288 216 127 510 0.182032880405 0.343931427507 8 14 48 248 10000
+358	157504 137 0 421 0 0.338016932279 7 0 3 12 30
+359	157641 942 0 509 0 0.343931427507 37 0 3 67 163
+360	158583 208 364 421 0.337517510029 0.338016932279 8 0 2 8 12
+361	158791 37 0 247 0 0.237517510029 2 0 0 0 0
+374	158828 11 0 0 0 0 1 0 0 0 0
+375	158839 11 0 0 0 0 1 0 0 0 0
+376	158850 11 0 0 0 0 1 0 0 0 0
+390	158861 26 307 307 0.243650617939 0.243650617939 1 1 1 1 1
+393	158887 107 0 440 0 0.343650617939 7 0 1 1 1
+394	158994 109 0 440 0 0.343650617939 7 0 256 256 65536
+395	159103 26 440 440 0.343650617939 0.343650617939 1 0 0 0 0
+396	159129 28 437 437 0.343650617939 0.343650617939 1 256 256 256 65536
+397	159157 45 437 437 0.1 0.3 3 0 0 0 0
+398	159202 28 440 440 0.343650617939 0.343650617939 1 256 256 256 65536
+399	159230 45 440 440 0.1 0.3 3 0 0 0 0
+404	159275 32 448 448 0.343688617939 0.343688617939 1 3.8e-05 3.8e-05 3.8e-05 1.444e-09
+405	159307 74 0 448 0 0.343688617939 4 0 1 1 1
+406	159381 27 437 437 0.343650617939 0.343650617939 1 19 19 19 361
+407	159408 74 0 438 0 0.343650617939 4 0 1 1 1
+408	159482 1986 0 500 0 0.343930216669 78 0 2 4 8
+410	161468 12 0 0 0 0 1 31 31 31 961
+411	161480 54 448 499 0.343688617939 0.343930216669 2 14 32 46 1220
+412	161534 27 499 499 0.343930216669 0.343930216669 1 14 14 14 196
+413	161561 27 448 448 0.343688617939 0.343688617939 1 32 32 32 1024
+414	161588 27 448 448 0.343688617939 0.343688617939 1 32 32 32 1024
+416	161615 54 448 499 0.343688617939 0.343930216669 2 14 32 46 1220
+417	161669 214 36 482 0.052936291518 0.343886216669 8 32 48 320 13312
+418	161883 27 482 482 0.343886216669 0.343886216669 1 48 48 48 2304
+419	161910 187 36 381 0.052936291518 0.337556720867 7 32 48 272 11008
+420	162097 187 36 381 0.052936291518 0.337556720867 7 32 48 272 11008
+422	162284 214 36 482 0.052936291518 0.343886216669 8 32 48 320 13312
+423	162498 216 131 431 0.182032968645 0.338018143117 8 14 48 248 10000
+424	162714 216 131 431 0.182032968645 0.338018143117 8 14 48 248 10000
+427	162930 74 0 448 0 0.343688617939 4 0 1 1 1
+428	163004 66 440 482 0.343650617939 0.343886216669 2 24000000 24000000 48000000 1.152e+15
+429	163070 336 131 423 0.182032968645 0.338017020519 12 0 4.4e-05 0.000176 7.744e-09
+431	163406 54 440 488 0.343650617939 0.343896216669 2 14 32 46 1220
+433	163460 430 36 482 0.052936291518 0.343886216669 16 14 48 568 23312
+434	163890 216 131 431 0.182032968645 0.338018143117 8 14 48 248 10000
+436	164106 216 131 431 0.182032968645 0.338018143117 8 14 48 248 10000
+441	164322 137 0 500 0 0.343930216669 7 0 3 12 30
+442	164459 941 0 500 0 0.343930216669 37 0 3 67 163
+443	165400 208 441 500 0.343650617939 0.343930216669 8 0 2 8 12
+444	165608 37 0 439 0 0.343650617939 2 0 0 0 0
+457	165645 11 0 0 0 0 1 0 0 0 0
+458	165656 11 0 0 0 0 1 0 0 0 0
+459	165667 11 0 0 0 0 1 0 0 0 0
 

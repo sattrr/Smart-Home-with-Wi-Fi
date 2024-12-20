@@ -21,6 +21,8 @@ import inet.visualizer.contract.IIntegratedVisualizer;
 import inet.environment.common.PhysicalEnvironment;
 import inet.node.inet.WirelessHost;
 import inet.physicallayer.wireless.ieee80211.packetlevel.Ieee80211ScalarRadioMedium;
+import inet.visualizer.common.IntegratedMultiVisualizer;
+import inet.visualizer.common.IntegratedVisualizer;
 
 network Smarthome
 {
@@ -28,29 +30,28 @@ network Smarthome
         @display("bgb=1293,640;i=background/denah;bgi=background/denah");
 
     submodules:
-        // Radio medium for wireless communication
+        visualizer: <default(firstAvailableOrEmpty("IntegratedCanvasVisualizer"))> like IIntegratedVisualizer if typename != "" {
+            @display("p=1242,470");
+        }
+        visualizer2: IntegratedVisualizer {
+            @display("p=1242,559");
+        }
         radioMedium: Ieee80211ScalarRadioMedium {
-            @display("p=1245,378;i=block/frag");
+            @display("p=1242,384;i=block/frag");
         }
-
-        // Configurator for IP assignment
         configurator: Ipv4NetworkConfigurator {
-            @display("p=1245,300");
+            @display("p=1242,298");
         }
-
-        // Access Point in the center
         accessPoint: AccessPoint {
             @display("p=506,277");
         }
-
-        // Devices in respective rooms
         smartphone: <default("WirelessHost")> like INetworkNode {
             @display("p=122,280;i=device/palm");
         }
-        smartLight: <default("WirelessHost")> like INetworkNode {
+        lamp: <default("WirelessHost")> like INetworkNode {
             @display("p=357,101;i=misc/lamp");
         }
-        smartThermostat: <default("WirelessHost")> like INetworkNode {
+        thermostat: <default("WirelessHost")> like INetworkNode {
             @display("p=843,246;i=misc/thermometer");
         }
         smartTV: <default("WirelessHost")> like INetworkNode {
